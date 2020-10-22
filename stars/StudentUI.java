@@ -14,7 +14,7 @@ public class StudentUI extends SelectUI{
         
         Scanner sc = new Scanner(System.in);
         int i;
-        System.out.println("in admin display menu");
+        System.out.println("===STUDENT MENU===");
         do {
             System.out.println("1. Add course index");
             System.out.println("2. Drop course index");
@@ -106,6 +106,27 @@ public class StudentUI extends SelectUI{
             System.out.println("Error changing,  timetable clash");
         }
     }
-
     
+    private void swopIndex() {
+        boolean success;
+        ArrayList<Index> indexList;
+        Index selectedIndex;
+        String username, password;
+        LoginController loginController = new LoginController();
+        
+        indexList = studentController.getRegisteredIndex();
+        selectedIndex = (Index)select(indexList);
+        
+        System.out.print("Username: ");
+        username = sc.next();
+        System.out.print("Password: ");
+        password = new String(System.console().readPassword());
+        // password = sc.next();
+        success = loginController.checkStudent(username, password);
+        if (success) {
+            studentController.swopIndex(username, selectedIndex);
+        } else {
+            System.out.println("Incorrect details");
+        }
+    }
 }
