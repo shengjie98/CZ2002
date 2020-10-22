@@ -1,17 +1,16 @@
 package stars;
+
 import java.util.Scanner;
 import java.util.List;
 
-
-
-public class AdminUI extends SelectUI{
+public class AdminUI extends SelectUI {
     private AdminController adminController;
-    
-    public AdminUI () {
+
+    public AdminUI() {
         adminController = new AdminController();
     }
-    
-    public void displayMenu(){
+
+    public void displayMenu() {
         Scanner sc = new Scanner(System.in);
         int i;
         System.out.println("in admin display menu");
@@ -33,7 +32,7 @@ public class AdminUI extends SelectUI{
                     break;
             }
 
-        } while (i > 0 && i < 8) ;
+        } while (i > 0 && i < 8);
         return;
     }
 
@@ -60,18 +59,23 @@ public class AdminUI extends SelectUI{
         System.out.print("  i. Access Perios Start (DD/MM/YYYY): ");
         end = sc.nextLine();
 
-        // admin controller.add student(studentName, nationality, gender, studentID, degree, email)
+        // admin controller.add student(studentName, nationality, gender, studentID,
+        // degree, email)
+        adminController.addStudent(studentName, nationality, gender, studentID, degree, email);
         // login controller add account()
+        // loginController.add
     }
 
     private void editCourseInformation() {
         Scanner sc = new Scanner(System.in);
-        List<Course> courseList;
-        Course selectedCourse;
+        ArrayList<Course> courseList;
         Index[] indexList;
         Index selectedIndex;
         System.out.println("Edit Course Information");
+
+        // get list of courses from the course database
         courseList = adminController.getCourseList();
-        selectedCourse = (Course)select(courseList);
+        Course selectedCourse = (Course) select(courseList);
+
     }
 }
