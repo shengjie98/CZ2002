@@ -18,6 +18,7 @@ public class AdminController {
 
     public void editCourseInformation() {
         // rmb dont let them reduce vacancy past the current
+
         // length of the list of confirmed students
     }
 
