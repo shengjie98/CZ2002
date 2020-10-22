@@ -36,10 +36,9 @@ public class LoginController {
      */
     private boolean checkAdmin(String username, String password) {
         int hashedPassword = password.hashCode();
+        System.out.println(hashedPassword);
         String adminUsername;
         int adminPassword;
-        
-        
         try {
             Scanner admin = new Scanner(new File("stars/adminAccount.txt"));
             adminUsername = admin.nextLine();
@@ -60,7 +59,21 @@ public class LoginController {
      * @param password
      * @return
      */
-    private boolean checkStudent(String username, String password) {
+    public boolean checkStudent(String username, String password) {
+        int hashedPassword = password.hashCode();
+        String studentUsername;
+        int studentPassword;
+        try {
+            Scanner admin = new Scanner(new File("stars/studentAccounts.txt"));
+            studentUsername = admin.nextLine();
+            studentPassword = admin.nextInt();
+            if (username.equals(studentUsername) && hashedPassword == studentPassword) {
+                return true;
+            } 
+        } catch (FileNotFoundException e) {
+            System.out.print("file not file error\n");
+            return false;
+        }
         return false;
     }
 
@@ -72,6 +85,6 @@ public class LoginController {
      * @param accessEnd
      */
     public void editAccess(String studentID, String password, String accessStart, String accessEnd) {
-
+        return;
     }
 }

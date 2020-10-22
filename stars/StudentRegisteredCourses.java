@@ -1,19 +1,19 @@
 package stars;
 
-public class StudentRegisteredCourses
+import java.util.ArrayList;
 
-        public static void addIndex(String index) {
-        }
+public class StudentRegisteredCourses{
 
-        public static void dropIndex(String index) {
-        }
-        
-        public void changeIndex(String myIndex) {
-        }
+    public boolean addIndex(Index index) {
 
-        public void changeIndex(String oldIndex, String newIndex) {
-        }
+    }
 
-        public Index[] getIndexList() {
-        }
+    public boolean dropIndex(Index index) {
+    }
+
+    public boolean changeIndex(String oldIndex, String newIndex) {
+    }
+
+    public ArrayList<Index> getIndexList() {
+    }
 }

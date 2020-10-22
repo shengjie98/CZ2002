@@ -1,7 +1,8 @@
 package stars;
 
 import java.util.Scanner;
-import java.util.List;
+// import java.util.List;
+import java.util.ArrayList;
 
 public class AdminUI extends SelectUI {
     private AdminController adminController;
@@ -54,28 +55,63 @@ public class AdminUI extends SelectUI {
         gender = sc.nextLine();
         System.out.print("  g. Degree: ");
         degree = sc.nextLine();
-        System.out.print("  h. Access Perios Start (DD/MM/YYYY): ");
+        System.out.print("  h. Access Period Start (DD/MM/YYYY): ");
         start = sc.nextLine();
-        System.out.print("  i. Access Perios Start (DD/MM/YYYY): ");
+        System.out.print("  i. Access Period Start (DD/MM/YYYY): ");
         end = sc.nextLine();
 
         // admin controller.add student(studentName, nationality, gender, studentID,
         // degree, email)
         adminController.addStudent(studentName, nationality, gender, studentID, degree, email);
         // login controller add account()
-        loginController.add
+        // loginController.add
     }
 
     private void editCourseInformation() {
-        Scanner sc = new Scanner(System.in);
-
-        Index[] indexList;
-        Index selectedIndex;
         System.out.println("Edit Course Information");
 
         // get list of courses from the course database
-        ArrayList<Course> courseList = adminController.getCourseList();
+        ArrayList<Course> courseList;
+        courseList = adminController.getCourseList();
+        // this will print out the list of courses and allow the user to select
+        // the course they want to edit
         Course selectedCourse = (Course) select(courseList);
+
+        // get user to choose the course information to edit
+        System.out.println("Which part of the course do you want to edit?: \n");
+        System.out.println("1: Course Code\n");
+        System.out.println("2: School\n");
+        System.out.println("3: Add an Index\n");
+        System.out.println("4: Drop Index Number\n");
+        System.out.println("5: Change vacancy of the Index\n");
+        Scanner sc = new Scanner(System.in);
+        int i = sc.nextInt();
+        switch (i) {
+            case 1:
+                // Change course ID
+                Scanner newCourseID = new Scanner(System.in);
+                selectedCourse.setCourseID(newCourseID.nextLine());
+                break;
+            case 2:
+                // Change school
+                Scanner newSchool = new Scanner(System.in);
+                selectedCourse.setSchool(newSchool.nextLine());
+                break;
+            case 3:
+                // Add Index
+                Scanner newSchool = new Scanner(System.in);
+                selectedCourse.setSchool(newSchool.nextLine());
+                break;
+            default:
+                break;
+        }
+        // let user decide which of the course information to edit
+
+        // get the list of indexes from the course object
+        ArrayList<Index> indexList = selectedCourse.getIndexList();
+        // this will print out the list of indexes and allow the user to select
+        // the index that they want to edit
+        Index selectedIndex = (Index) select(indexList);
 
     }
 }

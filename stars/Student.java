@@ -1,3 +1,7 @@
+package stars;
+
+import java.util.ArrayList;
+
 /**
  * Stores and retrieves student data
  */
@@ -7,20 +11,38 @@ public class Student {
     private String studentName;
     private String nationality;
     private String gender;
-    private String email;
     private String degree;
+    private StudentRegisteredCourses registeredCourses;
 
     // Constructor
 
-    public Student(String studentName, String nationality, String gender, String studentID, String degree, String email) {
+    public Student(String studentName, String nationality, String gender, String studentID, String degree) {
 		// TODO Auto-generated constructor stub
-    	this.studentName = studentName;
-    	this.nationality = nationality;
-    	this.gender = gender;
-    	this.studentID = studentID;
-    	this.degree = degree;
-    	this.email = email;
-	}
+        this.studentName = studentName;
+        this.nationality = nationality;
+        this.gender = gender;
+        this.studentID = studentID;
+        this.degree = degree;
+        registeredCourses = new StudentRegisteredCourses();
+        
+    }
+    
+
+    public boolean addIndex(Index index) {
+        return registeredCourses.addIndex(index);;
+    }
+
+    public boolean dropIndex(Index index) {
+        return registeredCourses.dropIndex(index);
+    }
+
+    public ArrayList<Index> getRegisteredIndex() {
+        return registeredCourses.getIndexList();
+    }
+
+    public boolean changeIndex(Index oldIndex, Index newIndex){
+        return registeredCourses.changeIndex(oldIndex, newIndex);
+    } 
 
 	/**
      * Retrieves student identification number
@@ -35,16 +57,13 @@ public class Student {
     }
 
     public String getNationality() {
-    	return nationality;
+        return nationality;
     }
     public String getGender() {
-    	return gender;
+        return gender;
     }
     public String getDegree() {
-    	return degree;
-    }
-    public String getEmail() {
-    	return email;
+        return degree;
     }
 
 }
