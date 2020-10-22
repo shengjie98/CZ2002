@@ -1,5 +1,7 @@
 package stars;
 
+import java.util.ArrayList;
+
 /**
  * Stores and retrieves student data
  */
@@ -25,7 +27,22 @@ public class Student {
         
     }
     
- 
+
+    public boolean addIndex(Index index) {
+        return registeredCourses.addIndex(index);;
+    }
+
+    public boolean dropIndex(Index index) {
+        return registeredCourses.dropIndex(index);
+    }
+
+    public ArrayList<Index> getRegisteredIndex() {
+        return registeredCourses.getIndexList();
+    }
+
+    public boolean changeIndex(Index oldIndex, Index newIndex){
+        return registeredCourses.changeIndex(oldIndex, newIndex);
+    } 
 
 	/**
      * Retrieves student identification number
