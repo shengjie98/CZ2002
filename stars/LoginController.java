@@ -21,7 +21,7 @@ public class LoginController {
         } else {
             studentVerification = checkStudent(username, password);
             if (studentVerification) {
-                StudentUI studentUI = new StudentUI();
+                StudentUI studentUI = new StudentUI(username);
                 studentUI.displayMenu();
             }
         } 

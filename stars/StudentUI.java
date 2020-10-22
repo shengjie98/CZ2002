@@ -31,6 +31,18 @@ public class StudentUI extends SelectUI{
                 case 2: 
                     dropIndex();
                     break;
+                case 3:
+                    printRegisteredCourses();
+                    break;
+                case 4:
+                    checkVacanciesAvailable();
+                    break;
+                case 5:
+                    changeIndex();
+                    break;
+                case 6:
+                    swopIndex();
+                    break;
                 default:
                     break;
             }
@@ -68,7 +80,6 @@ public class StudentUI extends SelectUI{
     
     private void printRegisteredCourses() {
         ArrayList<Index> indexList;
-        Index selectedIndex;
         indexList = studentController.getRegisteredIndex();
         for (Index index: indexList) {
             System.out.println(index.print());
@@ -97,7 +108,7 @@ public class StudentUI extends SelectUI{
         
         indexList = studentController.getRegisteredIndex();
         oldIndex = (Index)select(indexList);
-        indexList = index.getCourse().getIndexList();
+        indexList = oldIndex.getCourse().getIndexList();
         newIndex = (Index)select(indexList);
         success = studentController.changeIndex(oldIndex, newIndex);
         if (success) {

@@ -28,20 +28,35 @@ public class Timing {
         this.start = start;
         this.end = end;
     }
+    
+    /**
+     * method that checks if 2 methods overlap
+     * @param otherTiming
+     * @return true if there is no overlap
+     */
+    public boolean checkOverlap(Timing otherTiming) {
+        if (this.day != otherTiming.day) {
+            return true;
+        } 
+        if ((this.start.isBefore(otherTiming.getStart())&&this.start.isBefore(otherTiming.getEnd()))||(this.start.isAfter(otherTiming.getStart())&&this.start.isAfter(otherTiming.getEnd()))) {
+            return true;
+        }
+        return false;
+    }
 
     public LocalTime getStart() {
         return start;
     }
 
-    public void setStart(int start) {
+    public void setStart(LocalTime start) {
         this.start = start;
     }
 
-    public int getEnd() {
+    public LocalTime getEnd() {
         return end;
     }
 
-    public void setEnd(int end) {
+    public void setEnd(LocalTime end) {
         this.end = end;
     }
 }

@@ -2,7 +2,6 @@ package stars;
 
 import java.util.ArrayList;
 
-package stars;
 
 /**
  * Stores and retrieves student data
@@ -46,7 +45,16 @@ public class Student {
         return registeredCourses.changeIndex(oldIndex, newIndex);
     } 
 
-	/**
+    public boolean checkChangeIndex(Index myIndex, Index friendIndex) {
+        return registeredCourses.checkChangeIndex(myIndex, friendIndex);
+    }
+
+    public void swopPlaces(Index friendIndex, Student friend) {
+        registeredCourses.swopPlaces(friendIndex, friend);
+    }
+    
+    
+    /**
      * Retrieves student identification number
      * @return studentID
      */
@@ -68,6 +76,4 @@ public class Student {
         return degree;
     }
 
-    public boolean checkChangeIndex(Index myIndex, Index friendIndex) {
-    }
 }

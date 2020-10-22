@@ -57,12 +57,12 @@ public class Index implements Selectable {
 		}
 	}
 
-	public boolean swapStudent(Student newStudent) {
-		if (confirmedList.contains(newStudent)) {
-			confirmedList.set(confirmedList.indexOf(newStudent), newStudent);
+	public boolean swopStudent(Student curStudent, Student newStudent) {
+		if (confirmedList.contains(curStudent)) {
+			confirmedList.set(confirmedList.indexOf(curStudent), newStudent);
 			return true;
 		} else {
-			waitList.set(waitList.indexOf(newStudent), newStudent);
+			waitList.set(waitList.indexOf(curStudent), newStudent);
 			return false;
 		}
 	}
