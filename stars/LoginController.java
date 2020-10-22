@@ -38,8 +38,6 @@ public class LoginController {
         int hashedPassword = password.hashCode();
         String adminUsername;
         int adminPassword;
-        
-        
         try {
             Scanner admin = new Scanner(new File("stars/adminAccount.txt"));
             adminUsername = admin.nextLine();

@@ -1,6 +1,6 @@
 package stars;
 
-public class StudentRegisteredCourses
+public class StudentRegisteredCourses{
 
         public static void addIndex(String index) {
         }

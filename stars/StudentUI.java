@@ -78,7 +78,7 @@ public class StudentUI extends SelectUI{
         selectedCourse = (Course)select(courseList);
         indexList = selectedCourse.getIndexList();
         selectedIndex = (Index)select(indexList);
-        System.out.println("Vacancies: ", selectedIndex.getVacancy());
+        System.out.printf("Vacancies: %i", selectedIndex.getVacancy());
     }
     
 }
