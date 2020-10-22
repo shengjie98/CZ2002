@@ -70,6 +70,6 @@ public class LoginController {
      * @param accessEnd
      */
     public void editAccess(String studentID, String password, String accessStart, String accessEnd) {
-
+        return;
     }
 }

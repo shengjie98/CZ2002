@@ -40,6 +40,7 @@ public class StudentUI extends SelectUI{
     }
 
     private void addIndex() {
+        boolean success;
         ArrayList<Course> courseList;
         Course selectedCourse;
         ArrayList<Index> indexList;
@@ -49,9 +50,15 @@ public class StudentUI extends SelectUI{
         selectedCourse = (Course)select(courseList);
         indexList = selectedCourse.getIndexList();
         selectedIndex = (Index)select(indexList);
-        studentController.addIndex(selectedIndex);
+        success = studentController.addIndex(selectedIndex);
+        if (success) {
+            System.out.println("Successfully added!");
+        } else {
+            System.out.println("Error adding timetable clash or too many AUs");
+        }
     }
     private void dropIndex() {
+        boolean success;
         ArrayList<Index> indexList;
         Index selectedIndex;
         indexList = studentController.getRegisteredIndex();
@@ -81,4 +88,16 @@ public class StudentUI extends SelectUI{
         System.out.printf("Vacancies: %i", selectedIndex.getVacancy());
     }
     
+    private void changeIndex() {
+        ArrayList<Course> courseList;
+        Course selectedCourse;
+        ArrayList<Index> indexList;
+        Index oldIndex, newIndex;
+        
+        courseList = studentController.getRegisteredIndex();
+        selectedCourse = (Course)select(courseList);
+        indexList = selectedCourse.getIndexList();
+        oldIndex = (Index)select(indexList);
+        System.out.printf("Vacancies: %i", selectedIndex.getVacancy());
+    }
 }
