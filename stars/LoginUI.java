@@ -10,7 +10,8 @@ public class LoginUI {
             System.out.print("Username: ");
             username = sc.next();
             System.out.print("Password: ");
-            password = sc.next();
+            password = new String(System.console().readPassword());
+            // password = sc.next();
             loginController.verifyLogin(username, password);
         } while (true);
     }
