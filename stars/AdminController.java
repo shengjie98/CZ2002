@@ -18,29 +18,32 @@ public class AdminController {
     public void addStudent(String studentName, String nationality, String gender, String studentID, String degree,
             String email) {
         // instantiate a new student object
-        Student newStudent = new Student(studentName, nationality, gender, studentID, degree, email);
+        Student newStudent = new Student(studentName, nationality, gender, studentID, degree);
         // add this student to the StudentDB
         studentInfo.addStudent(newStudent);
     }
 
-    public void editCourseInformation(int choice) {
-        // rmb dont let them reduce vacancy past the current
-        switch (choice):
-        // length of the list of confirmed students
+    // public void editCourseInformation(int choice) {
+    // // rmb dont let them reduce vacancy past the current
+    // if (choice == 1) {
 
+    // }
+    // // length of the list of confirmed students
+
+    // }
+
+    // private void addIndex(ArrayList<Index> indexList, Index newIndex) {
+
+    // }
+
+    public void dropIndex(ArrayList<Index> indexList, Index selectedIndex) {
+        indexList.remove(selectedIndex);
+        return;
     }
 
-    private void addIndex() {
+    // private void editVacancy(Index){
 
-    }
-
-    private void dropIndex() {
-
-    }
-
-    private void editVacancy(Index){
-
-    }
+    // }
 
     public ArrayList<Course> getCourseList() {
         return this.courseInfo.getCourseList();
