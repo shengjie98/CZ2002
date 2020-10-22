@@ -63,18 +63,18 @@ public class AdminUI extends SelectUI {
         // degree, email)
         adminController.addStudent(studentName, nationality, gender, studentID, degree, email);
         // login controller add account()
-        loginController.add
+        // loginController.add
     }
 
     private void editCourseInformation() {
         Scanner sc = new Scanner(System.in);
-
+        ArrayList<Course> courseList;
         Index[] indexList;
         Index selectedIndex;
         System.out.println("Edit Course Information");
 
         // get list of courses from the course database
-        ArrayList<Course> courseList = adminController.getCourseList();
+        courseList = adminController.getCourseList();
         Course selectedCourse = (Course) select(courseList);
 
     }
