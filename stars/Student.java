@@ -1,4 +1,4 @@
-/**
+package stars;/**
  * Stores and retrieves student data
  */
 public class Student {
@@ -9,7 +9,7 @@ public class Student {
     private String gender;
     private String email;
     private String degree;
-    
+
     // Constructor
 
     public Student(String studentName, String nationality, String gender, String studentID, String degree, String email) {
@@ -33,7 +33,7 @@ public class Student {
     public String getStudentName() {
         return studentName;
     }
-    
+
     public String getNationality() {
     	return nationality;
     }
