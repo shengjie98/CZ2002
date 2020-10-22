@@ -1,3 +1,4 @@
+package stars;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,11 +32,18 @@ public class CourseDB implements Database {
     public void add(Course newCourse) {
         courseList.add(newCourse);
     }
+<<<<<<< HEAD
 
     @Override
     public void loadInformation() {
         // TODO Auto-generated method stub
         ArrayList<String[]> courses = new ArrayList<>();
+=======
+    
+	public void loadInformation() {
+		// TODO Auto-generated method stub
+        List<String[]> courses = new ArrayList<>();
+>>>>>>> 21fa2c146d34dbb5eae81c1abc48dbe48ce3d0ac
         Scanner sc;
         String line;
         String delimiter = "[ ]+";
@@ -86,9 +94,16 @@ public class CourseDB implements Database {
 
     }
 
+<<<<<<< HEAD
     @Override
     public void saveInformation() {
         // TODO Auto-generated method stub
 
     }
+=======
+	public void saveInformation() {
+		// TODO Auto-generated method stub
+		
+	}
+>>>>>>> 21fa2c146d34dbb5eae81c1abc48dbe48ce3d0ac
 }
