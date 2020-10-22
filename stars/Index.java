@@ -20,6 +20,49 @@ public class Index implements Selectable {
 		this.indexNumber = indexNumber;
 	}
 
+	/**
+	 * 
+	 * @param newStudent
+	 * @return returns true if student is added to confirmed list and false if added
+	 *         to waitlist
+	 */
+	public boolean addStudent(Student newStudent) {
+		// if the confirmedList is full, add the student to the waitlist
+		if (confirmedList.size() == vacancy) {
+			waitList.add(newStudent);
+			return false;
+		} else {
+			// else add the student to the confirmed list
+			confirmedList.add(newStudent);
+			return true;
+		}
+	}
+
+	/**
+	 * 
+	 * @param newStudent
+	 * @return
+	 */
+	public boolean dropStudent(Student newStudent) {
+		if (confirmedList.contains(newStudent)) {
+			confirmedList.remove(newStudent);
+			return true;
+		} else {
+			waitList.remove(newStudent);
+			return false;
+		}
+	}
+
+	public boolean swapStudent(Student newStudent) {
+		if (confirmedList.contains(newStudent)) {
+			confirmedList.set(confirmedList.indexOf(newStudent), newStudent);
+			return true;
+		} else {
+			waitList.set(waitList.indexOf(newStudent), newStudent);
+			return false;
+		}
+	}
+
 	public Course getCourse() {
 		return course;
 	}

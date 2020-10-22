@@ -29,6 +29,9 @@ public class AdminUI extends SelectUI {
                 case 2:
                     addStudent();
                     break;
+                case 4:
+                    editCourseInformation();
+                    break;
                 default:
                     break;
             }
@@ -55,6 +58,7 @@ public class AdminUI extends SelectUI {
         gender = sc.nextLine();
         System.out.print("  g. Degree: ");
         degree = sc.nextLine();
+        // need to change to local time object here
         System.out.print("  h. Access Period Start (DD/MM/YYYY): ");
         start = sc.nextLine();
         System.out.print("  i. Access Period Start (DD/MM/YYYY): ");
@@ -98,20 +102,31 @@ public class AdminUI extends SelectUI {
                 selectedCourse.setSchool(newSchool.nextLine());
                 break;
             case 3:
-                // Add Index
-                Scanner newSchool = new Scanner(System.in);
-                selectedCourse.setSchool(newSchool.nextLine());
+                // Add a new index into an existing course
+                Scanner vacancy = new Scanner(System.in);
+                
+                //create list of timings
+                Scanner 
+                Index newIndex = new Index(selectedCourse, timings, vacancy, waitList, confirmedList, indexNumber);
+                adminController.addIndex(newIndex);
+                break;
+            case 4:
+                // Drop Index
+                // get the list of indexes from the course object
+                ArrayList<Index> indexList = selectedCourse.getIndexList();
+                // this will print out the list of indexes and allow the user to select
+                // the index that they want to edit
+                Index selectedIndex = (Index) select(indexList);
+
+                adminController.dropIndex(indexList, selectedIndex);
+                break;
+            case 5:
+                // Change vacancy
                 break;
             default:
                 break;
         }
         // let user decide which of the course information to edit
-
-        // get the list of indexes from the course object
-        ArrayList<Index> indexList = selectedCourse.getIndexList();
-        // this will print out the list of indexes and allow the user to select
-        // the index that they want to edit
-        Index selectedIndex = (Index) select(indexList);
 
     }
 }
