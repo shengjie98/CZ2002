@@ -1,8 +1,12 @@
 package stars;
 
 public class AdminController {
-    CourseDB courseInfo = new CourseDB;
-    StudentDB studentInfo = new StudentDB;
+    private CourseDB courseInfo;
+    private StudentDB studentInfo;
+
+    public AdminController() {
+
+    }
 
     /**
      * @return adds a student to an index of a course
@@ -13,16 +17,15 @@ public class AdminController {
         Student newStudent = new Student(studentName, nationality, gender, studentID, degree, email);
         // add this student to the StudentDB
         studentInfo.addStudent(newStudent);
-
     }
 
-    public void editCourseInformation() {
+    public void editCourseInformation(int choice) {
         // rmb dont let them reduce vacancy past the current
-
         // length of the list of confirmed students
+        switch 
     }
 
-    public void addCourse() {
+    public void addCourse(String courseID, Index[] indexList, int au, String school, String courseName) {
 
     }
 
