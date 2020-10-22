@@ -1,3 +1,4 @@
+package stars;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,7 +31,6 @@ public class CourseDB implements Database{
         courseList.add(newCourse);
     }
     
-    @Override
 	public void loadInformation() {
 		// TODO Auto-generated method stub
         List<String[]> courses = new ArrayList<>();
@@ -83,7 +83,6 @@ public class CourseDB implements Database{
 
     }
 
-	@Override
 	public void saveInformation() {
 		// TODO Auto-generated method stub
 		
