@@ -1,7 +1,8 @@
 package stars;
 import java.util.Scanner;
+import java.util.List;
 
-import javax.swing.plaf.ColorUIResource;
+
 
 public class AdminUI extends SelectUI{
     private AdminController adminController;
@@ -65,7 +66,7 @@ public class AdminUI extends SelectUI{
 
     private void editCourseInformation() {
         Scanner sc = new Scanner(System.in);
-        Course[] courseList;
+        List<Course> courseList;
         Course selectedCourse;
         Index[] indexList;
         Index selectedIndex;
