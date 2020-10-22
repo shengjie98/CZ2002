@@ -59,7 +59,7 @@ public class LoginController {
      * @param password
      * @return
      */
-    private boolean checkStudent(String username, String password) {
+    public boolean checkStudent(String username, String password) {
         int hashedPassword = password.hashCode();
         String studentUsername;
         int studentPassword;

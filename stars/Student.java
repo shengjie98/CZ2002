@@ -7,12 +7,11 @@ public class Student {
     private String studentName;
     private String nationality;
     private String gender;
-    private String email;
     private String degree;
 
     // Constructor
 
-    public Student(String studentName, String nationality, String gender, String studentID, String degree, String email) {
+    public Student(String studentName, String nationality, String gender, String studentID, String degree) {
 		// TODO Auto-generated constructor stub
     	this.studentName = studentName;
     	this.nationality = nationality;
