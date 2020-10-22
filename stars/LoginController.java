@@ -64,7 +64,13 @@ public class LoginController {
         return false;
     }
 
-
+    /**
+     * 
+     * @param studentID matric number
+     * @param password password
+     * @param accessStart date in DD/MM/YYYY
+     * @param accessEnd
+     */
     public void editAccess(String studentID, String password, String accessStart, String accessEnd) {
 
     }
