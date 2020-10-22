@@ -37,7 +37,7 @@ public class StudentController {
         return aStudent.changeIndex(oldIndex, newIndex);
     }
     public boolean swopIndex(String friendID, Index index) {
-        studentInfo.loadInfo()
+        studentInfo.loadInfo();
     }
 
 }

@@ -113,7 +113,8 @@ public class StudentUI extends SelectUI{
         Index selectedIndex;
         String username, password;
         LoginController loginController = new LoginController();
-        
+        Scanner sc = new Scanner(System.in);
+
         indexList = studentController.getRegisteredIndex();
         selectedIndex = (Index)select(indexList);
         
