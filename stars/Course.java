@@ -16,9 +16,8 @@ public class Course implements Selectable {
     private int au;
     private String school;
 
-    public Course(String courseID, ArrayList<Index> indexList, int au, String school, String courseName) {
+    public Course(String courseID, int au, String school, String courseName) {
         this.courseID = courseID;
-        this.indexList = indexList;
         this.au = au;
         this.school = school;
         this.courseName = courseName;
