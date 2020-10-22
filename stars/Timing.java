@@ -1,20 +1,35 @@
 
 package stars;
+import java.time.LocalTime;
 
 public class Timing {
-    private String day;
-    private String type;
-    private int start;
-    private int end;
+    static enum Type {
+        TUT,
+        LAB, 
+        LEC
+    }
 
-    public Timing(String day, String type, int start, int end) {
+    static enum Day {
+        MON, 
+        TUE,
+        WED,
+        THU, 
+        FRI
+    }
+    
+    private Day day;
+    private Type type;
+    private LocalTime start;
+    private LocalTime end;
+
+    public Timing(Day day, Type type, LocalTime start, LocalTime end) {
         this.day = day;
         this.type = type;
         this.start = start;
         this.end = end;
     }
 
-    public int getStart() {
+    public LocalTime getStart() {
         return start;
     }
 

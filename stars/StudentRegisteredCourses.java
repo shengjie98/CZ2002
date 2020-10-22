@@ -11,7 +11,7 @@ public class StudentRegisteredCourses{
     public boolean dropIndex(Index index) {
     }
 
-    public boolean changeIndex(String oldIndex, String newIndex) {
+    public boolean changeIndex(Index oldIndex, Index newIndex) {
     }
 
     public ArrayList<Index> getIndexList() {
