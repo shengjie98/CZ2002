@@ -8,13 +8,15 @@ public class Index implements Selectable {
 	private ArrayList<Student> waitList;
 	private ArrayList<Student> confirmedList;
 	private int vacancy;
+	private int vacancyLimit;
 	private int indexNumber;
 
-	public Index(Course course, ArrayList<Timing> timings, int vacancy, ArrayList<Student> waitList,
+	public Index(Course course, ArrayList<Timing> timings, int vacancy, int vacancyLimit, ArrayList<Student> waitList,
 			ArrayList<Student> confirmedList, int indexNumber) {
 		this.course = course;
 		this.timings = timings;
 		this.vacancy = vacancy;
+		this.vacancyLimit = vacancyLimit;
 		this.waitList = waitList;
 		this.confirmedList = confirmedList;
 		this.indexNumber = indexNumber;
@@ -28,12 +30,13 @@ public class Index implements Selectable {
 	 */
 	public boolean addStudent(Student newStudent) {
 		// if the confirmedList is full, add the student to the waitlist
-		if (confirmedList.size() == vacancy) {
+		if (confirmedList.size() == vacancyLimit) {
 			waitList.add(newStudent);
 			return false;
 		} else {
 			// else add the student to the confirmed list
 			confirmedList.add(newStudent);
+			vacancy--;
 			return true;
 		}
 	}
@@ -46,6 +49,7 @@ public class Index implements Selectable {
 	public boolean dropStudent(Student newStudent) {
 		if (confirmedList.contains(newStudent)) {
 			confirmedList.remove(newStudent);
+			vacancy++;
 			return true;
 		} else {
 			waitList.remove(newStudent);
