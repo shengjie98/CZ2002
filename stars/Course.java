@@ -9,9 +9,10 @@ import java.util.ArrayList;
  */
 
 public class Course implements Selectable {
+
     private String courseID;
     private String courseName;
-    private ArrayList<Index> indexList;
+    private ArrayList<Index> indexList = new ArrayList<Index>();
     private int au;
     private String school;
 
@@ -21,6 +22,13 @@ public class Course implements Selectable {
         this.au = au;
         this.school = school;
         this.courseName = courseName;
+    }
+
+    public void addIndex(ArrayList<Timing> timings, int vacancy, ArrayList<Student> waitList,
+            ArrayList<Student> confirmedList, int indexNumber) {
+        Index newIndex = new Index(this, timings, vacancy, waitList, confirmedList, indexNumber);
+        indexList.add(newIndex);
+        return;
     }
 
     public String getCourseID() {
@@ -65,7 +73,7 @@ public class Course implements Selectable {
 
     public String print() {
         // print out all the information of the Course
-        String stringToReturn = this.getCourseID() + '\n' + this.getSchool() + '\n' + this.getCourseName() + '\n';
+        String stringToReturn = this.getCourseID() + ' ' + this.getSchool() + ' ' + this.getCourseName() + ' ';
         return stringToReturn;
     }
 

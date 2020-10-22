@@ -3,14 +3,14 @@ package stars;
 import java.util.ArrayList;
 
 public class Index implements Selectable {
-	private String course;
+	private Course course;
 	private ArrayList<Timing> timings;
-	private int vacancy;
 	private ArrayList<Student> waitList;
 	private ArrayList<Student> confirmedList;
+	private int vacancy;
 	private int indexNumber;
 
-	public Index(String course, ArrayList<Timing> timings, int vacancy, ArrayList<Student> waitList,
+	public Index(Course course, ArrayList<Timing> timings, int vacancy, ArrayList<Student> waitList,
 			ArrayList<Student> confirmedList, int indexNumber) {
 		this.course = course;
 		this.timings = timings;
@@ -20,11 +20,11 @@ public class Index implements Selectable {
 		this.indexNumber = indexNumber;
 	}
 
-	public String getCourse() {
+	public Course getCourse() {
 		return course;
 	}
 
-	public void setCourse(String course) {
+	public void setCourse(Course course) {
 		this.course = course;
 	}
 
