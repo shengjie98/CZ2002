@@ -1,7 +1,7 @@
 package stars;
 import java.util.Scanner;
 
-public class StudentUI {
+public class StudentUI extends SelectUI{
     public void displayMenu(){
         Scanner sc = new Scanner(System.in);
         int i;
