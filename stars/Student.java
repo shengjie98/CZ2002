@@ -2,6 +2,8 @@ package stars;
 
 import java.util.ArrayList;
 
+package stars;
+
 /**
  * Stores and retrieves student data
  */
@@ -29,7 +31,7 @@ public class Student {
     
 
     public boolean addIndex(Index index) {
-        return registeredCourses.addIndex(index);;
+        return registeredCourses.addIndex(index);
     }
 
     public boolean dropIndex(Index index) {
@@ -66,4 +68,6 @@ public class Student {
         return degree;
     }
 
+    public boolean checkChangeIndex(Index myIndex, Index friendIndex) {
+    }
 }

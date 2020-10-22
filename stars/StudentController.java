@@ -1,8 +1,9 @@
 package stars;
 
+import java.util.ArrayList;
+
 public class StudentController {
 
-//    private String studentID;
     private Student aStudent;
     private CourseDB courseInfo;
     private StudentDB studentInfo;
@@ -12,11 +13,6 @@ public class StudentController {
         courseInfo = new CourseDB();
         studentInfo = new StudentDB();
         aStudent = studentInfo.loadInfo(studentID);
-//        this.studentID = studentID;
-//        Course allCourses = new Course(a,s,d,f,g)
-//        Index aIndex = new Index(a,s,d,f,g,h);
-//
-//        aStudent = studentInfo.loadInfo(studentID);
     }
 
     public ArrayList<Course> getCourseList() {
@@ -33,11 +29,24 @@ public class StudentController {
     public ArrayList<Index> getRegisteredIndex(){
         return aStudent.getRegisteredIndex();
     }
-    public boolean changeIndex(){
+    public boolean changeIndex(Index oldIndex, Index newIndex){
         return aStudent.changeIndex(oldIndex, newIndex);
     }
-    public boolean swopIndex(String friendID, Index index) {
-        studentInfo.loadInfo();
+    public boolean swopIndex(String friendID, Index myIndex) {
+        //using myIndex find myCourse, then find my friend's Index using myCourse
+        Student friend = studentInfo.loadInfo(friendID); //find the student object for your friend
+        Course myCourse = myIndex.getCourse(); //from the student object, find
+        for (Index friendIndex : friend.getRegisteredIndex()){
+            Course friendCourse = friendIndex.getCourse();
+            if (friendCourse.getCourseID()==myCourse.getCourseID()) {//id
+                Index foundIndex = friendIndex;
+                if (friend.checkChangeIndex(myIndex, friendIndex) && aStudent.checkChangeIndex(friendIndex, myIndex)) {
+                    aStudent.swopPlaces(myIndex, friendIndex);
+                    friend.swopPlaces(friendIndex, myIndex);
+                    return true;
+                }
+            }
+        }
+        return false;
     }
-
 }
