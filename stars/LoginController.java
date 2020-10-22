@@ -1,8 +1,18 @@
 package stars;
 
 
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+import java.io.File;
+
 public class LoginController {
-    public boolean verifyLogin(String username, String password) {
+    
+    /**
+     * Verifies the username and passsword of the use
+     * @param username
+     * @param password
+     */
+    public void verifyLogin(String username, String password) {
         boolean adminVerification, studentVerification;
         adminVerification = checkAdmin(username, password);
         if (adminVerification) {
@@ -15,16 +25,45 @@ public class LoginController {
                 studentUI.displayMenu();
             }
         } 
-        return false;
+        return;
     }
 
+    /**
+     * Checks if the input belongs to the admin
+     * @param username username
+     * @param password password
+     * @return boolean if the username and password belongs to the admin
+     */
     private boolean checkAdmin(String username, String password) {
-        if (username.equals("admin") && password.equals("admin")) {
-            return true;
-        } 
+        int hashedPassword = password.hashCode();
+        String adminUsername;
+        int adminPassword;
+        
+        
+        try {
+            Scanner admin = new Scanner(new File("stars/adminAccount.txt"));
+            adminUsername = admin.nextLine();
+            adminPassword = admin.nextInt();
+            if (username.equals(adminUsername) && hashedPassword == adminPassword) {
+                return true;
+            } 
+        } catch (FileNotFoundException e) {
+            System.out.print("file not file error\n");
+            return false;
+        }
+        
+        
+        
+        
         return false;
     }
     
+    /**
+     * checks if the input belongs to any student
+     * @param username
+     * @param password
+     * @return
+     */
     private boolean checkStudent(String username, String password) {
         return false;
     }

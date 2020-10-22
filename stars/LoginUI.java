@@ -6,13 +6,12 @@ public class LoginUI {
         Scanner sc = new Scanner(System.in);
         LoginController loginController = new LoginController();
         String username, password;
-        boolean valid;
         do {
             System.out.print("Username: ");
             username = sc.next();
             System.out.print("Password: ");
             password = sc.next();
-            valid = loginController.verifyLogin(username, password);
-        } while (!valid);
+            loginController.verifyLogin(username, password);
+        } while (true);
     }
 }
