@@ -18,7 +18,7 @@ public class StudentUI extends SelectUI{
         do {
             System.out.println("1. Add course index");
             System.out.println("2. Drop course index");
-            System.out.println("3. Print Rrgistered courses");
+            System.out.println("3. Print Registered courses");
             System.out.println("4. Check vacancies available");
             System.out.println("5. Change index number of course");
             System.out.println("6. Swop index number with another student");

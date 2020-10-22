@@ -2,10 +2,10 @@ package stars;
 
 public class StudentRegisteredCourses{
 
-        public static void addIndex(String index) {
+        public static void addIndex(Index index) {
         }
 
-        public static void dropIndex(String index) {
+        public static void dropIndex(Index index) {
         }
         
         public void changeIndex(String myIndex) {
