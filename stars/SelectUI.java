@@ -14,7 +14,7 @@ public abstract class SelectUI {
         System.out.println("Select one from the following");
         Scanner sc = new Scanner(System.in);
         for (i = 1; i <= ls.length; i++) {
-            System.out.printf("%i: %s\n", i , ls[i-1].print());
+            System.out.printf("%d: %s\n", i , ls[i-1].print());
         }
         System.out.print("Option: ");
         do {
