@@ -51,10 +51,6 @@ public class LoginController {
             System.out.print("file not file error\n");
             return false;
         }
-        
-        
-        
-        
         return false;
     }
     
@@ -66,5 +62,10 @@ public class LoginController {
      */
     private boolean checkStudent(String username, String password) {
         return false;
+    }
+
+
+    public void editAccess(String studentID, String password, String accessStart, String accessEnd) {
+
     }
 }

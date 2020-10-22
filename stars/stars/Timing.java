@@ -1,5 +1,3 @@
-package stars;
-
 public class Timing {
     private enum day {
         MON, TUES, WED, THUR, FRI
