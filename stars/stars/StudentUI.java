@@ -1,4 +1,5 @@
 package stars;
+
 import java.util.Scanner;
 
 public class StudentUI extends SelectUI{

@@ -1,4 +1,4 @@
-
+package stars;
 
 
 public class Index{

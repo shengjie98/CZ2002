@@ -1,4 +1,4 @@
-package stars;/**
+/**
  * Stores and retrieves student data
  */
 public class Student {

@@ -1,7 +1,10 @@
+package stars;
+
+import stars.Index;
 
 /**
  * 
- * @return class for Course objects
+ * @return class for stars.Course objects
  */
 
 public class Course {
@@ -13,7 +16,7 @@ public class Course {
 
     /**
      * 
-     * @return an array of Index objects for the course
+     * @return an array of stars.Index objects for the course
      */
     public Index[] getIndex() {
         return indexList;

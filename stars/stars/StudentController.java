@@ -1,3 +1,5 @@
+package stars;
+
 public class StudentController {
 
     private String studentID;
@@ -5,6 +7,7 @@ public class StudentController {
 
     CourseDB courseInfo = new CourseDB;
     StudentDB studentInfo = new StudentDB;
+    RegisteredCourses registeredInfo = new RegisteredCourses;
 
     public StudentController(String studentID) {
         this.studentID = studentID;
@@ -17,19 +20,29 @@ public class StudentController {
         index = studentUI.select(courseArray);
         StudentRegisteredCourses.addIndex(index);
     }
-    // can add index and drop index be combined?
+    // can add index and drop and change index be combined?
     public void dropIndex(){
         courseArray = aCourse.getIndexList();
         index = studentUI.select(courseArray);
         StudentRegisteredCourses.dropIndex(index);
     }
-    public void checkVacanciesAvailable(){
+    public boolean checkVacanciesAvailable(){
+        if (IndexClass.getVacancyLimit >= IndexClass.vacancy){
+            return true;
+        }
+        return false;
+    }
+    public void changeIndex(){
+        oldCourseArray = aCourse.getIndexList();
+        oldIndex = studentUI.select(courseArray);
+        newCourseArray = aCourse.
+        StudentRegisteredCourses.changeIndex(oldIndex, newIndex);
+    }
+    public swapIndex(){
+        courseArray = aCourse.getIndexList();
+        yourIndex = studentUI.select(courseArray);
 
     }
-    public changeIndex(){
-        return;
-    }
-    public swapIndex()
         return
 
 }
