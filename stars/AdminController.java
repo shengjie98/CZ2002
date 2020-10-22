@@ -1,5 +1,8 @@
 package stars;
 
+import java.util.List;
+import java.util.ArrayList;
+
 public class AdminController {
     private CourseDB courseInfo;
     private StudentDB studentInfo;
@@ -23,8 +26,11 @@ public class AdminController {
     public void editCourseInformation(int choice) {
         // rmb dont let them reduce vacancy past the current
         // length of the list of confirmed students
-        switch 
     }
+
+    public List<Course> getCourseList()[
+        return this.courseInfo.getCourseList();
+    ]
 
     public void addCourse(String courseID, Index[] indexList, int au, String school, String courseName) {
 
