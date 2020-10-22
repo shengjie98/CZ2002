@@ -5,44 +5,46 @@ public class StudentController {
     private String studentID;
     private Student aStudent;
 
-    CourseDB courseInfo = new CourseDB;
-    StudentDB studentInfo = new StudentDB;
-    RegisteredCourses registeredInfo = new RegisteredCourses;
+    CourseDB courseInfo = new CourseDB();
+    StudentDB studentInfo = new StudentDB();
+    Course allCourses = new Course();
+    StudentRegisteredCourses registeredInfo = new StudentRegisteredCourses();
+    StudentUI aStudentUI = new StudentUI();
+    Index aIndex = new Index();
 
     public StudentController(String studentID) {
         this.studentID = studentID;
         aStudent = studentInfo.loadInfo(studentID);
     }
 
-    Course aCourse = new Course();
     public void addIndex(){
-        courseArray = aCourse.getIndexList();
-        index = studentUI.select(courseArray);
-        StudentRegisteredCourses.addIndex(index);
+        Index allIndexArray[] = allCourses.getIndexList(); //might change the first word to Index
+        String index = aStudentUI.select(allIndexArray); //check array
+        registeredInfo.addIndex(index);
     }
     // can add index and drop and change index be combined?
     public void dropIndex(){
-        courseArray = aCourse.getIndexList();
-        index = studentUI.select(courseArray);
-        StudentRegisteredCourses.dropIndex(index);
+        RegisteredCourses registeredCourseArray[] = registeredInfo.getIndexList();
+        String index = aStudentUI.select(registeredCourseArray);
+        registeredInfo.dropIndex(index);
     }
     public boolean checkVacanciesAvailable(){
-        if (IndexClass.getVacancyLimit >= IndexClass.vacancy){
+        if (aIndex.getVacancy() >= aIndex.getConfirmedList().length){
             return true;
         }
         return false;
     }
     public void changeIndex(){
-        oldCourseArray = aCourse.getIndexList();
-        oldIndex = studentUI.select(courseArray);
-        newCourseArray = aCourse.
-        StudentRegisteredCourses.changeIndex(oldIndex, newIndex);
+        Index registeredIndexArray[] = registeredInfo.getIndexList();
+        String oldIndex = aStudentUI.select(registeredIndexArray);
+        Index allIndexArray[] = allCourses.getIndexList();
+        String newIndex = aStudentUI.select(allIndexArray);
+        registeredInfo.changeIndex(oldIndex, newIndex);
     }
-    public swapIndex(){
-        courseArray = aCourse.getIndexList();
-        yourIndex = studentUI.select(courseArray);
-
+    public void swapIndex() {
+        Index registeredIndexArray[] = registeredInfo.getIndexList();
+        String myIndex = aStudentUI.select(registeredIndexArray);
+        registeredInfo.changeIndex(myIndex);
     }
-        return
 
 }
