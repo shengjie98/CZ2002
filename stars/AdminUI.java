@@ -71,10 +71,6 @@ public class AdminUI extends SelectUI{
         Index selectedIndex;
         System.out.println("Edit Course Information");
         courseList = adminController.getCourseList();
-        selectedCourse = select(courseList);
-
-
-
-
+        selectedCourse = (Course)select(courseList);
     }
 }
