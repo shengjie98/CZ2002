@@ -28,9 +28,9 @@ public class AdminController {
         // length of the list of confirmed students
     }
 
-    public List<Course> getCourseList()[
+    public List<Course> getCourseList() {
         return this.courseInfo.getCourseList();
-    ]
+    }
 
     public void addCourse(String courseID, Index[] indexList, int au, String school, String courseName) {
 
