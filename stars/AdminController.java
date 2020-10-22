@@ -5,7 +5,8 @@ public class AdminController {
     private StudentDB studentInfo;
 
     public AdminController() {
-
+        courseInfo = new CourseDB();
+        studentInfo = new StudentDB();
     }
 
     /**

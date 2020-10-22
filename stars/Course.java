@@ -1,11 +1,13 @@
 package stars;
 
+import stars.Index;
+
 /**
  * 
  * @return class for stars.Course objects
  */
 
-public class Course implements Selectable{
+public class Course {
     private String courseID;
     private Index[] indexList;
     private int au;
@@ -72,7 +74,4 @@ public class Course implements Selectable{
         this.courseName = CourseName;
     }
 
-    public String print(){
-        return this.courseID;
-    }
 }
