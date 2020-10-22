@@ -1,8 +1,6 @@
 package stars;
 
 import java.util.ArrayList;
-import java.util.PrimitiveIterator.OfInt;
-import java.time.LocalTime;
 
 public class StudentRegisteredCourses{
     ArrayList<Index> waitlistedIndexArray;

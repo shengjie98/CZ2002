@@ -2,7 +2,6 @@ package stars;
 
 import java.util.ArrayList;
 
-
 /**
  * Stores and retrieves student data
  */
