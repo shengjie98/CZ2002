@@ -23,12 +23,14 @@ public class AdminController {
         studentInfo.addStudent(newStudent);
     }
 
-    public void editCourseInformation(int choice) {
+    public void editCourseInformation() {
         // rmb dont let them reduce vacancy past the current
+
         // length of the list of confirmed students
+
     }
 
-    public List<Course> getCourseList() {
+    public ArrayList<Course> getCourseList() {
         return this.courseInfo.getCourseList();
     }
 
