@@ -1,5 +1,10 @@
 package stars;
 
 public interface Selectable {
-    public void print();
+    
+    /**
+     * Retrieves student identification number
+     * @return String This formatted string containing information of the Selectable to be printed
+     */
+    public String print();
 }
