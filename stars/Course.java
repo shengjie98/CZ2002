@@ -14,6 +14,14 @@ public class Course {
     private String school;
     private String courseName;
 
+    public Course(String courseID, Index[] indexList, int au, String school, String courseName) {
+        this.courseID = courseID;
+        this.indexList = indexList;
+        this.au = au;
+        this.school = school;
+        this.courseName = courseName;
+    }
+
     /**
      * 
      * @return an array of stars.Index objects for the course
