@@ -7,12 +7,12 @@ import stars.Index;
  * @return class for stars.Course objects
  */
 
-public class Course {
+public class Course implements Selectable {
     private String courseID;
+    private String courseName;
     private Index[] indexList;
     private int au;
     private String school;
-    private String courseName;
 
     public Course(String courseID, Index[] indexList, int au, String school, String courseName) {
         this.courseID = courseID;
@@ -22,56 +22,51 @@ public class Course {
         this.courseName = courseName;
     }
 
-    /**
-     * 
-     * @return an array of stars.Index objects for the course
-     */
-    public Index[] getIndex() {
+    public String getCourseID() {
+        return courseID;
+    }
+
+    public void setCourseID(String courseID) {
+        this.courseID = courseID;
+    }
+
+    public Index[] getIndexList() {
         return indexList;
     }
 
-    /**
-     * 
-     * @return the au
-     */
-    public int getAU() {
+    public void setIndexList(Index[] indexList) {
+        this.indexList = indexList;
+    }
+
+    public int getAu() {
         return au;
     }
 
-    /**
-     * 
-     * @param CourseID
-     * @return set the courseID
-     */
-    public void setCourseID(String CourseID) {
-        this.courseID = CourseID;
+    public void setAu(int au) {
+        this.au = au;
     }
 
-    /**
-     * 
-     * @param AU
-     * @return set the AU
-     */
-    public void setAU(int AU) {
-        this.au = AU;
+    public String getSchool() {
+        return school;
     }
 
-    /**
-     * 
-     * @param School
-     * @return set the school that the course belongs to
-     */
-    public void setSchool(String School) {
-        this.school = School;
+    public void setSchool(String school) {
+        this.school = school;
     }
 
-    /**
-     * 
-     * @param CourseName
-     * @return set the name of the course
-     */
-    public void setCourseName(String CourseName) {
-        this.courseName = CourseName;
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+
+    public String print() {
+        // print out all the information of the Course
+        String stringToReturn = this.getCourseID() + '\n' + this.getSchool() + '\n' + this.getCourseID() + '\n'
+                + this.getAu() + '\n';
+        return stringToReturn;
     }
 
 }

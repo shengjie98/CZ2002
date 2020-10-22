@@ -2,6 +2,7 @@ package stars;
 
 import java.util.Scanner;
 import java.util.List;
+import java.util.ArrayList;
 
 public class AdminUI extends SelectUI {
     private AdminController adminController;
@@ -76,6 +77,12 @@ public class AdminUI extends SelectUI {
         // get list of courses from the course database
         courseList = adminController.getCourseList();
         Course selectedCourse = (Course) select(courseList);
+        int Au = selectedCourse.getAu();
+        String CourseID = selectedCourse.getCourseID();
+
+        System.out.println("Edit Course Information");
+        System.out.println(selectedCourse.print());
+        System.out.println();
 
     }
 }
