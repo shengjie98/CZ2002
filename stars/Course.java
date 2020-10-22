@@ -1,6 +1,5 @@
 package stars;
 
-import stars.Index;
 import java.util.ArrayList;
 
 /**
