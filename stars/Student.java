@@ -23,7 +23,7 @@ public class Student {
         this.gender = gender;
         this.studentID = studentID;
         this.degree = degree;
-        registeredCourses = new StudentRegisteredCourses();
+        registeredCourses = new StudentRegisteredCourses(this);
         
     }
     
