@@ -1,6 +1,7 @@
 package stars;
 
 import stars.Index;
+import java.util.ArrayList;
 
 /**
  * 
@@ -10,11 +11,11 @@ import stars.Index;
 public class Course implements Selectable {
     private String courseID;
     private String courseName;
-    private Index[] indexList;
+    private ArrayList<Index> indexList;
     private int au;
     private String school;
 
-    public Course(String courseID, Index[] indexList, int au, String school, String courseName) {
+    public Course(String courseID, ArrayList<Index> indexList, int au, String school, String courseName) {
         this.courseID = courseID;
         this.indexList = indexList;
         this.au = au;
@@ -30,11 +31,11 @@ public class Course implements Selectable {
         this.courseID = courseID;
     }
 
-    public Index[] getIndexList() {
+    public ArrayList<Index> getIndexList() {
         return indexList;
     }
 
-    public void setIndexList(Index[] indexList) {
+    public void setIndexList(ArrayList<Index> indexList) {
         this.indexList = indexList;
     }
 
@@ -64,8 +65,7 @@ public class Course implements Selectable {
 
     public String print() {
         // print out all the information of the Course
-        String stringToReturn = this.getCourseID() + '\n' + this.getSchool() + '\n' + this.getCourseID() + '\n'
-                + this.getAu() + '\n';
+        String stringToReturn = this.getCourseID() + '\n' + this.getSchool() + '\n' + this.getCourseName() + '\n';
         return stringToReturn;
     }
 

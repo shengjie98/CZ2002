@@ -1,15 +1,17 @@
 package stars;
 
-public class Index {
+import java.util.ArrayList;
+
+public class Index implements Selectable {
 	private String course;
-	private Timing[] timings;
+	private ArrayList<Timing> timings;
 	private int vacancy;
-	private Student[] waitList;
-	private Student[] confirmedList;
+	private ArrayList<Student> waitList;
+	private ArrayList<Student> confirmedList;
 	private int indexNumber;
 
-	public Index(String course, Timing[] timings, int vacancy, Student[] waitList, Student[] confirmedList,
-			int indexNumber) {
+	public Index(String course, ArrayList<Timing> timings, int vacancy, ArrayList<Student> waitList,
+			ArrayList<Student> confirmedList, int indexNumber) {
 		this.course = course;
 		this.timings = timings;
 		this.vacancy = vacancy;
@@ -26,11 +28,11 @@ public class Index {
 		this.course = course;
 	}
 
-	public Timing[] getTimings() {
+	public ArrayList<Timing> getTimings() {
 		return timings;
 	}
 
-	public void setTimings(Timing[] timings) {
+	public void setTimings(ArrayList<Timing> timings) {
 		this.timings = timings;
 	}
 
@@ -42,19 +44,19 @@ public class Index {
 		this.vacancy = vacancy;
 	}
 
-	public Student[] getWaitList() {
+	public ArrayList<Student> getWaitList() {
 		return waitList;
 	}
 
-	public void setWaitList(Student[] waitList) {
+	public void setWaitList(ArrayList<Student> waitList) {
 		this.waitList = waitList;
 	}
 
-	public Student[] getConfirmedList() {
+	public ArrayList<Student> getConfirmedList() {
 		return confirmedList;
 	}
 
-	public void setConfirmedList(Student[] confirmedList) {
+	public void setConfirmedList(ArrayList<Student> confirmedList) {
 		this.confirmedList = confirmedList;
 	}
 
@@ -66,4 +68,9 @@ public class Index {
 		this.indexNumber = indexNumber;
 	}
 
+	public String print() {
+		// print out all the information of the Course
+		String stringToReturn = String.valueOf(this.getIndexNumber()) + ' ' + String.valueOf(this.getVacancy());
+		return stringToReturn;
+	}
 }

@@ -1,7 +1,7 @@
 package stars;
 
 import java.util.Scanner;
-import java.util.List;
+// import java.util.List;
 import java.util.ArrayList;
 
 public class AdminUI extends SelectUI {
@@ -55,9 +55,9 @@ public class AdminUI extends SelectUI {
         gender = sc.nextLine();
         System.out.print("  g. Degree: ");
         degree = sc.nextLine();
-        System.out.print("  h. Access Perios Start (DD/MM/YYYY): ");
+        System.out.print("  h. Access Period Start (DD/MM/YYYY): ");
         start = sc.nextLine();
-        System.out.print("  i. Access Perios Start (DD/MM/YYYY): ");
+        System.out.print("  i. Access Period Start (DD/MM/YYYY): ");
         end = sc.nextLine();
 
         // admin controller.add student(studentName, nationality, gender, studentID,
@@ -69,20 +69,18 @@ public class AdminUI extends SelectUI {
 
     private void editCourseInformation() {
         Scanner sc = new Scanner(System.in);
-        ArrayList<Course> courseList;
-        Index[] indexList;
-        Index selectedIndex;
         System.out.println("Edit Course Information");
-
         // get list of courses from the course database
+        ArrayList<Course> courseList;
         courseList = adminController.getCourseList();
+        // this will print out the course information
         Course selectedCourse = (Course) select(courseList);
-        int Au = selectedCourse.getAu();
-        String CourseID = selectedCourse.getCourseID();
+
+        // get the list of indexes from the course object
+        ArrayList<Index> indexList = selectedCourse.getIndexList();
+        Index selectedIndex = (Index) select(indexList);
 
         System.out.println("Edit Course Information");
-        System.out.println(selectedCourse.print());
-        System.out.println();
 
     }
 }
