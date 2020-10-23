@@ -105,8 +105,6 @@ public class StudentUI extends SelectUI{
     
     private void changeIndex() {
         boolean success;
-        ArrayList<Course> courseList;
-        Course selectedCourse;
         ArrayList<Index> indexList;
         Index oldIndex, newIndex;
         

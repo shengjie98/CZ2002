@@ -11,12 +11,12 @@ public class Index implements Selectable {
 	private int vacancyLimit;
 	private int indexNumber;
 
-	public Index(Course course, ArrayList<Timing> timings, int vacancy, int vacancyLimit, ArrayList<Student> waitList,
+	public Index(Course course, ArrayList<Timing> timings, int vacancy, ArrayList<Student> waitList,
 			ArrayList<Student> confirmedList, int indexNumber) {
 		this.course = course;
 		this.timings = timings;
 		this.vacancy = vacancy;
-		this.vacancyLimit = vacancyLimit;
+		this.vacancyLimit = vacancy;
 		this.waitList = waitList;
 		this.confirmedList = confirmedList;
 		this.indexNumber = indexNumber;
