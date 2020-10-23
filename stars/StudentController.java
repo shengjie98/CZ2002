@@ -57,4 +57,10 @@ public class StudentController {
         }
         return false;
     }
+
+    public void save() {
+        this.courseInfo.saveInformation();
+        this.studentInfo.saveInformation();
+    }
+
 }

@@ -30,6 +30,11 @@ public class AdminController {
         studentInfo.addStudent(newStudent);
     }
 
+    public void save() {
+        this.courseInfo.saveInformation();
+        this.studentInfo.saveInformation();
+    }
+
     // public void editCourseInformation(int choice) {
     // // rmb dont let them reduce vacancy past the current
     // if (choice == 1) {

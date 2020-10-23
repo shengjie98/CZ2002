@@ -46,6 +46,7 @@ public class AdminUI extends SelectUI {
             }
 
         } while (i > 0 && i < 8);
+        adminController.save();
         return;
     }
 

@@ -48,6 +48,7 @@ public class StudentUI extends SelectUI{
             }
 
         } while (i > 0 && i < 7) ;
+        studentController.save();
         return;
     }
 
