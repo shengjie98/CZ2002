@@ -11,12 +11,19 @@ public class AdminController {
         courseInfo = new CourseDB();
         studentInfo = new StudentDB();
     }
+    
+    public ArrayList<Course> getCourseList() {
+        return this.courseInfo.getCourseList();
+    }
+
+    public ArrayList<Student> getStudentList() {
+        return this.studentInfo.getStudentList();
+    }
 
     /**
      * @return adds a student to an index of a course
      */
-    public void addStudent(String studentName, String nationality, String gender, String studentID, String degree,
-            String email) {
+    public void addStudent(String studentName, String nationality, String gender, String studentID, String degree) {
         // instantiate a new student object
         Student newStudent = new Student(studentName, nationality, gender, studentID, degree);
         // add this student to the StudentDB
@@ -45,19 +52,16 @@ public class AdminController {
 
     // }
 
-    public ArrayList<Course> getCourseList() {
-        return this.courseInfo.getCourseList();
-    }
 
-    public void addCourse(String courseID, Index[] indexList, int au, String school, String courseName) {
+    // public void addCourse(String courseID, Index[] indexList, int au, String school, String courseName) {
 
-    }
+    // }
 
-    public void editCourseAccess() {
+    // public void editCourseAccess() {
 
-    }
+    // }
 
-    public void printStudentList() {
+    // public void printStudentList() {
 
-    }
+    // }
 }

@@ -11,7 +11,7 @@ public class StudentController {
     public StudentController(String studentID) {
         courseInfo = new CourseDB();
         studentInfo = new StudentDB();
-        myStudent = studentInfo.loadInfo(studentID);
+        myStudent = studentInfo.findStudent(studentID);
     }
 
     public ArrayList<Course> getCourseList() {
@@ -42,12 +42,12 @@ public class StudentController {
     
     public boolean swopIndex (String friendID, Index myIndex){
         //using myIndex find myCourse, then find my friend's Index using myCourse
-        Student friend = studentInfo.loadInfo(friendID); //find the student object for your friend
+        Student friend = studentInfo.findStudent(friendID); //find the student object for your friend
         Course myCourse = myIndex.getCourse(); //from the student object, find
         for (Index friendIndex : friend.getRegisteredIndex()) {
             Course friendCourse = friendIndex.getCourse();
             if (friendCourse.getCourseID() == myCourse.getCourseID()) {//id
-                Index foundIndex = friendIndex;
+                // Index foundIndex = friendIndex; 
                 if (friend.checkChangeIndex(myIndex, friendIndex) && myStudent.checkChangeIndex(friendIndex, myIndex)) {
                     myStudent.swopPlaces(friendIndex, friend);
                     friend.swopPlaces(myIndex, this.myStudent);
