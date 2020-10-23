@@ -149,7 +149,10 @@ public class AdminUI extends SelectUI {
                 selectedCourse.setSchool(newSchool.nextLine());
                 break;
             case 3:
-                // Add a new index into an existing course
+                /**
+                 * Add a new index into an existing course
+                 */
+                //get the 
                 Scanner vacancy = new Scanner(System.in);
 
                 // create list of timings
@@ -164,10 +167,15 @@ public class AdminUI extends SelectUI {
                 // get the list of indexes from the course object
                 ArrayList<Index> indexList = selectedCourse.getIndexList();
                 // this will print out the list of indexes and allow the user to select
-                // the index that they want to edit
+                // the index that they want to drop; The admin will only
+                // be allowed to drop it if it has no students
                 Index selectedIndex = (Index) select(indexList);
-
-                adminController.dropIndex(indexList, selectedIndex);
+                ArrayList<Student> confirmedList = selectedIndex.getConfirmedList()
+                if (confirmedList.size() == 0 ){
+                    adminController.dropIndex(indexList, selectedIndex);
+                } else {
+                    System.out.println("Unable to drop Index. Students are already in the Index!");
+                }
                 break;
             case 5:
                 /**
