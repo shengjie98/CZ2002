@@ -1,8 +1,9 @@
 
 package stars;
+import java.io.Serializable;
 import java.time.LocalTime;
 
-public class Timing {
+public class Timing implements Serializable {
     static enum Type {
         TUT,
         LAB, 

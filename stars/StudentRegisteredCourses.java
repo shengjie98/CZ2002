@@ -1,8 +1,9 @@
 package stars;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class StudentRegisteredCourses{
+public class StudentRegisteredCourses implements Serializable{
     ArrayList<Index> waitlistedIndexArray;
     ArrayList<Index> confirmedIndexArray;
     Student owner; 

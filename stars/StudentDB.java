@@ -60,13 +60,14 @@ public class StudentDB implements Database{
 			ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(STUDENT_DATABASE_FILE));
 			this.studentList = (ArrayList<Student>) inputStream.readObject();
 		} catch (IOException e) {
+			System.out.println("IOException");
+		} catch (ClassNotFoundException e) {
 			System.out.println("Class not found");
 		}
 	}
 	
 	// sj stuff feel free to change @yx
 	public void saveInformation() {
-		// TODO Auto-generated method stub
 		try {
 			ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(STUDENT_DATABASE_FILE));
 			outputStream.writeObject(this.studentList);

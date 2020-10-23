@@ -1,11 +1,12 @@
 package stars;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Stores and retrieves student data
  */
-public class Student implements Selectable{
+public class Student implements Selectable, Serializable{
 
     private String studentID;
     private String studentName;

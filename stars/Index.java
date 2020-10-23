@@ -1,8 +1,9 @@
 package stars;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Index implements Selectable {
+public class Index implements Selectable, Serializable {
 	private Course course;
 	private ArrayList<Timing> timings;
 	private ArrayList<Student> waitList;

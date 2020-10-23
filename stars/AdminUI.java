@@ -155,8 +155,8 @@ public class AdminUI extends SelectUI {
                 Scanner vacancy = new Scanner(System.in);
                 
                 //create list of timings
-                Index newIndex = new Index(selectedCourse, timings, vacancy, waitList, confirmedList, indexNumber);
-                adminController.addIndex(newIndex);
+                // Index newIndex = new Index(selectedCourse, timings, vacancy, waitList, confirmedList, indexNumber);
+                // adminController.addIndex(newIndex);
                 break;
             case 4:
                 // Drop Index

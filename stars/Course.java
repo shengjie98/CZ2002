@@ -1,5 +1,6 @@
 package stars;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -7,7 +8,7 @@ import java.util.ArrayList;
  * @return class for stars.Course objects
  */
 
-public class Course implements Selectable {
+public class Course implements Selectable, Serializable {
 
     private String courseID;
     private String courseName;
