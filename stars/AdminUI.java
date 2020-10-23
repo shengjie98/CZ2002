@@ -22,8 +22,8 @@ public class AdminUI extends SelectUI {
         int i;
         System.out.println("in admin display menu");
         do {
-            System.out.println("1. Edit student access period"); // sj
-            System.out.println("2. Add student"); // sj
+            System.out.println("1. Edit student access period");
+            System.out.println("2. Add student");
             System.out.println("3. Add course");
             System.out.println("4. Update course");
             System.out.println("5. Check availablity slot for an index");
@@ -151,9 +151,10 @@ public class AdminUI extends SelectUI {
             case 3:
                 // Add a new index into an existing course
                 Scanner vacancy = new Scanner(System.in);
-                
-                //create list of timings
-                // Index newIndex = new Index(selectedCourse, timings, vacancy, waitList, confirmedList, indexNumber);
+
+                // create list of timings
+                // Index newIndex = new Index(selectedCourse, timings, vacancy, waitList,
+                // confirmedList, indexNumber);
                 // adminController.addIndex(newIndex);
                 break;
             case 4:
