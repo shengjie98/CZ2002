@@ -11,7 +11,7 @@ public class AdminUI extends SelectUI {
     private AdminController adminController;
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
     private LoginController loginController;
-         
+        
 
     public AdminUI() {
         adminController = new AdminController();
@@ -57,7 +57,7 @@ public class AdminUI extends SelectUI {
         LocalDateTime start, end;
         while (true) {
             try {
-                System.out.print("  h. Access Period Start (DD/MM/YYYY hh:mm): ");
+                System.out.print("  a. Access Period Start (DD/MM/YYYY hh:mm): ");
                 start = LocalDateTime.parse(sc.nextLine(), formatter);
                 break;
             } catch (DateTimeParseException e) {
@@ -66,7 +66,7 @@ public class AdminUI extends SelectUI {
         }
         while (true) {
             try {
-                System.out.print("  i. Access Period End (DD/MM/YYYY hh:mm): ");
+                System.out.print("  b. Access Period End (DD/MM/YYYY hh:mm): ");
                 end = LocalDateTime.parse(sc.nextLine(), formatter);
                 break;
             } catch (DateTimeParseException e) {
@@ -78,27 +78,25 @@ public class AdminUI extends SelectUI {
 
     private void addStudent() {
         Scanner sc = new Scanner(System.in);
-        String studentName, studentID, email, password, nationality, gender, degree;
+        String studentName, studentID, password, nationality, gender, degree;
         LocalDateTime start, end;
         System.out.println("Add a Student");
         System.out.print("  a. Student Name: ");
         studentName = sc.nextLine();
         System.out.print("  b. Student ID: ");
         studentID = sc.nextLine();
-        System.out.print("  c. Email: ");
-        email = sc.nextLine();
-        System.out.print("  d. Password: ");
+        System.out.print("  c. Password: ");
         password = sc.nextLine();
-        System.out.print("  e. Nationality: ");
+        System.out.print("  d. Nationality: ");
         nationality = sc.nextLine();
-        System.out.print("  f. Gender: ");
+        System.out.print("  e. Gender: ");
         gender = sc.nextLine();
-        System.out.print("  g. Degree: ");
+        System.out.print("  f. Degree: ");
         degree = sc.nextLine();
         // need to change to local time object here
         while (true) {
             try {
-                System.out.print("  h. Access Period Start (DD/MM/YYYY hh:mm): ");
+                System.out.print("  g. Access Period Start (DD/MM/YYYY hh:mm): ");
                 start = LocalDateTime.parse(sc.nextLine(), formatter);
                 break;
             } catch (DateTimeParseException e) {
@@ -107,7 +105,7 @@ public class AdminUI extends SelectUI {
         }
         while (true) {
             try {
-                System.out.print("  i. Access Period End (DD/MM/YYYY hh:mm): ");
+                System.out.print("  h. Access Period End (DD/MM/YYYY hh:mm): ");
                 end = LocalDateTime.parse(sc.nextLine(), formatter);
                 break;
             } catch (DateTimeParseException e) {
@@ -118,7 +116,7 @@ public class AdminUI extends SelectUI {
 
         // admin controller.add student(studentName, nationality, gender, studentID,
         // degree, email)
-        adminController.addStudent(studentName, nationality, gender, studentID, degree, email);
+        adminController.addStudent(studentName, nationality, gender, studentID, degree);
         loginController.addStudent(studentID, password, start, end);
     }
 

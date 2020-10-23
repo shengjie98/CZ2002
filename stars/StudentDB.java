@@ -1,25 +1,37 @@
 package stars;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
+
 
 /**
  * handles student data
  */
 public class StudentDB implements Database{
 
-    private List<Student> studentList = new ArrayList<Student>();
+    private ArrayList<Student> studentList = new ArrayList<Student>();
+	private final String STUDENT_DATABASE_FILE = "stars/students.ser";
+	
 
-    //GET METHODS
+	public StudentDB () {
+		this.loadInformation();
+	}
+	
+	
+	//GET METHODS
 
     /**
      * Retrieve the list of all students
      * @return student object list
      */
-    public List<Student> getStudentList(){
+    public ArrayList<Student> getStudentList(){
         return studentList;
     }
 
@@ -29,62 +41,92 @@ public class StudentDB implements Database{
      * add a student into the student object list
      * @param studentName student name
      */
-    public void addStudent (String studentName, String nationality, String gender, String studentId, String degree, String email) {
-        studentList.add(new Student(studentName, nationality, gender, studentId, degree, email));
-    }
-
-	public void loadInformation() {
-		 List<String> students = new ArrayList<String>();
-	     Scanner sc;
-	     String line;
-	     String delimiter = "[ ]+";
-
-	     //scan from students.txt into List students
-	     try{
-	            //scan from courses.txt line by line into String line
-	            //split each line into token based on spaces and store into List courses
-	            sc = new Scanner(new File("students.txt"));
-	            while(sc.hasNextLine()){
-	                line = sc.nextLine();
-	                students.add(line.split(delimiter));
-	            }
-	            for(int i = 0; i<students.size(); i++){
-
-	                //initialise and set values for each array of strings in List courses
-					String index;
-					String gender;
-					String nationaity;
-	                String student;
-					String school = null;
-
-	                //index is the first string in the array
-	                index = students.get(i)[0];
-
-	                //gender is the second string in the array
-	                gender = students.get(i)[1];
-	                
-	                //nationality is the third string in the array  
-	                nationaity = students.get(i)[2];
-	                
-	                //school is the fourth string in the array
-	                school = students.get(i)[3];
-
-	                //student is the fifth in the array
-	                student = Integer.parseInt(students.get(i)[4]);
-	            }
-
-	        }catch(IOException e){
-	            e.printStackTrace();
-	        }
-	     	
+    public void addStudent (Student student) {
+        studentList.add(student);
+	}
+	
+	public Student findStudent (String studentID) {
+		for (Student student: this.studentList) {
+			if (student.getStudentID() == studentID) {
+				return student;
+			}
+		} 
+		return null;
 	}
 
-	@Override
+	// sj stuff feel free to change @yx
+	public void loadInformation() {
+		try {
+			ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(STUDENT_DATABASE_FILE));
+			this.studentList = (ArrayList<Student>) inputStream.readObject();
+		} catch (IOException e) {
+			System.out.println("Class not found");
+		}
+	}
+	
+	// sj stuff feel free to change @yx
 	public void saveInformation() {
 		// TODO Auto-generated method stub
-		
-		
+		try {
+			ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(STUDENT_DATABASE_FILE));
+			outputStream.writeObject(this.studentList);
+			outputStream.close();
+		} catch (IOException e) {
+			System.out.println("Class not found");
+		}
 	}
+
+	public void finalize () {
+		this.saveInformation();
+	}
+
+	// public void loadInformation() {
+	// 	 List<String> students = new ArrayList<String>();
+	//      Scanner sc;
+	//      String line;
+	//      String delimiter = "[ ]+";
+
+	//      //scan from students.txt into List students
+	//      try{
+		//             //scan from courses.txt line by line into String line
+		//             //split each line into token based on spaces and store into List courses
+	//             sc = new Scanner(new File("students.txt"));
+	//             while(sc.hasNextLine()){
+	//                 line = sc.nextLine();
+	//                 students.add(line.split(delimiter));
+	//             }
+	//             for(int i = 0; i<students.size(); i++){
+
+	//                 //initialise and set values for each array of strings in List courses
+	// 				String index;
+	// 				String gender;
+	// 				String nationaity;
+	//                 String student;
+	// 				String school = null;
+
+	//                 //index is the first string in the array
+	//                 index = students.get(i)[0];
+
+	//                 //gender is the second string in the array
+	//                 gender = students.get(i)[1];
+	                
+	//                 //nationality is the third string in the array  
+	//                 nationaity = students.get(i)[2];
+	                
+	//                 //school is the fourth string in the array
+	//                 school = students.get(i)[3];
+
+	//                 //student is the fifth in the array
+	//                 student = Integer.parseInt(students.get(i)[4]);
+	//             }
+
+	//         }catch(IOException e){
+	//             e.printStackTrace();
+	//         }
+	     	
+	// }
+
+	
 	
 
 }
