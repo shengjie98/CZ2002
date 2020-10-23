@@ -140,12 +140,16 @@ public class AdminUI extends SelectUI {
         int i = sc.nextInt();
         switch (i) {
             case 1:
-                // Change course ID
+                /**
+                 * Change course ID attribute
+                 */
                 Scanner newCourseID = new Scanner(System.in);
                 selectedCourse.setCourseID(newCourseID.nextLine());
                 break;
             case 2:
-                // Change school
+                /**
+                 * Change school attribute
+                 */
                 Scanner newSchool = new Scanner(System.in);
                 selectedCourse.setSchool(newSchool.nextLine());
                 break;
@@ -153,8 +157,28 @@ public class AdminUI extends SelectUI {
                 /**
                  * Add a new index into an existing course
                  */
-                //get the 
+                //get the attributes
+
                 Scanner vacancy = new Scanner(System.in);
+                int newVacancy = vacancy.nextInt();
+                System.out.println("Input Timings");
+                // while (true){
+                //     System.out.println("Type(LEC/TUT/LAB): ");
+                //     Scanner type = new Scanner(System.in);
+                //     String newType = type.nextLine();
+                //     if (newType.equals("LEC")){
+                        
+                //     } else if (newType.equals("TUT")){
+
+                //     } else if (newType.equals("LAB")) {
+
+                //     } 
+                //     if (){
+                //         break;
+                //     }
+                // }
+                
+                Index newIndex = new Index(selectedCourse, ArrayList<Timing> timings, int vacancy, int indexNumber);
 
                 // create list of timings
                 // Index newIndex = new Index(selectedCourse, timings, vacancy, waitList,
@@ -180,7 +204,7 @@ public class AdminUI extends SelectUI {
                 break;
             case 5:
                 /**
-                 * Change vacancy of course
+                 * Change vacancy attribute of course
                  */
                 
                 // Get the user to choose the index
