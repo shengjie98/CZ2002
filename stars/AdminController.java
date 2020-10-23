@@ -11,7 +11,7 @@ public class AdminController {
         courseInfo = new CourseDB();
         studentInfo = new StudentDB();
     }
-    
+
     public ArrayList<Course> getCourseList() {
         return this.courseInfo.getCourseList();
     }
@@ -43,6 +43,11 @@ public class AdminController {
 
     // }
 
+    /**
+     * 
+     * @param indexList
+     * @param selectedIndex remove this index from the list of indexes
+     */
     public void dropIndex(ArrayList<Index> indexList, Index selectedIndex) {
         indexList.remove(selectedIndex);
         return;
@@ -52,8 +57,8 @@ public class AdminController {
 
     // }
 
-
-    // public void addCourse(String courseID, Index[] indexList, int au, String school, String courseName) {
+    // public void addCourse(String courseID, Index[] indexList, int au, String
+    // school, String courseName) {
 
     // }
 
