@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Stores and retrieves student data
  */
-public class Student {
+public class Student implements Selectable{
 
     private String studentID;
     private String studentName;
@@ -52,6 +52,9 @@ public class Student {
         registeredCourses.swopPlaces(friendIndex, friend);
     }
     
+    public String print() {
+        return this.studentName;
+    }
     
     /**
      * Retrieves student identification number

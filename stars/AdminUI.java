@@ -1,14 +1,21 @@
 package stars;
 
 import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 // import java.util.List;
 import java.util.ArrayList;
 
 public class AdminUI extends SelectUI {
     private AdminController adminController;
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+    private LoginController loginController;
+         
 
     public AdminUI() {
         adminController = new AdminController();
+        loginController = new LoginController();
     }
 
     public void displayMenu() {
@@ -26,6 +33,9 @@ public class AdminUI extends SelectUI {
             System.out.print("Option: ");
             i = sc.nextInt();
             switch (i) {
+                case 1: 
+                    editStudentAccess();
+                    break;
                 case 2:
                     addStudent();
                     break;
@@ -40,9 +50,36 @@ public class AdminUI extends SelectUI {
         return;
     }
 
+    private void editStudentAccess(){
+        ArrayList<Student> studentList = this.adminController.getStudentList();
+        Student selectedStudent = (Student) select(studentList);
+        Scanner sc = new Scanner(System.in);
+        LocalDateTime start, end;
+        while (true) {
+            try {
+                System.out.print("  h. Access Period Start (DD/MM/YYYY hh:mm): ");
+                start = LocalDateTime.parse(sc.nextLine(), formatter);
+                break;
+            } catch (DateTimeParseException e) {
+                System.out.println("Incorrect Format");
+            }
+        }
+        while (true) {
+            try {
+                System.out.print("  i. Access Period End (DD/MM/YYYY hh:mm): ");
+                end = LocalDateTime.parse(sc.nextLine(), formatter);
+                break;
+            } catch (DateTimeParseException e) {
+                System.out.println("Incorrect Format");
+            }
+        }
+        loginController.editAccess(selectedStudent.getStudentID(), start, end);
+    }
+
     private void addStudent() {
         Scanner sc = new Scanner(System.in);
-        String studentName, studentID, email, password, nationality, gender, degree, start, end;
+        String studentName, studentID, email, password, nationality, gender, degree;
+        LocalDateTime start, end;
         System.out.println("Add a Student");
         System.out.print("  a. Student Name: ");
         studentName = sc.nextLine();
@@ -59,16 +96,30 @@ public class AdminUI extends SelectUI {
         System.out.print("  g. Degree: ");
         degree = sc.nextLine();
         // need to change to local time object here
-        System.out.print("  h. Access Period Start (DD/MM/YYYY): ");
-        start = sc.nextLine();
-        System.out.print("  i. Access Period Start (DD/MM/YYYY): ");
-        end = sc.nextLine();
+        while (true) {
+            try {
+                System.out.print("  h. Access Period Start (DD/MM/YYYY hh:mm): ");
+                start = LocalDateTime.parse(sc.nextLine(), formatter);
+                break;
+            } catch (DateTimeParseException e) {
+                System.out.println("Incorrect Format");
+            }
+        }
+        while (true) {
+            try {
+                System.out.print("  i. Access Period End (DD/MM/YYYY hh:mm): ");
+                end = LocalDateTime.parse(sc.nextLine(), formatter);
+                break;
+            } catch (DateTimeParseException e) {
+                System.out.println("Incorrect Format");
+            }
+        }
+        
 
         // admin controller.add student(studentName, nationality, gender, studentID,
         // degree, email)
         adminController.addStudent(studentName, nationality, gender, studentID, degree, email);
-        // login controller add account()
-        // loginController.add
+        loginController.addStudent(studentID, password, start, end);
     }
 
     private void editCourseInformation() {
