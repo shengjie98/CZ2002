@@ -2,7 +2,10 @@ package stars;
 
 
 import java.io.FileNotFoundException;
+import java.time.LocalDateTime;
 import java.util.Scanner;
+
+
 import java.io.File;
 
 public class LoginController {
@@ -62,14 +65,22 @@ public class LoginController {
     public boolean checkStudent(String username, String password) {
         int hashedPassword = password.hashCode();
         String studentUsername;
+        String[] line;
         int studentPassword;
+        LocalDateTime accessStart, accessEnd, now;
         try {
             Scanner admin = new Scanner(new File("stars/studentAccounts.txt"));
-            studentUsername = admin.nextLine();
-            studentPassword = admin.nextInt();
-            if (username.equals(studentUsername) && hashedPassword == studentPassword) {
-                return true;
-            } 
+            now = LocalDateTime.now();
+            do {
+                line = admin.nextLine().split(" ");
+                studentUsername = line[0];
+                studentPassword = (int)line[1];
+                accessStart = LocalDateTime.parse(line[2]);
+                accessEnd = LocalDateTime.parse(line[3]);
+                if (username.equals(studentUsername) && hashedPassword == studentPassword && now.isAfter(accessStart) && now.isBefore(accessEnd)) {
+                    return true;
+                } 
+            } while (admin.hasNextLine());
         } catch (FileNotFoundException e) {
             System.out.print("file not file error\n");
             return false;
