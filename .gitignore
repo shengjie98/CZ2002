@@ -3,4 +3,4 @@
 CZ2002.iml
 .idea
 /stars/*.class
-*class
+*.class
