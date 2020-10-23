@@ -20,6 +20,18 @@ public class Index implements Selectable, Serializable {
 		this.indexNumber = indexNumber;
 	}
 
+	// public boolean addTiming(Timing newTiming) {
+	// // if the confirmedList is full, add the student to the waitlist
+	// if (confirmedList.size() == vacancyLimit) {
+	// waitList.add(newStudent);
+	// return false;
+	// } else {
+	// // else add the student to the confirmed list
+	// confirmedList.add(newStudent);
+	// vacancy--;
+	// return true;
+	// }
+	// }
 	/**
 	 * 
 	 * @param newStudent
