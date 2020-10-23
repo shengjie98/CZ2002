@@ -75,14 +75,19 @@ public class StudentUI extends SelectUI{
         Index selectedIndex;
         indexList = studentController.getRegisteredIndex();
         selectedIndex = (Index)select(indexList);
-        studentController.dropIndex(selectedIndex);
+        success = studentController.dropIndex(selectedIndex);
+        if (success) {
+            System.out.println("Successfully dropped!");
+        } else {
+            System.out.println("Error dropping");
+        }
     }
     
     private void printRegisteredCourses() {
         ArrayList<Index> indexList;
         indexList = studentController.getRegisteredIndex();
         for (Index index: indexList) {
-            System.out.println(index.print());
+            System.out.println("  "+ index.print());
         }
     }
     
@@ -91,7 +96,6 @@ public class StudentUI extends SelectUI{
         Course selectedCourse;
         ArrayList<Index> indexList;
         Index selectedIndex;
-        
         courseList = studentController.getCourseList();
         selectedCourse = (Course)select(courseList);
         indexList = selectedCourse.getIndexList();
