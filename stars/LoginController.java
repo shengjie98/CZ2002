@@ -123,7 +123,7 @@ public class LoginController {
 
 
         try{
-            PrintWriter printStream = new PrintWriter(new BufferedWriter((new FileWriter("test/data.txt"))));
+            PrintWriter printStream = new PrintWriter(new BufferedWriter((new FileWriter(STUDENT_ACCOUNTS_FILE))));
             for (String s: lines) {
                 printStream.println(s);
             }
@@ -137,7 +137,7 @@ public class LoginController {
     public void addStudent(String studentID, String password, LocalDateTime accessStart, LocalDateTime accessEnd) {
         int hashedPassword = password.hashCode();
         try{
-            PrintWriter printStream = new PrintWriter(new BufferedWriter((new FileWriter("test/data.txt", true))));
+            PrintWriter printStream = new PrintWriter(new BufferedWriter((new FileWriter(STUDENT_ACCOUNTS_FILE, true))));
             printStream.println(String.join(" ", studentID, Integer.toString(hashedPassword), accessStart.toString(), accessEnd.toString()));
             printStream.close();
         } catch (IOException e) {

@@ -8,6 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
@@ -57,7 +58,8 @@ public class CourseDB implements Database {
     }
     
     public void saveInformation() {
-		try {
+        System.out.print("Saving data");
+        try {
 			ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(COURSE_DATABASE_FILE));
 			outputStream.writeObject(this.courseList);
 			outputStream.close();
