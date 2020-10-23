@@ -158,7 +158,9 @@ public class AdminUI extends SelectUI {
                 // adminController.addIndex(newIndex);
                 break;
             case 4:
-                // Drop Index
+                /**
+                 * Drop Index 
+                 */
                 // get the list of indexes from the course object
                 ArrayList<Index> indexList = selectedCourse.getIndexList();
                 // this will print out the list of indexes and allow the user to select
@@ -168,7 +170,25 @@ public class AdminUI extends SelectUI {
                 adminController.dropIndex(indexList, selectedIndex);
                 break;
             case 5:
-                // Change vacancy
+                /**
+                 * Change vacancy of course
+                 */
+                
+                // Get the user to choose the index
+                Index selectedIndex = (Index) select(indexList);
+
+                // Get the user to input the vacancy which must be
+                // greater than the current length of the list of
+                // students
+                Scanner newVanacyIn = new Scanner(System.in);
+                int newVacancy = newVanacyIn.nextInt();
+                ArrayList<Student> confirmedList = selectedIndex.getConfirmedList()
+                if (newVacancy > confirmedList.size()){
+                    selectedIndex.setVacancy(newVacancy);
+                } else {
+                    System.out.println("Unable to set new vacancy. Students are already in the list!");
+                }
+
                 break;
             default:
                 break;

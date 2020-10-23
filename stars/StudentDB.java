@@ -42,7 +42,7 @@ public class StudentDB implements Database{
      * @param studentName student name
      */
     public void addStudent (Student student) {
-        studentList.add(student);
+		studentList.add(student);
 	}
 	
 	public Student findStudent (String studentID) {
@@ -59,10 +59,13 @@ public class StudentDB implements Database{
 		try {
 			ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(STUDENT_DATABASE_FILE));
 			this.studentList = (ArrayList<Student>) inputStream.readObject();
+			inputStream.close();
 		} catch (IOException e) {
-			System.out.println("IOException");
+			// System.out.println("IOException");
+			this.studentList = new ArrayList<Student>();
 		} catch (ClassNotFoundException e) {
-			System.out.println("Class not found");
+			// System.out.println("Class not found");
+			this.studentList = new ArrayList<Student>();
 		}
 	}
 	
@@ -75,10 +78,6 @@ public class StudentDB implements Database{
 		} catch (IOException e) {
 			System.out.println("Class not found");
 		}
-	}
-
-	public void finalize () {
-		this.saveInformation();
 	}
 
 	// public void loadInformation() {

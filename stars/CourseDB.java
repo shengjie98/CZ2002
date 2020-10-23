@@ -49,28 +49,27 @@ public class CourseDB implements Database {
     public void loadInformation() {
         try {
 			ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(COURSE_DATABASE_FILE));
-			this.courseList = (ArrayList<Course>) inputStream.readObject();
+            this.courseList = (ArrayList<Course>) inputStream.readObject();
+            // inputStream.close();
 		} catch (IOException e) {
-			System.out.println("IOException");
+            // System.out.println("IOException");
+            this.courseList = new ArrayList<Course>();
 		} catch (ClassNotFoundException e) {
-			System.out.println("Class not found");
+            // System.out.println("Class not found");
+            this.courseList = new ArrayList<Course>();
 		}
     }
     
     public void saveInformation() {
-        System.out.print("Saving data");
         try {
-			ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(COURSE_DATABASE_FILE));
+            ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(COURSE_DATABASE_FILE));
 			outputStream.writeObject(this.courseList);
 			outputStream.close();
 		} catch (IOException e) {
-			System.out.println("Class not found");
+            System.out.println("Class not found");
 		}
     }
     
-    public void finalize() {
-        this.saveInformation();
-    }
 
 	// public void loadInformation() {
 	// 	// TODO Auto-generated method stub
