@@ -6,20 +6,17 @@ import java.util.ArrayList;
 public class Index implements Selectable, Serializable {
 	private Course course;
 	private ArrayList<Timing> timings;
-	private ArrayList<Student> waitList;
-	private ArrayList<Student> confirmedList;
+	private ArrayList<Student> waitList = new ArrayList<Student>();
+	private ArrayList<Student> confirmedList = new ArrayList<Student>();
 	private int vacancy;
 	private int vacancyLimit;
 	private int indexNumber;
 
-	public Index(Course course, ArrayList<Timing> timings, int vacancy, ArrayList<Student> waitList,
-			ArrayList<Student> confirmedList, int indexNumber) {
+	public Index(Course course, ArrayList<Timing> timings, int vacancy, int indexNumber) {
 		this.course = course;
 		this.timings = timings;
 		this.vacancy = vacancy;
 		this.vacancyLimit = vacancy;
-		this.waitList = waitList;
-		this.confirmedList = confirmedList;
 		this.indexNumber = indexNumber;
 	}
 
