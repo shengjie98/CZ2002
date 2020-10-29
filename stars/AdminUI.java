@@ -4,7 +4,6 @@ import java.util.Scanner;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-// import java.util.List;
 import java.util.ArrayList;
 
 public class AdminUI extends SelectUI {
@@ -38,8 +37,20 @@ public class AdminUI extends SelectUI {
                 case 2:
                     addStudent();
                     break;
+                case 3:
+                    addCourse();
+                    break;
                 case 4:
                     editCourseInformation();
+                    break;
+                case 5:
+                    checkVacancy();
+                    break;
+                case 6:
+                    printStudentListByIndex();
+                    break;
+                case 7:
+                    printStudentListByCourse();
                     break;
                 default:
                     break;
@@ -119,6 +130,22 @@ public class AdminUI extends SelectUI {
         loginController.addStudent(studentID, password, start, end);
     }
 
+    private void addCourse() {
+        System.out.println("Enter Course Name:");
+        Scanner courseName = new Scanner(System.in);
+        String newCourseName = courseID.nextLine();
+        System.out.println("Enter Course ID:");
+        Scanner courseID = new Scanner(System.in);
+        String newCourseID = courseID.nextLine();
+        System.out.println("Enter number of AUs:");
+        Scanner au = new Scanner(System.in);
+        int newAU = au.nextInt();
+        System.out.println("Enter School that course belongs to:");
+        Scanner school = new Scanner(System.in);
+        String newSchool = courseID.nextLine();
+        adminController.addCourse(newCourseID, newAU, newSchool, newCourseName);
+    }
+
     private void editCourseInformation() {
         System.out.println("Edit Course Information");
 
@@ -158,32 +185,67 @@ public class AdminUI extends SelectUI {
                  * Add a new index into an existing course
                  */
                 //get the attributes
-
+                System.out.println("Input Vacancy of Course");
                 Scanner vacancy = new Scanner(System.in);
                 int newVacancy = vacancy.nextInt();
+                System.out.println("Input Index Number");
+                Scanner indexNumber = new Scanner(System.in);
+                int newIndexNumber = vacancy.nextInt();
+                Index newIndex = new Index(selectedCourse, newVacancy, newIndexNumber);
+                //get the list of timings
                 System.out.println("Input Timings");
-                // while (true){
-                //     System.out.println("Type(LEC/TUT/LAB): ");
-                //     Scanner type = new Scanner(System.in);
-                //     String newType = type.nextLine();
-                //     if (newType.equals("LEC")){
-                        
-                //     } else if (newType.equals("TUT")){
+                while (true){
+                    //get the type 
+                    System.out.println("Type(LEC/TUT/LAB): ");
+                    Scanner t = new Scanner(System.in);
+                    
+                    String type = t.nextLine();
+                    switch (type){
+                        case "LEC":
+                            Timing.Type newType = Timing.Type.LEC;
+                        case "TUT":
+                            Timing.Type newType = Timing.Type.TUT;
+                        case "LAB":
+                            Timing.Type newType = Timing.Type.LAB;
+                    }
+                    //get the day of the timing
+                    System.out.println("Day(MON/TUE/WED/THU/FRI): ");
+                    Scanner d = new Scanner(System.in);
+                    String day = d.nextLine();
+                    
+                    //enum part??
+                    switch (day){
+                        case "MON":
+                            Timing.Day newDay = Timing.Day.MON;
+                        case "TUE":
+                            Timing.Day newDay = Timing.Day.TUE;
+                        case "WED":
+                            Timing.Day newDay = Timing.Day.WED;
+                        case "THU":
+                            Timing.Day newDay = Timing.Day.THU;
+                        case "FRI":
+                            Timing.Day newDay = Timing.Day.FRI;
+                    }
 
-                //     } else if (newType.equals("LAB")) {
-
-                //     } 
-                //     if (){
-                //         break;
-                //     }
-                // }
-                
-                Index newIndex = new Index(selectedCourse, ArrayList<Timing> timings, int vacancy, int indexNumber);
-
-                // create list of timings
-                // Index newIndex = new Index(selectedCourse, timings, vacancy, waitList,
-                // confirmedList, indexNumber);
-                // adminController.addIndex(newIndex);
+                    //get the start time
+                    System.out.println("Start Time: ");
+                    Scanner sc = new Scanner(System.in);
+                    LocalDateTime start = LocalDateTime.parse(sc.nextLine(), formatter);
+                    //get the end time 
+                    System.out.println("End Time: ");
+                    Scanner sc = new Scanner(System.in);
+                    LocalDateTime end = LocalDateTime.parse(sc.nextLine(), formatter);
+                    
+                    //yet to convert to enum so the constructor is throwing an error
+                    Timing newTiming = new Timing(newDay, newType, start, end);
+                    newIndex.addTiming(newTiming);
+                    System.out.println("Any more Timings? Y/N");
+                    Scanner sc = new Scanner(System.in);
+                    if (sc.nextLine() == "N"){
+                        break;
+                    }
+                }
+                adminController.addIndex(selectedCourse, newIndex);
                 break;
             case 4:
                 /**
@@ -206,27 +268,70 @@ public class AdminUI extends SelectUI {
                 /**
                  * Change vacancy attribute of course
                  */
-                
+                ArrayList<Index> indexList = selectedCourse.getIndexList();
                 // Get the user to choose the index
                 Index selectedIndex = (Index) select(indexList);
-
                 // Get the user to input the vacancy which must be
                 // greater than the current length of the list of
                 // students
                 Scanner newVanacyIn = new Scanner(System.in);
                 int newVacancy = newVanacyIn.nextInt();
-                ArrayList<Student> confirmedList = selectedIndex.getConfirmedList()
+                ArrayList<Student> confirmedList = selectedIndex.getConfirmedList();
                 if (newVacancy > confirmedList.size()){
                     selectedIndex.setVacancy(newVacancy);
                 } else {
-                    System.out.println("Unable to set new vacancy. Students are already in the list!");
+                    System.out.println("Unable to set new vacancy. Students will be kicked out of the list!");
                 }
 
                 break;
             default:
                 break;
         }
-        // let user decide which of the course information to edit
+    }
 
+    private void checkVacancy() {
+        // get list of courses from the course database
+        ArrayList<Course> courseList;
+        courseList = adminController.getCourseList();
+        // this will print out the list of courses and allow the user to select
+        // the course they want to edit
+        Course selectedCourse = (Course) select(courseList);
+        ArrayList<Index> indexList = selectedCourse.getIndexList();
+        // Get the user to choose the index
+        Index selectedIndex = (Index) select(indexList);
+        System.out.printf("Vacancy is: %d", selectedIndex.getVacancy());
+    }
+
+    private void printStudentListByIndex() {
+        // get list of courses from the course database
+        ArrayList<Course> courseList;
+        courseList = adminController.getCourseList();
+        // this will print out the list of courses and allow the user to select
+        // the course they want to edit
+        Course selectedCourse = (Course) select(courseList);
+        ArrayList<Index> indexList = selectedCourse.getIndexList();
+        // Get the user to choose the index
+        Index selectedIndex = (Index) select(indexList);
+        ArrayList<Student> confirmedList = selectedIndex.getConfirmedList();
+        for (int i = 0; i < confirmedList.size(); i++) {
+            System.out.printf("%s\n", (confirmedList.get(i)).print());
+        }
+    }
+
+    private void printStudentListByCourse() {
+        // get list of courses from the course database
+        ArrayList<Course> courseList;
+        courseList = adminController.getCourseList();
+        // this will print out the list of courses and allow the user to select
+        // the course they want to edit
+        Course selectedCourse = (Course) select(courseList);
+        ArrayList<Index> indexList = selectedCourse.getIndexList();
+
+        for (int i = 0; i < indexList.size(); i++) {
+            ArrayList<Student> confirmedList = (indexList.get(i)).getConfirmedList();
+            for (int j = 0; j < confirmedList.size(); j++) {
+                System.out.printf("%s\n", (confirmedList.get(i)).print());
+            }
+        }
     }
 }

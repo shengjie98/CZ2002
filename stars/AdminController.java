@@ -1,6 +1,6 @@
 package stars;
 
-import java.util.List;
+// import java.util.List;
 import java.util.ArrayList;
 
 public class AdminController {
@@ -44,9 +44,10 @@ public class AdminController {
 
     // }
 
-    // private void addIndex(ArrayList<Index> indexList, Index newIndex) {
-
-    // }
+    public void addIndex(Course selectedCourse, Index newIndex) {
+        (selectedCourse.getIndexList()).add(newIndex);
+        return;
+    }
 
     /**
      * 
@@ -58,20 +59,16 @@ public class AdminController {
         return;
     }
 
+    public void addCourse(String courseID, int au, String school, String courseName) {
+        Course newCourse = new Course(courseID, au, school, courseName);
+        (courseInfo.getCourseList()).add(newCourse);
+        return;
+    }
     // private void editVacancy(Index){
 
     // }
 
-    // public void addCourse(String courseID, Index[] indexList, int au, String
-    // school, String courseName) {
-
-    // }
-
     // public void editCourseAccess() {
-
-    // }
-
-    // public void printStudentList() {
 
     // }
 }

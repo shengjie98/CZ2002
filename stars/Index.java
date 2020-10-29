@@ -5,33 +5,25 @@ import java.util.ArrayList;
 
 public class Index implements Selectable, Serializable {
 	private Course course;
-	private ArrayList<Timing> timings;
+	private ArrayList<Timing> timings = new ArrayList<Timing>();;
 	private ArrayList<Student> waitList = new ArrayList<Student>();
 	private ArrayList<Student> confirmedList = new ArrayList<Student>();
 	private int vacancy;
 	private int vacancyLimit;
 	private int indexNumber;
 
-	public Index(Course course, ArrayList<Timing> timings, int vacancy, int indexNumber) {
+	public Index(Course course, int vacancy, int indexNumber) {
 		this.course = course;
-		this.timings = timings;
 		this.vacancy = vacancy;
 		this.vacancyLimit = vacancy;
 		this.indexNumber = indexNumber;
 	}
 
-	// public boolean addTiming(Timing newTiming) {
-	// // if the confirmedList is full, add the student to the waitlist
-	// if (confirmedList.size() == vacancyLimit) {
-	// waitList.add(newStudent);
-	// return false;
-	// } else {
-	// // else add the student to the confirmed list
-	// confirmedList.add(newStudent);
-	// vacancy--;
-	// return true;
-	// }
-	// }
+	public boolean addTiming(Timing newTiming) {
+		timings.add(newTiming);
+		return true;
+	}
+
 	/**
 	 * 
 	 * @param newStudent

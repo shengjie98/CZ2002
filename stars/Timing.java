@@ -1,23 +1,18 @@
 
 package stars;
+
 import java.io.Serializable;
 import java.time.LocalTime;
 
 public class Timing implements Serializable {
     static enum Type {
-        TUT,
-        LAB, 
-        LEC
+        TUT, LAB, LEC
     }
 
     static enum Day {
-        MON, 
-        TUE,
-        WED,
-        THU, 
-        FRI
+        MON, TUE, WED, THU, FRI
     }
-    
+
     private Day day;
     private Type type;
     private LocalTime start;
@@ -29,17 +24,19 @@ public class Timing implements Serializable {
         this.start = start;
         this.end = end;
     }
-    
+
     /**
      * method that checks if 2 methods overlap
+     * 
      * @param otherTiming
      * @return true if there is no overlap
      */
     public boolean checkOverlap(Timing otherTiming) {
         if (this.day != otherTiming.day) {
             return true;
-        } 
-        if ((this.start.isBefore(otherTiming.getStart())&&this.start.isBefore(otherTiming.getEnd()))||(this.start.isAfter(otherTiming.getStart())&&this.start.isAfter(otherTiming.getEnd()))) {
+        }
+        if ((this.start.isBefore(otherTiming.getStart()) && this.start.isBefore(otherTiming.getEnd()))
+                || (this.start.isAfter(otherTiming.getStart()) && this.start.isAfter(otherTiming.getEnd()))) {
             return true;
         }
         return false;
