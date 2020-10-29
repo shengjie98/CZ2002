@@ -13,6 +13,7 @@ import java.io.File;
 public class LoginController {
     private final String ADMIN_ACCOUNT_FILE = "stars/adminAccount.txt";
     private final String STUDENT_ACCOUNTS_FILE = "stars/studentAccounts.txt";
+    private SelectUI ui;
     /**
      * Verifies the username and passsword of the use
      * @param username
@@ -22,13 +23,13 @@ public class LoginController {
         boolean adminVerification, studentVerification;
         adminVerification = checkAdmin(username, password);
         if (adminVerification) {
-            AdminUI adminUI = new AdminUI();
-            adminUI.displayMenu();
+            this.ui = new AdminUI();
+            this.ui.displayMenu();
         } else {
             studentVerification = checkStudent(username, password);
             if (studentVerification) {
-                StudentUI studentUI = new StudentUI(username);
-                studentUI.displayMenu();
+                this.ui = new StudentUI(username);
+                this.ui.displayMenu();
             }
         } 
         return;
