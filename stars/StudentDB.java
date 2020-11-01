@@ -10,47 +10,46 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
 /**
  * handles student data
  */
-public class StudentDB implements Database{
+public class StudentDB implements Database {
 
-    private ArrayList<Student> studentList = new ArrayList<Student>();
+	private ArrayList<Student> studentList = new ArrayList<Student>();
 	private final String STUDENT_DATABASE_FILE = "stars/students.ser";
-	
 
-	public StudentDB () {
+	public StudentDB() {
 		this.loadInformation();
 	}
-	
-	
-	//GET METHODS
 
-    /**
-     * Retrieve the list of all students
-     * @return student object list
-     */
-    public ArrayList<Student> getStudentList(){
-        return studentList;
-    }
+	// GET METHODS
 
-    //SET METHODS
+	/**
+	 * Retrieve the list of all students
+	 * 
+	 * @return student object list
+	 */
+	public ArrayList<Student> getStudentList() {
+		return studentList;
+	}
 
-    /**
-     * add a student into the student object list
-     * @param studentName student name
-     */
-    public void addStudent (Student student) {
+	// SET METHODS
+
+	/**
+	 * add a student into the student object list
+	 * 
+	 * @param studentName student name
+	 */
+	public void addStudent(Student student) {
 		studentList.add(student);
 	}
-	
-	public Student findStudent (String studentID) {
-		for (Student student: this.studentList) {
-			if (student.getStudentID() == studentID) {
+
+	public Student findStudent(String studentID) {
+		for (Student student : this.studentList) {
+			if ((student.getStudentID()).equals(studentID)) {
 				return student;
 			}
-		} 
+		}
 		return null;
 	}
 
@@ -68,7 +67,7 @@ public class StudentDB implements Database{
 			this.studentList = new ArrayList<Student>();
 		}
 	}
-	
+
 	// sj stuff feel free to change @yx
 	public void saveInformation() {
 		try {
@@ -81,52 +80,49 @@ public class StudentDB implements Database{
 	}
 
 	// public void loadInformation() {
-	// 	 List<String> students = new ArrayList<String>();
-	//      Scanner sc;
-	//      String line;
-	//      String delimiter = "[ ]+";
+	// List<String> students = new ArrayList<String>();
+	// Scanner sc;
+	// String line;
+	// String delimiter = "[ ]+";
 
-	//      //scan from students.txt into List students
-	//      try{
-		//             //scan from courses.txt line by line into String line
-		//             //split each line into token based on spaces and store into List courses
-	//             sc = new Scanner(new File("students.txt"));
-	//             while(sc.hasNextLine()){
-	//                 line = sc.nextLine();
-	//                 students.add(line.split(delimiter));
-	//             }
-	//             for(int i = 0; i<students.size(); i++){
+	// //scan from students.txt into List students
+	// try{
+	// //scan from courses.txt line by line into String line
+	// //split each line into token based on spaces and store into List courses
+	// sc = new Scanner(new File("students.txt"));
+	// while(sc.hasNextLine()){
+	// line = sc.nextLine();
+	// students.add(line.split(delimiter));
+	// }
+	// for(int i = 0; i<students.size(); i++){
 
-	//                 //initialise and set values for each array of strings in List courses
-	// 				String index;
-	// 				String gender;
-	// 				String nationaity;
-	//                 String student;
-	// 				String school = null;
+	// //initialise and set values for each array of strings in List courses
+	// String index;
+	// String gender;
+	// String nationaity;
+	// String student;
+	// String school = null;
 
-	//                 //index is the first string in the array
-	//                 index = students.get(i)[0];
+	// //index is the first string in the array
+	// index = students.get(i)[0];
 
-	//                 //gender is the second string in the array
-	//                 gender = students.get(i)[1];
-	                
-	//                 //nationality is the third string in the array  
-	//                 nationaity = students.get(i)[2];
-	                
-	//                 //school is the fourth string in the array
-	//                 school = students.get(i)[3];
+	// //gender is the second string in the array
+	// gender = students.get(i)[1];
 
-	//                 //student is the fifth in the array
-	//                 student = Integer.parseInt(students.get(i)[4]);
-	//             }
+	// //nationality is the third string in the array
+	// nationaity = students.get(i)[2];
 
-	//         }catch(IOException e){
-	//             e.printStackTrace();
-	//         }
-	     	
+	// //school is the fourth string in the array
+	// school = students.get(i)[3];
+
+	// //student is the fifth in the array
+	// student = Integer.parseInt(students.get(i)[4]);
 	// }
 
-	
-	
+	// }catch(IOException e){
+	// e.printStackTrace();
+	// }
+
+	// }
 
 }

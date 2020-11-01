@@ -333,16 +333,15 @@ public class AdminUI extends SelectUI {
         // get list of courses from the course database
         ArrayList<Course> courseList;
         courseList = adminController.getCourseList();
-        System.out.printf("courseList length is %d", courseList.size());
         // this will print out the list of courses and allow the user to select
         // the course they want to edit
         Course selectedCourse = (Course) select(courseList);
         ArrayList<Index> indexList = selectedCourse.getIndexList();
 
-        for (int i = 0; i < indexList.size(); i++) {
-            ArrayList<Student> confirmedList = (indexList.get(i)).getConfirmedList();
-            for (int j = 0; j < confirmedList.size(); j++) {
-                System.out.printf("%s\n", (confirmedList.get(i)).print());
+        for (Index eachIndex : indexList) {
+            ArrayList<Student> confirmedList = eachIndex.getConfirmedList();
+            for (Student eachStudent : confirmedList) {
+                System.out.printf("%s\n", eachStudent.print());
             }
         }
     }
