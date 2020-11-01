@@ -171,6 +171,7 @@ public class AdminUI extends SelectUI {
                 /**
                  * Change course ID attribute
                  */
+                System.out.println("Enter new Course ID: ");
                 Scanner newCourseID = new Scanner(System.in);
                 selectedCourse.setCourseID(newCourseID.nextLine());
                 break;
@@ -178,6 +179,7 @@ public class AdminUI extends SelectUI {
                 /**
                  * Change school attribute
                  */
+                System.out.println("Enter new School name: ");
                 Scanner newSchool = new Scanner(System.in);
                 selectedCourse.setSchool(newSchool.nextLine());
                 break;
@@ -186,15 +188,15 @@ public class AdminUI extends SelectUI {
                  * Add a new index into an existing course
                  */
                 // get the attributes
-                System.out.println("Input Vacancy of Course");
+                System.out.println("Input Vacancy of Course: ");
                 Scanner vacancy = new Scanner(System.in);
                 int newVacancy = vacancy.nextInt();
-                System.out.println("Input Index Number");
+                System.out.println("Input Index Number: ");
                 Scanner indexNumber = new Scanner(System.in);
                 int newIndexNumber = vacancy.nextInt();
                 Index newIndex = new Index(selectedCourse, newVacancy, newIndexNumber);
                 // get the list of timings
-                System.out.println("Input Timings");
+                System.out.println("Input Timings: ");
                 while (true) {
                     // get the type
                     String type;
@@ -204,7 +206,7 @@ public class AdminUI extends SelectUI {
                         System.out.println("Type(LEC/TUT/LAB): ");
                         Scanner t = new Scanner(System.in);
                         type = t.nextLine();
-                    } while ((type != "LEC") || (type != "TUT") || (type != "LAB"));
+                    } while ((!type.equals("LEC")) && (!type.equals("TUT")) && (!type.equals("LAB")));
                     switch (type) {
                         case "LEC":
                             newType = Timing.Type.LEC;
@@ -221,7 +223,8 @@ public class AdminUI extends SelectUI {
                         System.out.println("Day(MON/TUE/WED/THU/FRI): ");
                         Scanner d = new Scanner(System.in);
                         day = d.nextLine();
-                    } while ((day != "MON") || (day != "TUE") || (day != "WED") || (day != "THU") || (day != "FRI"));
+                    } while ((!day.equals("MON")) && (!day.equals("TUE")) && (!day.equals("WED"))
+                            && (!day.equals("THU")) && (!day.equals("FRI")));
                     // enum part??
                     switch (day) {
                         case "MON":
@@ -250,7 +253,7 @@ public class AdminUI extends SelectUI {
                     newIndex.addTiming(newTiming);
                     System.out.println("Any more Timings? Y/N");
                     Scanner yesOrNo = new Scanner(System.in);
-                    if (yesOrNo.nextLine() == "N") {
+                    if ((yesOrNo.nextLine()).equals("N")) {
                         break;
                     }
                 }
@@ -267,7 +270,7 @@ public class AdminUI extends SelectUI {
                 // be allowed to drop it if it has no students
                 Index selectedIndex = (Index) select(indexList);
                 if (adminController.dropIndex(selectedCourse, selectedIndex)) {
-                    System.out.println("Index Dropped");
+                    System.out.println("Index Dropped.");
                 } else {
                     System.out.println("Unable to drop Index. Students are already in the Index!");
                 }
@@ -307,7 +310,7 @@ public class AdminUI extends SelectUI {
         ArrayList<Index> indexList = selectedCourse.getIndexList();
         // Get the user to choose the index
         Index selectedIndex = (Index) select(indexList);
-        System.out.printf("Vacancy is: %d", selectedIndex.getVacancy());
+        System.out.printf("Vacancy is: %d\n", selectedIndex.getVacancy());
     }
 
     private void printStudentListByIndex() {
@@ -330,6 +333,7 @@ public class AdminUI extends SelectUI {
         // get list of courses from the course database
         ArrayList<Course> courseList;
         courseList = adminController.getCourseList();
+        System.out.printf("courseList length is %d", courseList.size());
         // this will print out the list of courses and allow the user to select
         // the course they want to edit
         Course selectedCourse = (Course) select(courseList);
