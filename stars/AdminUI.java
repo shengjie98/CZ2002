@@ -2,9 +2,9 @@ package stars;
 
 import java.util.Scanner;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-// import java.util.List;
 import java.util.ArrayList;
 
 public class AdminUI extends SelectUI {
@@ -38,8 +38,20 @@ public class AdminUI extends SelectUI {
                 case 2:
                     addStudent();
                     break;
+                case 3:
+                    addCourse();
+                    break;
                 case 4:
                     editCourseInformation();
+                    break;
+                case 5:
+                    checkVacancy();
+                    break;
+                case 6:
+                    printStudentListByIndex();
+                    break;
+                case 7:
+                    printStudentListByCourse();
                     break;
                 default:
                     break;
@@ -119,6 +131,22 @@ public class AdminUI extends SelectUI {
         loginController.addStudent(studentID, password, start, end);
     }
 
+    private void addCourse() {
+        System.out.println("Enter Course Name:");
+        Scanner courseName = new Scanner(System.in);
+        String newCourseName = courseName.nextLine();
+        System.out.println("Enter Course ID:");
+        Scanner courseID = new Scanner(System.in);
+        String newCourseID = courseID.nextLine();
+        System.out.println("Enter number of AUs:");
+        Scanner au = new Scanner(System.in);
+        int newAU = au.nextInt();
+        System.out.println("Enter School that course belongs to:");
+        Scanner school = new Scanner(System.in);
+        String newSchool = school.nextLine();
+        adminController.addCourse(newCourseID, newAU, newSchool, newCourseName);
+    }
+
     private void editCourseInformation() {
         System.out.println("Edit Course Information");
 
@@ -143,6 +171,7 @@ public class AdminUI extends SelectUI {
                 /**
                  * Change course ID attribute
                  */
+                System.out.println("Enter new Course ID: ");
                 Scanner newCourseID = new Scanner(System.in);
                 selectedCourse.setCourseID(newCourseID.nextLine());
                 break;
@@ -150,6 +179,7 @@ public class AdminUI extends SelectUI {
                 /**
                  * Change school attribute
                  */
+                System.out.println("Enter new School name: ");
                 Scanner newSchool = new Scanner(System.in);
                 selectedCourse.setSchool(newSchool.nextLine());
                 break;
@@ -157,37 +187,81 @@ public class AdminUI extends SelectUI {
                 /**
                  * Add a new index into an existing course
                  */
-                //get the attributes
-
+                // get the attributes
+                System.out.println("Input Vacancy of Course: ");
                 Scanner vacancy = new Scanner(System.in);
                 int newVacancy = vacancy.nextInt();
-                System.out.println("Input Timings");
-                // while (true){
-                //     System.out.println("Type(LEC/TUT/LAB): ");
-                //     Scanner type = new Scanner(System.in);
-                //     String newType = type.nextLine();
-                //     if (newType.equals("LEC")){
-                        
-                //     } else if (newType.equals("TUT")){
+                System.out.println("Input Index Number: ");
+                Scanner indexNumber = new Scanner(System.in);
+                int newIndexNumber = vacancy.nextInt();
+                Index newIndex = new Index(selectedCourse, newVacancy, newIndexNumber);
+                // get the list of timings
+                System.out.println("Input Timings: ");
+                while (true) {
+                    // get the type
+                    String type;
+                    Timing.Type newType = Timing.Type.LEC; // !!This is not supposed to be the default; change this
+                                                           // before submitting
+                    do {
+                        System.out.println("Type(LEC/TUT/LAB): ");
+                        Scanner t = new Scanner(System.in);
+                        type = t.nextLine();
+                    } while ((!type.equals("LEC")) && (!type.equals("TUT")) && (!type.equals("LAB")));
+                    switch (type) {
+                        case "LEC":
+                            newType = Timing.Type.LEC;
+                        case "TUT":
+                            newType = Timing.Type.TUT;
+                        case "LAB":
+                            newType = Timing.Type.LAB;
+                    }
+                    // get the day of the timing
+                    String day;
+                    Timing.Day newDay = Timing.Day.MON; // !!This is not supposed to be the default; change this before
+                                                        // submitting
+                    do {
+                        System.out.println("Day(MON/TUE/WED/THU/FRI): ");
+                        Scanner d = new Scanner(System.in);
+                        day = d.nextLine();
+                    } while ((!day.equals("MON")) && (!day.equals("TUE")) && (!day.equals("WED"))
+                            && (!day.equals("THU")) && (!day.equals("FRI")));
+                    // enum part??
+                    switch (day) {
+                        case "MON":
+                            newDay = Timing.Day.MON;
+                        case "TUE":
+                            newDay = Timing.Day.TUE;
+                        case "WED":
+                            newDay = Timing.Day.WED;
+                        case "THU":
+                            newDay = Timing.Day.THU;
+                        case "FRI":
+                            newDay = Timing.Day.FRI;
+                    }
 
-                //     } else if (newType.equals("LAB")) {
+                    // get the start time
+                    System.out.println("Start Time: ");
+                    Scanner startTime = new Scanner(System.in);
+                    LocalTime start = LocalTime.parse(startTime.nextLine(), formatter);
+                    // get the end time
+                    System.out.println("End Time: ");
+                    Scanner endTime = new Scanner(System.in);
+                    LocalTime end = LocalTime.parse(endTime.nextLine(), formatter);
 
-                //     } 
-                //     if (){
-                //         break;
-                //     }
-                // }
-                
-                Index newIndex = new Index(selectedCourse, ArrayList<Timing> timings, int vacancy, int indexNumber);
-
-                // create list of timings
-                // Index newIndex = new Index(selectedCourse, timings, vacancy, waitList,
-                // confirmedList, indexNumber);
-                // adminController.addIndex(newIndex);
+                    // yet to convert to enum so the constructor is throwing an error
+                    Timing newTiming = new Timing(newDay, newType, start, end);
+                    newIndex.addTiming(newTiming);
+                    System.out.println("Any more Timings? Y/N");
+                    Scanner yesOrNo = new Scanner(System.in);
+                    if ((yesOrNo.nextLine()).equals("N")) {
+                        break;
+                    }
+                }
+                adminController.addIndex(selectedCourse, newIndex);
                 break;
             case 4:
                 /**
-                 * Drop Index 
+                 * Drop Index
                  */
                 // get the list of indexes from the course object
                 ArrayList<Index> indexList = selectedCourse.getIndexList();
@@ -195,9 +269,8 @@ public class AdminUI extends SelectUI {
                 // the index that they want to drop; The admin will only
                 // be allowed to drop it if it has no students
                 Index selectedIndex = (Index) select(indexList);
-                ArrayList<Student> confirmedList = selectedIndex.getConfirmedList()
-                if (confirmedList.size() == 0 ){
-                    adminController.dropIndex(indexList, selectedIndex);
+                if (adminController.dropIndex(selectedCourse, selectedIndex)) {
+                    System.out.println("Index Dropped.");
                 } else {
                     System.out.println("Unable to drop Index. Students are already in the Index!");
                 }
@@ -206,27 +279,71 @@ public class AdminUI extends SelectUI {
                 /**
                  * Change vacancy attribute of course
                  */
-                
+                ArrayList<Index> indexList2 = selectedCourse.getIndexList();
                 // Get the user to choose the index
-                Index selectedIndex = (Index) select(indexList);
-
+                Index selectedIndex2 = (Index) select(indexList2);
                 // Get the user to input the vacancy which must be
                 // greater than the current length of the list of
                 // students
                 Scanner newVanacyIn = new Scanner(System.in);
-                int newVacancy = newVanacyIn.nextInt();
-                ArrayList<Student> confirmedList = selectedIndex.getConfirmedList()
-                if (newVacancy > confirmedList.size()){
-                    selectedIndex.setVacancy(newVacancy);
+                int newVacancy2 = newVanacyIn.nextInt();
+                ArrayList<Student> confirmedList = selectedIndex2.getConfirmedList();
+                if (newVacancy2 > confirmedList.size()) {
+                    selectedIndex2.setVacancy(newVacancy2);
                 } else {
-                    System.out.println("Unable to set new vacancy. Students are already in the list!");
+                    System.out.println("Unable to set new vacancy. Students will be kicked out of the list!");
                 }
 
                 break;
             default:
                 break;
         }
-        // let user decide which of the course information to edit
+    }
 
+    private void checkVacancy() {
+        // get list of courses from the course database
+        ArrayList<Course> courseList;
+        courseList = adminController.getCourseList();
+        // this will print out the list of courses and allow the user to select
+        // the course they want to edit
+        Course selectedCourse = (Course) select(courseList);
+        ArrayList<Index> indexList = selectedCourse.getIndexList();
+        // Get the user to choose the index
+        Index selectedIndex = (Index) select(indexList);
+        System.out.printf("Vacancy is: %d\n", selectedIndex.getVacancy());
+    }
+
+    private void printStudentListByIndex() {
+        // get list of courses from the course database
+        ArrayList<Course> courseList;
+        courseList = adminController.getCourseList();
+        // this will print out the list of courses and allow the user to select
+        // the course they want to edit
+        Course selectedCourse = (Course) select(courseList);
+        ArrayList<Index> indexList = selectedCourse.getIndexList();
+        // Get the user to choose the index
+        Index selectedIndex = (Index) select(indexList);
+        ArrayList<Student> confirmedList = selectedIndex.getConfirmedList();
+        for (int i = 0; i < confirmedList.size(); i++) {
+            System.out.printf("%s\n", (confirmedList.get(i)).print());
+        }
+    }
+
+    private void printStudentListByCourse() {
+        // get list of courses from the course database
+        ArrayList<Course> courseList;
+        courseList = adminController.getCourseList();
+        System.out.printf("courseList length is %d", courseList.size());
+        // this will print out the list of courses and allow the user to select
+        // the course they want to edit
+        Course selectedCourse = (Course) select(courseList);
+        ArrayList<Index> indexList = selectedCourse.getIndexList();
+
+        for (int i = 0; i < indexList.size(); i++) {
+            ArrayList<Student> confirmedList = (indexList.get(i)).getConfirmedList();
+            for (int j = 0; j < confirmedList.size(); j++) {
+                System.out.printf("%s\n", (confirmedList.get(i)).print());
+            }
+        }
     }
 }

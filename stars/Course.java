@@ -23,9 +23,7 @@ public class Course implements Selectable, Serializable {
         this.courseName = courseName;
     }
 
-    public void addIndex(ArrayList<Timing> timings, int vacancy, ArrayList<Student> waitList,
-            ArrayList<Student> confirmedList, int indexNumber) {
-        Index newIndex = new Index(this, timings, vacancy, waitList, confirmedList, indexNumber);
+    public void addIndex(Index newIndex) {
         indexList.add(newIndex);
         return;
     }

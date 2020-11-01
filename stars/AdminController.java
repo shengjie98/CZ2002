@@ -1,6 +1,6 @@
 package stars;
 
-import java.util.List;
+// import java.util.List;
 import java.util.ArrayList;
 
 public class AdminController {
@@ -44,34 +44,43 @@ public class AdminController {
 
     // }
 
-    // private void addIndex(ArrayList<Index> indexList, Index newIndex) {
-
-    // }
+    public void addIndex(Course selectedCourse, Index newIndex) {
+        (selectedCourse.getIndexList()).add(newIndex);
+        return;
+    }
 
     /**
      * 
      * @param indexList
      * @param selectedIndex remove this index from the list of indexes
      */
-    public void dropIndex(ArrayList<Index> indexList, Index selectedIndex) {
-        indexList.remove(selectedIndex);
-        return;
+    public boolean dropIndex(Course selectedCourse, Index selectedIndex) {
+        ArrayList<Course> listOfCourses = courseInfo.getCourseList();
+        // find the ourse in the list of courses and remove it
+        for (Course eachCourse : listOfCourses) {
+            if (eachCourse.equals(selectedCourse)) {
+                ArrayList<Student> confirmedList = selectedIndex.getConfirmedList();
+                if (confirmedList.size() == 0) {
+                    (eachCourse.getIndexList()).remove(selectedIndex);
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+        return false;
     }
 
+    public void addCourse(String courseID, int au, String school, String courseName) {
+        Course newCourse = new Course(courseID, au, school, courseName);
+        courseInfo.add(newCourse);
+        return;
+    }
     // private void editVacancy(Index){
 
     // }
 
-    // public void addCourse(String courseID, Index[] indexList, int au, String
-    // school, String courseName) {
-
-    // }
-
     // public void editCourseAccess() {
-
-    // }
-
-    // public void printStudentList() {
 
     // }
 }
