@@ -54,14 +54,26 @@ public class AdminController {
      * @param indexList
      * @param selectedIndex remove this index from the list of indexes
      */
-    public void dropIndex(ArrayList<Index> indexList, Index selectedIndex) {
-        indexList.remove(selectedIndex);
-        return;
+    public boolean dropIndex(Course selectedCourse, Index selectedIndex) {
+        ArrayList<Course> listOfCourses = courseInfo.getCourseList();
+        // find the ourse in the list of courses and remove it
+        for (Course eachCourse : listOfCourses) {
+            if (eachCourse.equals(selectedCourse)) {
+                ArrayList<Student> confirmedList = selectedIndex.getConfirmedList();
+                if (confirmedList.size() == 0) {
+                    (eachCourse.getIndexList()).remove(selectedIndex);
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+        return false;
     }
 
     public void addCourse(String courseID, int au, String school, String courseName) {
         Course newCourse = new Course(courseID, au, school, courseName);
-        (courseInfo.getCourseList()).add(newCourse);
+        courseInfo.add(newCourse);
         return;
     }
     // private void editVacancy(Index){

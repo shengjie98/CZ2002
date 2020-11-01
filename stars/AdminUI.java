@@ -2,6 +2,7 @@ package stars;
 
 import java.util.Scanner;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -133,7 +134,7 @@ public class AdminUI extends SelectUI {
     private void addCourse() {
         System.out.println("Enter Course Name:");
         Scanner courseName = new Scanner(System.in);
-        String newCourseName = courseID.nextLine();
+        String newCourseName = courseName.nextLine();
         System.out.println("Enter Course ID:");
         Scanner courseID = new Scanner(System.in);
         String newCourseID = courseID.nextLine();
@@ -142,7 +143,7 @@ public class AdminUI extends SelectUI {
         int newAU = au.nextInt();
         System.out.println("Enter School that course belongs to:");
         Scanner school = new Scanner(System.in);
-        String newSchool = courseID.nextLine();
+        String newSchool = school.nextLine();
         adminController.addCourse(newCourseID, newAU, newSchool, newCourseName);
     }
 
@@ -184,7 +185,7 @@ public class AdminUI extends SelectUI {
                 /**
                  * Add a new index into an existing course
                  */
-                //get the attributes
+                // get the attributes
                 System.out.println("Input Vacancy of Course");
                 Scanner vacancy = new Scanner(System.in);
                 int newVacancy = vacancy.nextInt();
@@ -192,56 +193,64 @@ public class AdminUI extends SelectUI {
                 Scanner indexNumber = new Scanner(System.in);
                 int newIndexNumber = vacancy.nextInt();
                 Index newIndex = new Index(selectedCourse, newVacancy, newIndexNumber);
-                //get the list of timings
+                // get the list of timings
                 System.out.println("Input Timings");
-                while (true){
-                    //get the type 
-                    System.out.println("Type(LEC/TUT/LAB): ");
-                    Scanner t = new Scanner(System.in);
-                    
-                    String type = t.nextLine();
-                    switch (type){
+                while (true) {
+                    // get the type
+                    String type;
+                    Timing.Type newType = Timing.Type.LEC; // !!This is not supposed to be the default; change this
+                                                           // before submitting
+                    do {
+                        System.out.println("Type(LEC/TUT/LAB): ");
+                        Scanner t = new Scanner(System.in);
+                        type = t.nextLine();
+                    } while ((type != "LEC") || (type != "TUT") || (type != "LAB"));
+                    switch (type) {
                         case "LEC":
-                            Timing.Type newType = Timing.Type.LEC;
+                            newType = Timing.Type.LEC;
                         case "TUT":
-                            Timing.Type newType = Timing.Type.TUT;
+                            newType = Timing.Type.TUT;
                         case "LAB":
-                            Timing.Type newType = Timing.Type.LAB;
+                            newType = Timing.Type.LAB;
                     }
-                    //get the day of the timing
-                    System.out.println("Day(MON/TUE/WED/THU/FRI): ");
-                    Scanner d = new Scanner(System.in);
-                    String day = d.nextLine();
-                    
-                    //enum part??
-                    switch (day){
+                    // get the day of the timing
+                    String day;
+                    Timing.Day newDay = Timing.Day.MON; // !!This is not supposed to be the default; change this before
+                                                        // submitting
+                    do {
+                        System.out.println("Day(MON/TUE/WED/THU/FRI): ");
+                        Scanner d = new Scanner(System.in);
+                        day = d.nextLine();
+                    } while ((day != "MON") || (day != "TUE") || (day != "WED") || (day != "THU") || (day != "FRI"));
+                    // enum part??
+                    switch (day) {
                         case "MON":
-                            Timing.Day newDay = Timing.Day.MON;
+                            newDay = Timing.Day.MON;
                         case "TUE":
-                            Timing.Day newDay = Timing.Day.TUE;
+                            newDay = Timing.Day.TUE;
                         case "WED":
-                            Timing.Day newDay = Timing.Day.WED;
+                            newDay = Timing.Day.WED;
                         case "THU":
-                            Timing.Day newDay = Timing.Day.THU;
+                            newDay = Timing.Day.THU;
                         case "FRI":
-                            Timing.Day newDay = Timing.Day.FRI;
+                            newDay = Timing.Day.FRI;
                     }
 
-                    //get the start time
+                    // get the start time
                     System.out.println("Start Time: ");
-                    Scanner sc = new Scanner(System.in);
-                    LocalDateTime start = LocalDateTime.parse(sc.nextLine(), formatter);
-                    //get the end time 
+                    Scanner startTime = new Scanner(System.in);
+                    LocalTime start = LocalTime.parse(startTime.nextLine(), formatter);
+                    // get the end time
                     System.out.println("End Time: ");
-                    Scanner sc = new Scanner(System.in);
-                    LocalDateTime end = LocalDateTime.parse(sc.nextLine(), formatter);
-                    
-                    //yet to convert to enum so the constructor is throwing an error
+                    Scanner endTime = new Scanner(System.in);
+                    LocalTime end = LocalTime.parse(endTime.nextLine(), formatter);
+
+                    // yet to convert to enum so the constructor is throwing an error
                     Timing newTiming = new Timing(newDay, newType, start, end);
                     newIndex.addTiming(newTiming);
                     System.out.println("Any more Timings? Y/N");
-                    Scanner sc = new Scanner(System.in);
-                    if (sc.nextLine() == "N"){
+                    Scanner yesOrNo = new Scanner(System.in);
+                    if (yesOrNo.nextLine() == "N") {
                         break;
                     }
                 }
@@ -249,7 +258,7 @@ public class AdminUI extends SelectUI {
                 break;
             case 4:
                 /**
-                 * Drop Index 
+                 * Drop Index
                  */
                 // get the list of indexes from the course object
                 ArrayList<Index> indexList = selectedCourse.getIndexList();
@@ -257,9 +266,8 @@ public class AdminUI extends SelectUI {
                 // the index that they want to drop; The admin will only
                 // be allowed to drop it if it has no students
                 Index selectedIndex = (Index) select(indexList);
-                ArrayList<Student> confirmedList = selectedIndex.getConfirmedList()
-                if (confirmedList.size() == 0 ){
-                    adminController.dropIndex(indexList, selectedIndex);
+                if (adminController.dropIndex(selectedCourse, selectedIndex)) {
+                    System.out.println("Index Dropped");
                 } else {
                     System.out.println("Unable to drop Index. Students are already in the Index!");
                 }
@@ -268,17 +276,17 @@ public class AdminUI extends SelectUI {
                 /**
                  * Change vacancy attribute of course
                  */
-                ArrayList<Index> indexList = selectedCourse.getIndexList();
+                ArrayList<Index> indexList2 = selectedCourse.getIndexList();
                 // Get the user to choose the index
-                Index selectedIndex = (Index) select(indexList);
+                Index selectedIndex2 = (Index) select(indexList2);
                 // Get the user to input the vacancy which must be
                 // greater than the current length of the list of
                 // students
                 Scanner newVanacyIn = new Scanner(System.in);
-                int newVacancy = newVanacyIn.nextInt();
-                ArrayList<Student> confirmedList = selectedIndex.getConfirmedList();
-                if (newVacancy > confirmedList.size()){
-                    selectedIndex.setVacancy(newVacancy);
+                int newVacancy2 = newVanacyIn.nextInt();
+                ArrayList<Student> confirmedList = selectedIndex2.getConfirmedList();
+                if (newVacancy2 > confirmedList.size()) {
+                    selectedIndex2.setVacancy(newVacancy2);
                 } else {
                     System.out.println("Unable to set new vacancy. Students will be kicked out of the list!");
                 }
