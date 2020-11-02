@@ -9,6 +9,8 @@ public class LoginUI {
         do {
             System.out.print("Username: ");
             username = sc.next();
+
+            System.out.print(username);
             System.out.print("Password: ");
             password = new String(System.console().readPassword());
             // password = sc.next();

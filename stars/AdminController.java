@@ -23,9 +23,9 @@ public class AdminController {
     /**
      * @return adds a student to an index of a course
      */
-    public void addStudent(String studentName, String nationality, String gender, String studentID, String degree) {
+    public void addStudent(String studentName, String nationality, String gender, String studentID, String degree, String email) {
         // instantiate a new student object
-        Student newStudent = new Student(studentName, nationality, gender, studentID, degree);
+        Student newStudent = new Student(studentName, nationality, gender, studentID, degree, email);
         // add this student to the StudentDB
         studentInfo.addStudent(newStudent);
     }

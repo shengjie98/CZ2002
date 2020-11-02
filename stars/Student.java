@@ -14,16 +14,18 @@ public class Student implements Selectable, Serializable{
     private String gender;
     private String degree;
     private StudentRegisteredCourses registeredCourses;
+    private String email;
 
     // Constructor
 
-    public Student(String studentName, String nationality, String gender, String studentID, String degree) {
+    public Student(String studentName, String nationality, String gender, String studentID, String degree, String email) {
 		// TODO Auto-generated constructor stub
         this.studentName = studentName;
         this.nationality = nationality;
         this.gender = gender;
         this.studentID = studentID;
         this.degree = degree;
+        this.email = email;
         registeredCourses = new StudentRegisteredCourses(this);
         
     }
@@ -77,6 +79,10 @@ public class Student implements Selectable, Serializable{
     }
     public String getDegree() {
         return degree;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
 }

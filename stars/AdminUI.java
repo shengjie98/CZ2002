@@ -90,7 +90,7 @@ public class AdminUI extends SelectUI {
 
     private void addStudent() {
         Scanner sc = new Scanner(System.in);
-        String studentName, studentID, password, nationality, gender, degree;
+        String studentName, studentID, password, nationality, gender, degree, email;
         LocalDateTime start, end;
         System.out.println("Add a Student");
         System.out.print("  a. Student Name: ");
@@ -105,10 +105,12 @@ public class AdminUI extends SelectUI {
         gender = sc.nextLine();
         System.out.print("  f. Degree: ");
         degree = sc.nextLine();
+        System.out.print("  g. Email: ");
+        email = sc.nextLine();
         // need to change to local time object here
         while (true) {
             try {
-                System.out.print("  g. Access Period Start (DD/MM/YYYY hh:mm): ");
+                System.out.print("  h. Access Period Start (DD/MM/YYYY hh:mm): ");
                 start = LocalDateTime.parse(sc.nextLine(), formatter);
                 break;
             } catch (DateTimeParseException e) {
@@ -117,7 +119,7 @@ public class AdminUI extends SelectUI {
         }
         while (true) {
             try {
-                System.out.print("  h. Access Period End (DD/MM/YYYY hh:mm): ");
+                System.out.print("  i. Access Period End (DD/MM/YYYY hh:mm): ");
                 end = LocalDateTime.parse(sc.nextLine(), formatter);
                 break;
             } catch (DateTimeParseException e) {
@@ -127,7 +129,7 @@ public class AdminUI extends SelectUI {
 
         // admin controller.add student(studentName, nationality, gender, studentID,
         // degree, email)
-        adminController.addStudent(studentName, nationality, gender, studentID, degree);
+        adminController.addStudent(studentName, nationality, gender, studentID, degree, email);
         loginController.addStudent(studentID, password, start, end);
     }
 
