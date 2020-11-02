@@ -9,14 +9,45 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.EOFException;
 
 /**
  * handles student data
  */
 public class StudentDB implements Database {
+	File file = new File("stud4.txt");
 
 	private ArrayList<Student> studentList = new ArrayList<Student>();
-	private final String STUDENT_DATABASE_FILE = "stars/students.ser";
+	// format to show the serialisation 
+	students.add(new Student("Yu Xuan", "Singapore", "F", "U1920126K", "SCSE", "kohy0083@e.ntu.edu.sg"));
+	students.add(new Student("Hiok Hian", "Singapore", "M", "U1920000K", "SCSE", "a@hotmail.com"));
+	students.add(new Student("Sheng Jie", "Singapore", "M", "U1920001K", "SCSE", "a@gmail.com"));
+	students.add(new Student("Patria", "Singapore", "F", "U1920002K", "SCSE", "abc@gmail.com"));
+
+	// serialising it
+	FileOutputStream fo = new FileOutputStream(file);
+	ObjectOutputStream output = new ObjectOutputStream(fo);
+	for (Student s: students) {
+		output.writeObject(s);
+	}
+	output.close();
+	fo.close();
+
+	// deserialise it 
+	FileInputStream fi = new FileInputStream(file);
+	ObjectInputStream input = new ObjectInputStream(fi);
+	ArrayList<Student> students2 = new ArrayList<Student>();
+		
+	try {
+		while (true) {
+			Student s = (Student)input.readObject();
+			students2.add(s);
+		} 
+	} catch (EOFException ex) {
+	}
+
+
+	// private final String STUDENT_DATABASE_FILE = "stars/students.ser";
 
 	public StudentDB() {
 		this.loadInformation();
@@ -56,7 +87,7 @@ public class StudentDB implements Database {
 	// sj stuff feel free to change @yx
 	public void loadInformation() {
 		try {
-			ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(STUDENT_DATABASE_FILE));
+			ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fille));
 			this.studentList = (ArrayList<Student>) inputStream.readObject();
 			inputStream.close();
 		} catch (IOException e) {
@@ -71,7 +102,7 @@ public class StudentDB implements Database {
 	// sj stuff feel free to change @yx
 	public void saveInformation() {
 		try {
-			ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(STUDENT_DATABASE_FILE));
+			ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(file));
 			outputStream.writeObject(this.studentList);
 			outputStream.close();
 		} catch (IOException e) {
