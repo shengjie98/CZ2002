@@ -20,7 +20,7 @@ public class LoginController {
      * @param username
      * @param password
      */
-    public void verifyLogin(String username, String password) {
+    public boolean verifyLogin(String username, String password) {
         Authenticator studenAuthenticator = new FlatFileStudentAuthenticator();
         Authenticator adminAuthenticator = new FlatFileAdminAuthenticator();
         
@@ -28,12 +28,15 @@ public class LoginController {
         if (verification) {
             this.ui = new AdminUI();
             this.ui.displayMenu();
+            return true;
         } else {
             verification = studenAuthenticator.authenticate(username, password);
             if (verification) {
                 this.ui = new StudentUI(username);
                 this.ui.displayMenu();
+                return true;
             }
         }
+        return false;
     }
 }

@@ -30,6 +30,8 @@ public class AdminUI extends SelectUI {
             System.out.println("5. Check availability slot for an index");
             System.out.println("6. Print student list by index number");
             System.out.println("7. Print student list by course");
+            System.out.println("8. Print all students in database");
+            System.out.println("9. Print all courses in database");
             System.out.print("Option: ");
             i = sc.nextInt();
             switch (i) {
@@ -54,11 +56,17 @@ public class AdminUI extends SelectUI {
                 case 7:
                     printStudentListByCourse();
                     break;
+                case 8:
+                    getallstudents();
+                    break;
+                case 9:
+                    getallcourses();
+                    break;
                 default:
                     break;
             }
 
-        } while (i > 0 && i < 8);
+        } while (i > 0 && i < 10);
         adminController.save();
         return;
     }
@@ -501,6 +509,20 @@ public class AdminUI extends SelectUI {
             for (Student eachStudent : confirmedList) {
                 System.out.printf("%s\n", eachStudent.print());
             }
+        }
+    }
+
+    private void getallstudents(){
+        ArrayList<Student> ls = adminController.getStudentList();
+        for (Student smth: ls){
+            System.out.printf("%s\n",smth.print());
+        }
+    }
+
+    private void getallcourses(){
+        ArrayList<Course> ls = adminController.getCourseList();
+        for (Course another: ls){
+            System.out.printf("%s\n",another.print());
         }
     }
 }

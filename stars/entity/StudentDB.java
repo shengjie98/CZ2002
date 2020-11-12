@@ -8,8 +8,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.io.EOFException;
 import stars.boundary.*;
 import stars.controller.*;
 
@@ -19,38 +17,7 @@ import stars.controller.*;
 public class StudentDB implements Database {
 	private ArrayList<Student> studentList = new ArrayList<Student>();
     private final String STUDENT_DATABASE_FILE = "stars/students.ser";
-	// File file = new File("stars/students.ser");
-
-	// format to show the serialisation 
-	// students.add(new Student("Yu Xuan", "Singapore", "F", "U1920126K", "SCSE", "kohy0083@e.ntu.edu.sg"));
-	// students.add(new Student("Hiok Hian", "Singapore", "M", "U1920000K", "SCSE", "a@hotmail.com"));
-	// students.add(new Student("Sheng Jie", "Singapore", "M", "U1920001K", "SCSE", "a@gmail.com"));
-	// students.add(new Student("Patria", "Singapore", "F", "U1920002K", "SCSE", "abc@gmail.com"));
-
-	// serialising it
-	// FileOutputStream fo = new FileOutputStream(file);
-	// ObjectOutputStream output = new ObjectOutputStream(fo);
-	// for (Student s: students) {
-	// 	output.writeObject(s);
-	// }
-	// output.close();
-	// fo.close();
-
-	// deserialise it 
-	// FileInputStream fi = new FileInputStream(file);
-	// ObjectInputStream input = new ObjectInputStream(fi);
-	// ArrayList<Student> students2 = new ArrayList<Student>();
-		
-	// try {
-	// 	while (true) {
-	// 		Student s = (Student)input.readObject();
-	// 		students2.add(s);
-	// 	} 
-	// } catch (EOFException ex) {
-	// }
-
-
-	// private final String STUDENT_DATABASE_FILE = "stars/students.ser";
+	
 
 	public StudentDB() {
 		this.loadInformation();
