@@ -17,9 +17,10 @@ import stars.controller.*;
  * handles student data
  */
 public class StudentDB implements Database {
-	File file = new File("students.ser");
-
 	private ArrayList<Student> studentList = new ArrayList<Student>();
+    private final String STUDENT_DATABASE_FILE = "stars/students.ser";
+	// File file = new File("stars/students.ser");
+
 	// format to show the serialisation 
 	// students.add(new Student("Yu Xuan", "Singapore", "F", "U1920126K", "SCSE", "kohy0083@e.ntu.edu.sg"));
 	// students.add(new Student("Hiok Hian", "Singapore", "M", "U1920000K", "SCSE", "a@hotmail.com"));
@@ -63,7 +64,7 @@ public class StudentDB implements Database {
 	 * @return student object list
 	 */
 	public ArrayList getList() {
-		return studentList;
+		return this.studentList;
 	}
 
 	// SET METHODS
@@ -89,7 +90,7 @@ public class StudentDB implements Database {
 	// sj stuff feel free to change @yx
 	public void loadInformation() {
 		try {
-			ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(file));
+			ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(STUDENT_DATABASE_FILE));
 			this.studentList = (ArrayList<Student>) inputStream.readObject();
 			inputStream.close();
 		} catch (IOException e) {
@@ -104,11 +105,11 @@ public class StudentDB implements Database {
 	// sj stuff feel free to change @yx
 	public void saveInformation() {
 		try {
-			ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(file));
+			ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(STUDENT_DATABASE_FILE));
 			outputStream.writeObject(this.studentList);
 			outputStream.close();
 		} catch (IOException e) {
-			System.out.println("Class not found");
+			System.out.println("Class not found hi");
 		}
 	}
 

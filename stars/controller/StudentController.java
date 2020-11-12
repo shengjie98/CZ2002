@@ -21,10 +21,15 @@ public class StudentController {
     }
 
     public boolean addIndex(Index myIndex) {
-        for (Index existingIndex : myStudent.getRegisteredIndex()) {
-            if (existingIndex.getIndexNumber() == myIndex.getIndexNumber()) {
-                return false;
-            }     
+        int i;
+        ArrayList<Index> allIndex = myStudent.getRegisteredIndex();
+        if (allIndex.size() != 0) {
+            for (i = 0; i < allIndex.size(); i++) {
+                Index existingIndex = allIndex.get(i);
+                if (existingIndex.getIndexNumber() == myIndex.getIndexNumber()) {
+                    return false;
+                }     
+            }
         }
         return myStudent.addIndex(myIndex);
         // can add index and drop and change index be combined?

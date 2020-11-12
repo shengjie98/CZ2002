@@ -28,7 +28,7 @@ public class Student implements Selectable, Serializable{
         this.studentID = studentID;
         this.degree = degree;
         this.email = email;
-        notificationService = new emailService(this);
+        notificationService = new EmailService(this);
         registeredCourses = new StudentRegisteredCourses(this);
         
     }

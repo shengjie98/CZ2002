@@ -11,7 +11,8 @@ import java.util.ArrayList;
 
 public class AdminUI extends SelectUI {
     private AdminController adminController;
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+    private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+    private final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
     public AdminUI() {
         adminController = new AdminController();
@@ -70,7 +71,7 @@ public class AdminUI extends SelectUI {
         while (true) {
             try {
                 System.out.print("  a. Access Period Start (DD/MM/YYYY hh:mm): ");
-                start = LocalDateTime.parse(sc.nextLine(), formatter);
+                start = LocalDateTime.parse(sc.nextLine(), dateFormatter);
                 break;
             } catch (DateTimeParseException e) {
                 System.out.println("Incorrect Format");
@@ -79,7 +80,7 @@ public class AdminUI extends SelectUI {
         while (true) {
             try {
                 System.out.print("  b. Access Period End (DD/MM/YYYY hh:mm): ");
-                end = LocalDateTime.parse(sc.nextLine(), formatter);
+                end = LocalDateTime.parse(sc.nextLine(), dateFormatter);
                 if (end.isAfter(start)){
                     break;
                 }
@@ -113,7 +114,7 @@ public class AdminUI extends SelectUI {
         while (true) {
             try {
                 System.out.print("  h. Access Period Start (DD/MM/YYYY hh:mm): ");
-                start = LocalDateTime.parse(sc.nextLine(), formatter);
+                start = LocalDateTime.parse(sc.nextLine(), dateFormatter);
                 break;
             } catch (DateTimeParseException e) {
                 System.out.println("Incorrect Format");
@@ -122,7 +123,7 @@ public class AdminUI extends SelectUI {
         while (true) {
             try {
                 System.out.print("  i. Access Period End (DD/MM/YYYY hh:mm): ");
-                end = LocalDateTime.parse(sc.nextLine(), formatter);
+                end = LocalDateTime.parse(sc.nextLine(), dateFormatter);
                 break;
             } catch (DateTimeParseException e) {
                 System.out.println("Incorrect Format");
@@ -161,12 +162,12 @@ public class AdminUI extends SelectUI {
         Course selectedCourse = (Course) select(courseList);
 
         // get user to choose the course information to edit
-        System.out.println("Which part of the course do you want to edit?: \n");
-        System.out.println("1: Course Code\n");
-        System.out.println("2: School\n");
-        System.out.println("3: Add an Index\n");
-        System.out.println("4: Drop Index Number\n");
-        System.out.println("5: Change vacancy of the Index\n");
+        System.out.println("Which part of the course do you want to edit?:");
+        System.out.println("1: Course Code");
+        System.out.println("2: School");
+        System.out.println("3: Add an Index");
+        System.out.println("4: Drop Index Number");
+        System.out.println("5: Change vacancy of the Index");
         Scanner sc = new Scanner(System.in);
         int i = sc.nextInt();
         switch (i) {
@@ -245,11 +246,11 @@ public class AdminUI extends SelectUI {
                     // get the start time
                     System.out.println("Start Time: ");
                     Scanner startTime = new Scanner(System.in);
-                    LocalTime start = LocalTime.parse(startTime.nextLine(), formatter);
+                    LocalTime start = LocalTime.parse(startTime.nextLine(), timeFormatter);
                     // get the end time
                     System.out.println("End Time: ");
                     Scanner endTime = new Scanner(System.in);
-                    LocalTime end = LocalTime.parse(endTime.nextLine(), formatter);
+                    LocalTime end = LocalTime.parse(endTime.nextLine(), timeFormatter);
 
                     // yet to convert to enum so the constructor is throwing an error
                     Timing newTiming = new Timing(newDay, newType, start, end);
@@ -288,6 +289,7 @@ public class AdminUI extends SelectUI {
                 // Get the user to input the vacancy which must be
                 // greater than the current length of the list of
                 // students
+                System.out.print("New Vacancy: ");
                 Scanner newVanacyIn = new Scanner(System.in);
                 int newVacancy2 = newVanacyIn.nextInt();
                 ArrayList<Student> confirmedList = selectedIndex2.getConfirmedList();

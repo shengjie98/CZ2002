@@ -12,12 +12,12 @@ import stars.boundary.*;
 import stars.controller.*;
 
 
-public class emailService implements NotificationInterface {
+public class EmailService implements NotificationInterface {
     private Student student;
     final String username = "cz20022020@gmail.com"; // to be added
     final String password = "ilovecz2002"; // to be added
     
-    public emailService(Student student){
+    public EmailService(Student student){
         this.student = student;
     }
 

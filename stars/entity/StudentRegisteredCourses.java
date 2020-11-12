@@ -6,10 +6,10 @@ import stars.boundary.*;
 import stars.controller.*;
 
 public class StudentRegisteredCourses implements Serializable{
-    ArrayList<Index> waitlistedIndexArray;
-    ArrayList<Index> confirmedIndexArray;
-    Student owner; 
-    int AU;
+    private ArrayList<Index> waitlistedIndexArray;
+    private ArrayList<Index> confirmedIndexArray;
+    private Student owner; 
+    private int AU;
 
     public StudentRegisteredCourses(Student owner) {
         this.owner = owner;
