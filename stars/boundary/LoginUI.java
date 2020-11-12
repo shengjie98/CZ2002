@@ -8,8 +8,6 @@ import stars.entity.*;
 public class LoginUI {
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
-        LoginController loginController = new LoginController();
-        String username, password;
         int i;
         System.out.println("Welcome to STARS!");
         do {
@@ -22,12 +20,15 @@ public class LoginUI {
                     login();
                     break;
                 case 2: 
-                    exit();
+                    System.out.println("Thank you for using STARS!");
                     break;
-            } while (i > 0 && i < 3);    
-        } while (!exit);
+            } while (i < 1 || i > 2);    
+        } while (i < 2);
     }
-    private void login() {
+    private static void login() {
+        LoginController loginController = new LoginController();
+        String username, password;
+        Scanner sc = new Scanner(System.in);
         System.out.print("Username: ");
         username = sc.next();
         System.out.print("Password: ");
@@ -35,15 +36,10 @@ public class LoginUI {
             
         if (!loginController.verifyLogin(username, password)) {
             System.out.println("Invalid Input");
-        } else {
-            loginController.verifyLogin(username, password);
-        };        
+        }        
     }
 
-    private void exit() {
-        System.out.println("Thank you for using STARS!");
-        sc.close();
-    }
+
             
         // password = sc.next();
         // loginController.verifyLogin(username, password);
