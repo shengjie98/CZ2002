@@ -1,0 +1,240 @@
+@startuml
+
+title __ENTITY's Class Diagram__\n
+
+  namespace stars.entity {
+    class stars.entity.Course {
+        - au : int
+        - courseID : String
+        - courseName : String
+        - indexList : ArrayList<Index>
+        - school : String
+        + Course()
+        + addIndex()
+        + getAu()
+        + getCourseID()
+        + getCourseName()
+        + getIndexList()
+        + getSchool()
+        + print()
+        + setAu()
+        + setCourseID()
+        + setCourseName()
+        + setIndexList()
+        + setSchool()
+    }
+  }
+  
+
+  namespace stars.entity {
+    class stars.entity.CourseDB {
+        - COURSE_DATABASE_FILE : String
+        - courseList : ArrayList<Course>
+        + CourseDB()
+        + addItem()
+        + getList()
+        + loadInformation()
+        + saveInformation()
+    }
+  }
+  
+
+  namespace stars.entity {
+    interface stars.entity.Database {
+        {abstract} + addItem()
+        {abstract} + getList()
+        {abstract} + loadInformation()
+        {abstract} + saveInformation()
+    }
+  }
+  
+
+  namespace stars.entity {
+    class stars.entity.Index {
+        - confirmedList : ArrayList<Student>
+        - indexNumber : int
+        - timings : ArrayList<Timing>
+        - vacancy : int
+        - vacancyLimit : int
+        - waitList : ArrayList<Student>
+        + Index()
+        + addStudentToConfirmedList()
+        + addStudentToWaitList()
+        + addTiming()
+        + dequeueStudent()
+        + dropStudentFromConfirmedList()
+        + dropStudentFromWaitList()
+        + getAU()
+        + getConfirmedList()
+        + getCourse()
+        + getIndexNumber()
+        + getTimings()
+        + getVacancy()
+        + getWaitList()
+        + insertStudentToWaitList()
+        + print()
+        + setConfirmedList()
+        + setCourse()
+        + setIndexNumber()
+        + setTimings()
+        + setVacancy()
+        + setWaitList()
+    }
+  }
+  
+
+  namespace stars.entity {
+    interface stars.entity.NotificationInterface {
+        {abstract} + sendNotification()
+    }
+  }
+  
+
+  namespace stars.entity {
+    interface stars.entity.Selectable {
+        {abstract} + print()
+    }
+  }
+  
+
+  namespace stars.entity {
+    class stars.entity.Student {
+        - degree : String
+        - email : String
+        - gender : String
+        - nationality : String
+        - studentID : String
+        - studentName : String
+        + Student()
+        + addIndex()
+        + changeIndex()
+        + checkChangeIndex()
+        + dropIndex()
+        + getDegree()
+        + getEmail()
+        + getGender()
+        + getNationality()
+        + getRegisteredIndex()
+        + getStudentID()
+        + getStudentName()
+        + moveToConfirmed()
+        + notify()
+        + print()
+        + swopPlaces()
+    }
+  }
+  
+
+  namespace stars.entity {
+    class stars.entity.StudentDB {
+        ~ file : File
+        - studentList : ArrayList<Student>
+        + StudentDB()
+        + addItem()
+        + findStudent()
+        + getList()
+        + loadInformation()
+        + saveInformation()
+    }
+  }
+  
+
+  namespace stars.entity {
+    class stars.entity.StudentRegisteredCourses {
+        ~ AU : int
+        ~ confirmedIndexArray : ArrayList<Index>
+        ~ waitlistedIndexArray : ArrayList<Index>
+        + StudentRegisteredCourses()
+        + addAU()
+        + addIndex()
+        + addToConfirmedIndexArray()
+        + addToWaitlistedIndexArray()
+        + changeIndex()
+        + dropIndex()
+        + getAU()
+        + getConfirmedIndexArray()
+        + getIndexList()
+        + getOwner()
+        + getWaitlistedIndexArray()
+        + moveToConfirmed()
+        + removeFromConfirmedIndexArray()
+        + removeFromWaitlistedIndexArray()
+        + swopPlaces()
+    }
+  }
+  
+
+  namespace stars.entity {
+    class stars.entity.Timing {
+        - end : LocalTime
+        - start : LocalTime
+        + Timing()
+        + checkOverlap()
+        + getEnd()
+        + getStart()
+        + setEnd()
+        + setStart()
+    }
+  }
+  
+
+  namespace stars.entity {
+    enum Day {
+      FRI
+      MON
+      THU
+      TUE
+      WED
+    }
+  }
+  
+
+  namespace stars.entity {
+    enum Type {
+      LAB
+      LEC
+      TUT
+    }
+  }
+  
+
+  namespace stars.entity {
+    class stars.entity.emailService {
+        ~ password : String
+        ~ username : String
+        + emailService()
+        + sendNotification()
+    }
+  }
+  
+
+  stars.entity.Course .up.|> java.io.Serializable
+  stars.entity.Course .up.|> stars.entity.Selectable
+  stars.entity.CourseDB .up.|> stars.entity.Database
+  stars.entity.Index .up.|> java.io.Serializable
+  stars.entity.Index .up.|> stars.entity.Selectable
+  stars.entity.Index o-- stars.entity.Course : course
+  stars.entity.Student .up.|> java.io.Serializable
+  stars.entity.Student .up.|> stars.entity.Selectable
+  stars.entity.Student o-- stars.entity.NotificationInterface : notificationService
+  stars.entity.Student o-- stars.entity.StudentRegisteredCourses : registeredCourses
+  stars.entity.StudentDB .up.|> stars.entity.Database
+  stars.entity.StudentRegisteredCourses .up.|> java.io.Serializable
+  stars.entity.StudentRegisteredCourses o-- stars.entity.Student : owner
+  stars.entity.Timing .up.|> java.io.Serializable
+  stars.entity.Timing o-- stars.entity.Timing.Day : day
+  stars.entity.Timing o-- stars.entity.Timing.Type : type
+  stars.entity.Timing +-down- stars.entity.Timing.Day
+  stars.entity.Timing +-down- stars.entity.Timing.Type
+  stars.entity.emailService .up.|> stars.entity.NotificationInterface
+  stars.entity.emailService o-- stars.entity.Student : student
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml
