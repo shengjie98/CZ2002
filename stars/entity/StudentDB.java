@@ -8,8 +8,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.io.EOFException;
 import stars.boundary.*;
 import stars.controller.*;
 

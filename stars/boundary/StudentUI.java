@@ -103,7 +103,7 @@ public class StudentUI extends SelectUI{
         selectedCourse = (Course)select(courseList);
         indexList = selectedCourse.getIndexList();
         selectedIndex = (Index)select(indexList);
-        System.out.printf("Vacancies: %i", selectedIndex.getVacancy());
+        System.out.printf("Vacancies: %d\n", selectedIndex.getVacancy());
     }
     
     private void changeIndex() {
