@@ -66,7 +66,7 @@ public class AdminUI extends SelectUI {
                     break;
             }
 
-        } while (i > 0 && i < 8);
+        } while (i > 0 && i < 10);
         adminController.save();
         return;
     }
