@@ -15,7 +15,7 @@ public class StudentController {
     }
 
     public ArrayList<Course> getCourseList() {
-        return this.courseInfo.getCourseList();
+        return this.courseInfo.getList();
     }
 
     public boolean addIndex(Index myIndex) {

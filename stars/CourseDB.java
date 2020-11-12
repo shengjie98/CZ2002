@@ -33,7 +33,7 @@ public class CourseDB implements Database {
      * 
      * @return list of all courses in database
      */
-    public ArrayList<Course> getCourseList() {
+    public ArrayList getList() {
         return this.courseList;
     }
 
@@ -42,8 +42,8 @@ public class CourseDB implements Database {
      * 
      * @param course to be added into database
      */
-    public void add(Course newCourse) {
-        courseList.add(newCourse);
+    public void addItem(Object newCourse) {
+        courseList.add((Course)newCourse);
     }
 
     public void loadInformation() {

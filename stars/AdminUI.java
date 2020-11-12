@@ -10,11 +10,9 @@ import java.util.ArrayList;
 public class AdminUI extends SelectUI {
     private AdminController adminController;
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-    private LoginController loginController;
 
     public AdminUI() {
         adminController = new AdminController();
-        loginController = new LoginController();
     }
 
     public void displayMenu() {
@@ -85,7 +83,7 @@ public class AdminUI extends SelectUI {
                 System.out.println("Incorrect Format");
             }
         }
-        loginController.editAccess(selectedStudent.getStudentID(), start, end);
+        adminController.editAccess(selectedStudent.getStudentID(), start, end);
     }
 
     private void addStudent() {
@@ -129,8 +127,7 @@ public class AdminUI extends SelectUI {
 
         // admin controller.add student(studentName, nationality, gender, studentID,
         // degree, email)
-        adminController.addStudent(studentName, nationality, gender, studentID, degree, email);
-        loginController.addStudent(studentID, password, start, end);
+        adminController.addStudent(studentName, nationality, gender, studentID, degree, email, password, start, end);
     }
 
     private void addCourse() {

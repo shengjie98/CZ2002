@@ -126,7 +126,7 @@ public class StudentUI extends SelectUI{
         ArrayList<Index> indexList;
         Index selectedIndex;
         String username, password;
-        LoginController loginController = new LoginController();
+        StudentAuthenticator loginController = new FlatFileStudentAuthenticator();
         Scanner sc = new Scanner(System.in);
 
         indexList = studentController.getRegisteredIndex();
@@ -137,7 +137,7 @@ public class StudentUI extends SelectUI{
         System.out.print("Password: ");
         password = new String(System.console().readPassword());
         // password = sc.next();
-        success = loginController.checkStudent(username, password);
+        success = loginController.authenticate(username, password);
         if (success) {
             studentController.swopIndex(username, selectedIndex);
         } else {

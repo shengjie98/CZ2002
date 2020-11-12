@@ -24,50 +24,73 @@ public class Index implements Selectable, Serializable {
 		return true;
 	}
 
-	/**
-	 * 
-	 * @param newStudent
-	 * @return returns true if student is added to confirmed list and false if added
-	 *         to waitlist
-	 */
-	public boolean addStudent(Student newStudent) {
-		// if the confirmedList is full, add the student to the waitlist
-		if (confirmedList.size() == vacancyLimit) {
-			waitList.add(newStudent);
-			return false;
-		} else {
-			// else add the student to the confirmed list
-			confirmedList.add(newStudent);
-			vacancy--;
-			return true;
-		}
+	public void addStudentToWaitList(Student student) {
+		waitList.add(student);
 	}
 
-	/**
-	 * 
-	 * @param newStudent
-	 * @return
-	 */
-	public boolean dropStudent(Student newStudent) {
-		if (confirmedList.contains(newStudent)) {
-			confirmedList.remove(newStudent);
-			vacancy++;
-			return true;
-		} else {
-			waitList.remove(newStudent);
-			return false;
-		}
+	public void addStudentToConfirmedList(Student student) {
+		confirmedList.add(student);
+		vacancy--;
 	}
 
-	public boolean swopStudent(Student curStudent, Student newStudent) {
-		if (confirmedList.contains(curStudent)) {
-			confirmedList.set(confirmedList.indexOf(curStudent), newStudent);
-			return true;
-		} else {
-			waitList.set(waitList.indexOf(curStudent), newStudent);
-			return false;
-		}
+	public void dropStudentFromWaitList(Student student) {
+		waitList.remove(student);
 	}
+
+	public void dropStudentFromConfirmedList(Student student) {
+		confirmedList.remove(student);
+		vacancy++;
+	}
+
+	public Student dequeueStudent(){
+		return waitList.remove(0);
+	}
+
+	public void insertStudentToWaitList(Student student, int location) {
+		waitList.set(location, student);
+	}
+
+	public int getAU() {
+		return this.course.getAu();
+	}
+
+
+	// public boolean addStudent(Student newStudent) {
+	// 	// if the confirmedList is full, add the student to the waitlist
+	// 	if (confirmedList.size() == vacancyLimit) {
+	// 		waitList.add(newStudent);
+	// 		return false;
+	// 	} else {
+	// 		// else add the student to the confirmed list
+	// 		confirmedList.add(newStudent);
+	// 		vacancy--;
+	// 		return true;
+	// 	}
+	// }
+
+	// public boolean dropStudent(Student newStudent) {
+	// 	if (confirmedList.contains(newStudent)) {
+	// 		confirmedList.remove(newStudent);
+	// 		vacancy++;
+	// 		// TODO missing adding the waitlist student
+	// 		return true;
+
+
+	// 	} else {
+	// 		waitList.remove(newStudent);
+	// 		return false;
+	// 	}
+	// }
+
+	// public boolean swopStudent(Student curStudent, Student newStudent) {
+	// 	if (confirmedList.contains(curStudent)) {
+	// 		confirmedList.set(confirmedList.indexOf(curStudent), newStudent);
+	// 		return true;
+	// 	} else {
+	// 		waitList.set(waitList.indexOf(curStudent), newStudent);
+	// 		return false;
+	// 	}
+	// }
 
 	public Course getCourse() {
 		return course;

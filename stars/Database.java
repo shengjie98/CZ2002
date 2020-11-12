@@ -1,6 +1,10 @@
 package stars;
 
+import java.util.ArrayList;
+
 public interface Database {
-	public abstract void loadInformation();
-	public abstract void saveInformation();
+	public void loadInformation();
+	public void saveInformation();
+	public void addItem(Object o);
+	public ArrayList getList();
 }
