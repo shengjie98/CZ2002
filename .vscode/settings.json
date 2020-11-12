@@ -5,8 +5,9 @@
         "**/.hg": true,
         "**/CVS": true,
         "**/.DS_Store": true, 
-        "**/.class": true,
-        "*.class": true, 
+        "**/stars/boundary/*.class": true,
+        "**/stars/controller/*.class": true,
+        "**/stars/entity/*.class": true,
         "**/stars/*.class": true
     }
 }

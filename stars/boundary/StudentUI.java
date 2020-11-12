@@ -1,6 +1,8 @@
-package stars;
+package stars.boundary;
 import java.util.ArrayList;
 import java.util.Scanner;
+import stars.controller.*;
+import stars.entity.*;
 
 public class StudentUI extends SelectUI{
     StudentController studentController;

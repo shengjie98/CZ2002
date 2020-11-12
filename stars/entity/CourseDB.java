@@ -1,4 +1,4 @@
-package stars;
+package stars.entity;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -7,9 +7,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
+import stars.boundary.*;
+import stars.controller.*;
 
 /**
  * Handles the logic dealing with the course data

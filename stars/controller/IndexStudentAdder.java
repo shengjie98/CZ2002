@@ -1,4 +1,7 @@
-package stars;
+package stars.controller;
+
+import stars.entity.*;
+import stars.boundary.*;
 
 public class IndexStudentAdder {
     public boolean addStudent(Index index, StudentRegisteredCourses studentRegisteredCourses) {

@@ -1,4 +1,4 @@
-package stars;
+package stars.controller;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -9,6 +9,8 @@ import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
+import stars.entity.*;
+import stars.boundary.*;
 
 public class FlatFileStudentAuthenticator implements StudentAuthenticator {
     private final String STUDENT_ACCOUNTS_FILE = "stars/studentAccounts.txt";

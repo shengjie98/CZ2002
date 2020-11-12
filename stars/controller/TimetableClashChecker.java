@@ -1,6 +1,8 @@
-package stars;
+package stars.controller;
 
 import java.util.ArrayList;
+import stars.entity.*;
+import stars.boundary.*;
 
 public class TimetableClashChecker {
     public boolean checkClash(StudentRegisteredCourses studentRegisteredCourses, Index newIndex) {

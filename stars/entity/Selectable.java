@@ -1,4 +1,6 @@
-package stars;
+package stars.entity;
+
+
 
 public interface Selectable {
     

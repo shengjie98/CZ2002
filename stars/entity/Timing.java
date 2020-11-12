@@ -1,15 +1,17 @@
 
-package stars;
+package stars.entity;
 
 import java.io.Serializable;
 import java.time.LocalTime;
+import stars.boundary.*;
+import stars.controller.*;
 
 public class Timing implements Serializable {
-    static enum Type {
+    public static enum Type {
         TUT, LAB, LEC
     }
 
-    static enum Day {
+    public static enum Day {
         MON, TUE, WED, THU, FRI
     }
 

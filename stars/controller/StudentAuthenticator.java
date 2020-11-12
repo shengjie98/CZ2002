@@ -1,6 +1,8 @@
-package stars;
+package stars.controller;
 
 import java.time.LocalDateTime;
+import stars.entity.*;
+import stars.boundary.*;
 
 public interface StudentAuthenticator extends Authenticator {
     public void editAccess(String username, LocalDateTime accessStart, LocalDateTime accessEnd);

@@ -1,5 +1,7 @@
-package stars;
+package stars.boundary;
 
+import stars.controller.*;
+import stars.entity.*;
 import java.util.Scanner;
 import java.time.LocalDateTime;
 import java.time.LocalTime;

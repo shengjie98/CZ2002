@@ -1,8 +1,9 @@
-package stars;
+package stars.controller;
 
 import java.time.LocalDateTime;
-// import java.util.List;
 import java.util.ArrayList;
+import stars.entity.*;
+import stars.boundary.*;
 
 public class AdminController {
     private CourseDB courseInfo;

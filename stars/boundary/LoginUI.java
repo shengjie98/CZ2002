@@ -1,5 +1,9 @@
-package stars;
+package stars.boundary;
+
 import java.util.Scanner;
+import stars.controller.*;
+import stars.entity.*;
+
 
 public class LoginUI {
     public static void main(String[] args){
@@ -9,8 +13,6 @@ public class LoginUI {
         do {
             System.out.print("Username: ");
             username = sc.next();
-
-            System.out.print(username);
             System.out.print("Password: ");
             password = new String(System.console().readPassword());
             // password = sc.next();

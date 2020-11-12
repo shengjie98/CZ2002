@@ -1,6 +1,8 @@
-package stars;
+package stars.entity;
 
 import java.util.ArrayList;
+import stars.boundary.*;
+import stars.controller.*;
 
 public interface Database {
 	public void loadInformation();

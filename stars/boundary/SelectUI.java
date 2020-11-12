@@ -1,7 +1,9 @@
-package stars;
+package stars.boundary;
 
 import java.util.Scanner;
 import java.util.ArrayList;
+import stars.controller.*;
+import stars.entity.*;
 // import java.util.List;
 
 public abstract class SelectUI {

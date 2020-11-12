@@ -1,4 +1,4 @@
-package stars;
+package stars.entity;
 
 import java.util.Properties;
 import javax.mail.Message;
@@ -8,6 +8,8 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import stars.boundary.*;
+import stars.controller.*;
 
 
 public class emailService implements NotificationInterface {

@@ -1,6 +1,8 @@
-package stars;
+package stars.controller;
 
 import java.util.ArrayList;
+import stars.entity.*;
+import stars.boundary.*;
 
 public class IndexStudentDropper {
     public boolean dropStudent(Index index, StudentRegisteredCourses studentRegisteredCourses) {

@@ -1,7 +1,9 @@
-package stars;
+package stars.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import stars.boundary.*;
+import stars.controller.*;
 
 public class Index implements Selectable, Serializable {
 	private Course course;

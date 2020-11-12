@@ -1,6 +1,8 @@
-package stars;
+package stars.controller;
 
 import java.util.ArrayList;
+import stars.entity.*;
+import stars.boundary.*;
 
 public class IndexStudentSwopper {
     public void swopStudent(Index index, Student curStudent, Student newStudent) {
