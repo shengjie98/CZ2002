@@ -160,9 +160,9 @@ public class AdminUI extends SelectUI {
         Course newCourse = adminController.createCourse(newCourseID, newAU, newSchool, newCourseName);
 
         System.out.println("How many Indexes do you want to add?");
-        Scanner numOfIndexes = new Scanner(System.in);
-
-        for (int a = 0; a < numOfIndexes.nextInt(); a++) {
+        Scanner scannerNumOfIndexes = new Scanner(System.in);
+        int numOfIndexes = scannerNumOfIndexes.nextInt();
+        for (int a = 0; a < numOfIndexes; a++) {
             System.out.println("Input Vacancy of Course: ");
             Scanner vacancy = new Scanner(System.in);
             int newVacancy = vacancy.nextInt();
@@ -231,6 +231,8 @@ public class AdminUI extends SelectUI {
                     break;
                 }
             }
+            adminController.addIndex(newCourse, newIndex);;
+            System.out.println("Index added!");
         }
 
         adminController.addCourse(newCourse);

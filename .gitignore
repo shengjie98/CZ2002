@@ -5,3 +5,5 @@ CZ2002.iml
 /stars/*.class
 *.class
 stars\*.class
+lib
+setenv.bat

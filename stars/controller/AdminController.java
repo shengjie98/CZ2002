@@ -68,9 +68,8 @@ public class AdminController {
         courseInfo.addItem(newCourse);
     }
 
-    public Course addIndexToCourse(Course newCourse, Index index) {
+    public void addIndexToCourse(Course newCourse, Index index) {
         newCourse.addIndex(index);
-        return newCourse;
     }
 
     // public void editCourseInformation(int choice) {
