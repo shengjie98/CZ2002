@@ -1,7 +1,7 @@
-package stars.entity;
+package stars.controller;
 
 import stars.boundary.*;
-import stars.controller.*;
+import stars.entity.*;
 
 // import java.io.FileNotFoundException;
 // import java.io.FileWriter;

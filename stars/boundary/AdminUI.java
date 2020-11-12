@@ -26,7 +26,7 @@ public class AdminUI extends SelectUI {
             System.out.println("2. Add student");
             System.out.println("3. Add course");
             System.out.println("4. Update course");
-            System.out.println("5. Check availablity slot for an index");
+            System.out.println("5. Check availability slot for an index");
             System.out.println("6. Print student list by index number");
             System.out.println("7. Print student list by course");
             System.out.print("Option: ");
@@ -80,7 +80,9 @@ public class AdminUI extends SelectUI {
             try {
                 System.out.print("  b. Access Period End (DD/MM/YYYY hh:mm): ");
                 end = LocalDateTime.parse(sc.nextLine(), formatter);
-                break;
+                if (end.isAfter(start)){
+                    break;
+                }
             } catch (DateTimeParseException e) {
                 System.out.println("Incorrect Format");
             }
