@@ -1,11 +1,15 @@
 package stars.controller;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import stars.entity.*;
+import stars.entity.Timing.Day;
+import stars.entity.Timing.Type;
 import stars.boundary.*;
 
 public class AdminController {
+
     private CourseDB courseInfo;
     private StudentDB studentInfo;
 
@@ -25,7 +29,8 @@ public class AdminController {
     /**
      * @return adds a student to an index of a course
      */
-    public void addStudent(String studentName, String nationality, String gender, String studentID, String degree, String email, String password, LocalDateTime start, LocalDateTime end) {
+    public void addStudent(String studentName, String nationality, String gender, String studentID, String degree,
+            String email, String password, LocalDateTime start, LocalDateTime end) {
         // instantiate a new student object
         Student newStudent = new Student(studentName, nationality, gender, studentID, degree, email);
         // add this student to the StudentDB
@@ -37,6 +42,35 @@ public class AdminController {
     public void save() {
         this.courseInfo.saveInformation();
         this.studentInfo.saveInformation();
+    }
+
+    public Index createIndex(Course selectedCourse, int newVacancy, int newIndexNumber) {
+        Index newIndex = new Index(selectedCourse, newVacancy, newIndexNumber);
+        return newIndex;
+    }
+
+    public Timing createTiming(Day day, Type type, LocalTime start, LocalTime end) {
+        Timing newTiming = new Timing(day, type, start, end);
+        return newTiming;
+    }
+
+    public Index addTiming(Index newIndex, Timing newTiming) {
+        newIndex.addTiming(newTiming);
+        return newIndex;
+    }
+
+    public Course createCourse(String newCourseID, int newAU, String newSchool, String newCourseName) {
+        Course newCourse = new Course(newCourseID, newAU, newSchool, newCourseName);
+        return newCourse;
+    }
+
+    public void addCourse(Course newCourse) {
+        courseInfo.addItem(newCourse);
+    }
+
+    public Course addIndexToCourse(Course newCourse, Index index) {
+        newCourse.addIndex(index);
+        return newCourse;
     }
 
     // public void editCourseInformation(int choice) {
@@ -77,12 +111,13 @@ public class AdminController {
 
     public void addCourse(String courseID, int au, String school, String courseName) {
         Course newCourse = new Course(courseID, au, school, courseName);
+
         courseInfo.addItem(newCourse);
         return;
     }
     // private void editVacancy(Index){
 
-	public void editAccess(String studentID, LocalDateTime start, LocalDateTime end) {
+    public void editAccess(String studentID, LocalDateTime start, LocalDateTime end) {
         StudentAuthenticator studentAuthenticator = new FlatFileStudentAuthenticator();
         studentAuthenticator.editAccess(studentID, start, end);
     }
