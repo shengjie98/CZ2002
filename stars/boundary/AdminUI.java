@@ -263,7 +263,7 @@ public class AdminUI extends SelectUI {
         Scanner sc = new Scanner(System.in);
         int i = sc.nextInt();
         switch (i) {
-            case 1:
+            case 1: {
                 /**
                  * Change course ID attribute
                  */
@@ -271,7 +271,8 @@ public class AdminUI extends SelectUI {
                 Scanner newCourseID = new Scanner(System.in);
                 selectedCourse.setCourseID(newCourseID.nextLine());
                 break;
-            case 2:
+            }
+            case 2: {
                 /**
                  * Change school attribute
                  */
@@ -279,7 +280,8 @@ public class AdminUI extends SelectUI {
                 Scanner newSchool = new Scanner(System.in);
                 selectedCourse.setCourseName(newSchool.nextLine());
                 break;
-            case 3:
+            }
+            case 3: {
                 /**
                  * Change school attribute
                  */
@@ -287,7 +289,8 @@ public class AdminUI extends SelectUI {
                 Scanner newSchool = new Scanner(System.in);
                 selectedCourse.setSchool(newSchool.nextLine());
                 break;
-            case 4:
+            }
+            case 4: {
                 /**
                  * Add a new index into an existing course
                  */
@@ -370,7 +373,8 @@ public class AdminUI extends SelectUI {
                     System.out.println("Index Could not be added! Duplicate Index ID.");
                 }
                 break;
-            case 5:
+            }
+            case 5: {
                 /**
                  * Drop Index
                  */
@@ -386,7 +390,8 @@ public class AdminUI extends SelectUI {
                     System.out.println("Unable to drop Index. Students are already in the Index!");
                 }
                 break;
-            case 6:
+            }
+            case 6: {
                 /**
                  * Change Index ID
                  */
@@ -396,36 +401,41 @@ public class AdminUI extends SelectUI {
                 // the index that they want to drop; The admin will only
                 // be allowed to drop it if it has no students
                 Index selectedIndex = (Index) select(indexList);
-                if (adminController.dropIndex(selectedCourse, selectedIndex)) {
-                    System.out.println("Index Dropped.");
+                System.out.println("Enter new Index ID: ");
+                Scanner newIndexIDin = new Scanner(System.in);
+                int newIndexID = newIndexIDin.nextInt();
+                if (adminController.changeIndexID(selectedIndex, newIndexID)) {
+                    System.out.println("Index ID Changed.");
                 } else {
-                    System.out.println("Unable to drop Index. Students are already in the Index!");
+                    System.out.println("Unable to change Index ID. An Index with the same ID already exists!");
                 }
                 break;
-            case 7:
+            }
+            case 7: {
                 /**
                  * Change vacancy limit attribute of course
                  */
-                ArrayList<Index> indexList2 = selectedCourse.getIndexList();
+                ArrayList<Index> indexList = selectedCourse.getIndexList();
                 // Get the user to choose the index
-                Index selectedIndex2 = (Index) select(indexList2);
+                Index selectedIndex = (Index) select(indexList);
                 // Get the user to input the vacancy which must be
                 // greater than the current length of the list of
                 // students
-                int newVacancy2;
+                int newVacancy;
                 do {
                     System.out.print("New Vacancy of Index: ");
                     Scanner newVanacyIn = new Scanner(System.in);
                     // !! add while loop to force user to enter positive value
-                    newVacancy2 = newVanacyIn.nextInt();
-                    if (newVacancy2 < 0) {
+                    newVacancy = newVanacyIn.nextInt();
+                    if (newVacancy < 0) {
                         System.out.println("Please try again! Your new vacancy cannot be negative!");
                     }
-                } while (newVacancy2 < 0);
-                if (adminController.setVacancyLimit(selectedIndex2, newVacancy2) == false) {
+                } while (newVacancy < 0);
+                if (adminController.setVacancyLimit(selectedIndex, newVacancy) == false) {
                     System.out.println("Unable to set new vacancy. Students will be kicked out of the list!");
                 }
                 break;
+            }
             default:
                 break;
         }

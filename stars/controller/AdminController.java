@@ -93,7 +93,8 @@ public class AdminController {
                 return true;
             } else {
                 // if the confirmed list is not full, simply increase the vacancy
-                selectedIndex.setVacancy(newVacancyLimit - (selectedIndex.getVacancyLimit() - selectedIndex.getVacancy()));
+                selectedIndex
+                        .setVacancy(newVacancyLimit - (selectedIndex.getVacancyLimit() - selectedIndex.getVacancy()));
                 selectedIndex.setVacancyLimit(newVacancyLimit);
                 return true;
             }
@@ -130,6 +131,18 @@ public class AdminController {
             return true;
         }
         return false;
+    }
+
+    public boolean changeIndexID(Index selectedIndex, int newIndexID) {
+        ArrayList<Course> course = selectedIndex.getCourse();
+        ArrayList<Index> indexList = course.getIndexList();
+        for (Index index : indexList) {
+            if (index.getIndexNumber() == newIndexID) {
+                return false;
+            }
+        }
+        selectedIndex.setIndexNumber(newIndexID);
+        return true;
     }
 
     /**
