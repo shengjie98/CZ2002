@@ -254,10 +254,12 @@ public class AdminUI extends SelectUI {
         // get user to choose the course information to edit
         System.out.println("Which part of the course do you want to edit?:");
         System.out.println("1: Course Code");
-        System.out.println("2: School");
-        System.out.println("3: Add an Index");
-        System.out.println("4: Drop Index Number");
-        System.out.println("5: Change vacancy of the Index");
+        System.out.println("2: Course Name");
+        System.out.println("3: School");
+        System.out.println("4: Add an Index");
+        System.out.println("5: Drop Index Number");
+        System.out.println("6: Change Index ID");
+        System.out.println("7: Change vacancy of the Index");
         Scanner sc = new Scanner(System.in);
         int i = sc.nextInt();
         switch (i) {
@@ -273,11 +275,19 @@ public class AdminUI extends SelectUI {
                 /**
                  * Change school attribute
                  */
+                System.out.println("Enter new Course name: ");
+                Scanner newSchool = new Scanner(System.in);
+                selectedCourse.setCourseName(newSchool.nextLine());
+                break;
+            case 3:
+                /**
+                 * Change school attribute
+                 */
                 System.out.println("Enter new School name: ");
                 Scanner newSchool = new Scanner(System.in);
                 selectedCourse.setSchool(newSchool.nextLine());
                 break;
-            case 3:
+            case 4:
                 /**
                  * Add a new index into an existing course
                  */
@@ -354,9 +364,13 @@ public class AdminUI extends SelectUI {
                         break;
                     }
                 }
-                adminController.addIndex(selectedCourse, newIndex);
+                if (adminController.addIndex(selectedCourse, newIndex)) {
+                    System.out.println("Index Added!");
+                } else {
+                    System.out.println("Index Could not be added! Duplicate Index ID.");
+                }
                 break;
-            case 4:
+            case 5:
                 /**
                  * Drop Index
                  */
@@ -372,7 +386,23 @@ public class AdminUI extends SelectUI {
                     System.out.println("Unable to drop Index. Students are already in the Index!");
                 }
                 break;
-            case 5:
+            case 6:
+                /**
+                 * Change Index ID
+                 */
+                // get the list of indexes from the course object
+                ArrayList<Index> indexList = selectedCourse.getIndexList();
+                // this will print out the list of indexes and allow the user to select
+                // the index that they want to drop; The admin will only
+                // be allowed to drop it if it has no students
+                Index selectedIndex = (Index) select(indexList);
+                if (adminController.dropIndex(selectedCourse, selectedIndex)) {
+                    System.out.println("Index Dropped.");
+                } else {
+                    System.out.println("Unable to drop Index. Students are already in the Index!");
+                }
+                break;
+            case 7:
                 /**
                  * Change vacancy limit attribute of course
                  */

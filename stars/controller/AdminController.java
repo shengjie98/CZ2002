@@ -70,9 +70,9 @@ public class AdminController {
         courseInfo.addItem(newCourse);
     }
 
-    public void addIndexToCourse(Course newCourse, Index index) {
-        newCourse.addIndex(index);
-    }
+    // public void addIndexToCourse(Course newCourse, Index index) {
+    // newCourse.addIndex(index);
+    // }
 
     public boolean setVacancyLimit(Index selectedIndex, int newVacancyLimit) {
         // if the user tries to increase the vacancy limit
@@ -130,14 +130,10 @@ public class AdminController {
     // }
 
     public boolean addIndex(Course selectedCourse, Index newIndex) {
-        ArrayList<Index> indexList = selectedCourse.getIndexList();
-        for (Index index : indexList) {
-            if (index.getIndexNumber() == newIndex.getIndexNumber()) {
-                return false;
-            }
+        if (selectedCourse.addIndex(newIndex)) {
+            return true;
         }
-        (selectedCourse.getIndexList()).add(newIndex);
-        return true;
+        return false;
     }
 
     /**

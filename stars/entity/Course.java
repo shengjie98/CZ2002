@@ -25,9 +25,14 @@ public class Course implements Selectable, Serializable {
         this.courseName = courseName;
     }
 
-    public void addIndex(Index newIndex) {
+    public boolean addIndex(Index newIndex) {
+        for (Index index : indexList) {
+            if (index.getIndexNumber() == newIndex.getIndexNumber()) {
+                return false;
+            }
+        }
         indexList.add(newIndex);
-        return;
+        return true;
     }
 
     public String getCourseID() {
