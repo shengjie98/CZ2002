@@ -44,7 +44,7 @@ public class Index implements Selectable, Serializable {
 		vacancy++;
 	}
 
-	public Student dequeueStudent(){
+	public Student dequeueStudent() {
 		return waitList.remove(0);
 	}
 
@@ -56,42 +56,40 @@ public class Index implements Selectable, Serializable {
 		return this.course.getAu();
 	}
 
-
 	// public boolean addStudent(Student newStudent) {
-	// 	// if the confirmedList is full, add the student to the waitlist
-	// 	if (confirmedList.size() == vacancyLimit) {
-	// 		waitList.add(newStudent);
-	// 		return false;
-	// 	} else {
-	// 		// else add the student to the confirmed list
-	// 		confirmedList.add(newStudent);
-	// 		vacancy--;
-	// 		return true;
-	// 	}
+	// // if the confirmedList is full, add the student to the waitlist
+	// if (confirmedList.size() == vacancyLimit) {
+	// waitList.add(newStudent);
+	// return false;
+	// } else {
+	// // else add the student to the confirmed list
+	// confirmedList.add(newStudent);
+	// vacancy--;
+	// return true;
+	// }
 	// }
 
 	// public boolean dropStudent(Student newStudent) {
-	// 	if (confirmedList.contains(newStudent)) {
-	// 		confirmedList.remove(newStudent);
-	// 		vacancy++;
-	// 		// TODO missing adding the waitlist student
-	// 		return true;
+	// if (confirmedList.contains(newStudent)) {
+	// confirmedList.remove(newStudent);
+	// vacancy++;
+	// // TODO missing adding the waitlist student
+	// return true;
 
-
-	// 	} else {
-	// 		waitList.remove(newStudent);
-	// 		return false;
-	// 	}
+	// } else {
+	// waitList.remove(newStudent);
+	// return false;
+	// }
 	// }
 
 	// public boolean swopStudent(Student curStudent, Student newStudent) {
-	// 	if (confirmedList.contains(curStudent)) {
-	// 		confirmedList.set(confirmedList.indexOf(curStudent), newStudent);
-	// 		return true;
-	// 	} else {
-	// 		waitList.set(waitList.indexOf(curStudent), newStudent);
-	// 		return false;
-	// 	}
+	// if (confirmedList.contains(curStudent)) {
+	// confirmedList.set(confirmedList.indexOf(curStudent), newStudent);
+	// return true;
+	// } else {
+	// waitList.set(waitList.indexOf(curStudent), newStudent);
+	// return false;
+	// }
 	// }
 
 	public Course getCourse() {
@@ -146,5 +144,13 @@ public class Index implements Selectable, Serializable {
 		// print out all the information of the Course
 		String stringToReturn = String.valueOf(this.getIndexNumber()) + ' ' + String.valueOf(this.getVacancy());
 		return stringToReturn;
+	}
+
+	public int getVacancyLimit() {
+		return vacancyLimit;
+	}
+
+	public void setVacancyLimit(int newvacancyLimit) {
+		this.vacancyLimit = newvacancyLimit;
 	}
 }

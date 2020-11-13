@@ -72,6 +72,52 @@ public class AdminController {
         newCourse.addIndex(index);
     }
 
+    public boolean setVacancyLimit(Index selectedIndex, int newVacancyLimit) {
+        // if the user tries to increase the vacancy limit
+        if (newVacancyLimit > selectedIndex.getVacancyLimit()) {
+            int count = 0;
+            // if the confirmedlist is now full
+            if (selectedIndex.getVacancy() == 0) {
+                // while there are still students in the waitlist
+                while (selectedIndex.getWaitList().size() > 0) {
+                    for (int i = 0; i < newVacancyLimit; i++) {
+                        Student student = selectedIndex.dequeueStudent();
+                        selectedIndex.addStudentToConfirmedList(student);
+                        count++;
+                    }
+                }
+                // if there are no more students in the waitlist and there are still
+                // some empty vacancies, set the vacancy as the leftover slots
+                selectedIndex.setVacancy(newVacancyLimit - count);
+                selectedIndex.setVacancyLimit(newVacancyLimit);
+                return true;
+            } else {
+                // if the confirmed list is not full, simply increase the vacancy
+                selectedIndex
+                        .setVacancy(newVacancyLimit - (selectedIndex.getVacancyLimit() - selectedIndex.getVacancy()));
+                selectedIndex.setVacancyLimit(newVacancyLimit);
+                return true;
+            }
+            // if the user is trying to decrease the vacancy limit
+        } else if (newVacancyLimit < selectedIndex.getVacancyLimit()) {
+            // check if the number of students already in the list exceeds the
+            // the newVacancyLimit, if so, this will not be allowed
+            if ((selectedIndex.getVacancyLimit() - selectedIndex.getVacancy()) > newVacancyLimit) {
+                return false;
+            } else {
+                // otherwise, set the new vacancy to be the new limit - the number of students
+                // currently inside
+                selectedIndex
+                        .setVacancy(newVacancyLimit - (selectedIndex.getVacancyLimit() - selectedIndex.getVacancy()));
+                selectedIndex.setVacancyLimit(newVacancyLimit);
+                return true;
+            }
+        }
+        // if the newVacancy is the same as the current vacancy
+        return true;
+
+    }
+
     // public void editCourseInformation(int choice) {
     // // rmb dont let them reduce vacancy past the current
     // if (choice == 1) {

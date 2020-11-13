@@ -231,7 +231,8 @@ public class AdminUI extends SelectUI {
                     break;
                 }
             }
-            adminController.addIndex(newCourse, newIndex);;
+            adminController.addIndex(newCourse, newIndex);
+            ;
             System.out.println("Index added!");
         }
 
@@ -452,16 +453,19 @@ public class AdminUI extends SelectUI {
                 // Get the user to input the vacancy which must be
                 // greater than the current length of the list of
                 // students
-                System.out.print("New Vacancy: ");
-                Scanner newVanacyIn = new Scanner(System.in);
-                int newVacancy2 = newVanacyIn.nextInt();
-                ArrayList<Student> confirmedList = selectedIndex2.getConfirmedList();
-                if (newVacancy2 > confirmedList.size()) {
-                    selectedIndex2.setVacancy(newVacancy2);
-                } else {
+                int newVacancy2;
+                do {
+                    System.out.print("New Vacancy of Index: ");
+                    Scanner newVanacyIn = new Scanner(System.in);
+                    // !! add while loop to force user to enter positive value
+                    newVacancy2 = newVanacyIn.nextInt();
+                    if (newVacancy2 < 0) {
+                        System.out.println("Please try again! Your new vacancy cannot be negative!");
+                    }
+                } while (newVacancy2 < 0);
+                if (adminController.setVacancyLimit(selectedIndex2, newVacancy2) == false) {
                     System.out.println("Unable to set new vacancy. Students will be kicked out of the list!");
                 }
-
                 break;
             default:
                 break;
@@ -514,17 +518,17 @@ public class AdminUI extends SelectUI {
         }
     }
 
-    private void getallstudents(){
+    private void getallstudents() {
         ArrayList<Student> ls = adminController.getStudentList();
-        for (Student smth: ls){
-            System.out.printf("%s\n",smth.print());
+        for (Student smth : ls) {
+            System.out.printf("%s\n", smth.print());
         }
     }
 
-    private void getallcourses(){
+    private void getallcourses() {
         ArrayList<Course> ls = adminController.getCourseList();
-        for (Course another: ls){
-            System.out.printf("%s\n",another.print());
+        for (Course another : ls) {
+            System.out.printf("%s\n", another.print());
         }
     }
 }
