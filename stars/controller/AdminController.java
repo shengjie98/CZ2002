@@ -54,9 +54,11 @@ public class AdminController {
         return newTiming;
     }
 
-    public Index addTiming(Index newIndex, Timing newTiming) {
-        newIndex.addTiming(newTiming);
-        return newIndex;
+    public boolean addTiming(Index newIndex, Timing newTiming) {
+        if (newIndex.addTiming(newTiming)) {
+            return true;
+        }
+        return false;
     }
 
     public Course createCourse(String newCourseID, int newAU, String newSchool, String newCourseName) {
@@ -116,7 +118,6 @@ public class AdminController {
         }
         // if the newVacancy is the same as the current vacancy
         return true;
-
     }
 
     // public void editCourseInformation(int choice) {
@@ -128,9 +129,15 @@ public class AdminController {
 
     // }
 
-    public void addIndex(Course selectedCourse, Index newIndex) {
+    public boolean addIndex(Course selectedCourse, Index newIndex) {
+        ArrayList<Index> indexList = selectedCourse.getIndexList();
+        for (Index index : indexList) {
+            if (index.getIndexNumber() == newIndex.getIndexNumber()) {
+                return false;
+            }
+        }
         (selectedCourse.getIndexList()).add(newIndex);
-        return;
+        return true;
     }
 
     /**

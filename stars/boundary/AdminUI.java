@@ -224,7 +224,11 @@ public class AdminUI extends SelectUI {
 
                 // yet to convert to enum so the constructor is throwing an error
                 Timing newTiming = adminController.createTiming(newDay, newType, start, end);
-                newIndex = adminController.addTiming(newIndex, newTiming);
+                if (adminController.addTiming(newIndex, newTiming)) {
+                    System.out.println("Timing Added!");
+                } else {
+                    System.out.println("Timing could not be added! There was a clash in timing.");
+                }
                 System.out.println("Any more Timings? Y/N");
                 Scanner yesOrNo = new Scanner(System.in);
                 if ((yesOrNo.nextLine()).equals("N")) {
@@ -232,84 +236,10 @@ public class AdminUI extends SelectUI {
                 }
             }
             adminController.addIndex(newCourse, newIndex);
-            ;
             System.out.println("Index added!");
         }
-
         adminController.addCourse(newCourse);
     }
-
-    // private Index createIndex(Course selectedCourse, int newVacancy, int
-    // newIndexNumber) {
-    // Index newIndex = new Index(selectedCourse, newVacancy, newIndexNumber);
-    // // get the list of timings
-    // System.out.println("Input Timings: ");
-    // while (true) {
-    // // get the type
-    // String type;
-    // Timing.Type newType = Timing.Type.LEC; // !!This is not supposed to be the
-    // default; change this
-    // // before submitting
-    // do {
-    // System.out.println("Type(LEC/TUT/LAB): ");
-    // Scanner t = new Scanner(System.in);
-    // type = t.nextLine();
-    // } while ((!type.equals("LEC")) && (!type.equals("TUT")) &&
-    // (!type.equals("LAB")));
-    // switch (type) {
-    // case "LEC":
-    // newType = Timing.Type.LEC;
-    // case "TUT":
-    // newType = Timing.Type.TUT;
-    // case "LAB":
-    // newType = Timing.Type.LAB;
-    // }
-    // // get the day of the timing
-    // String day;
-    // Timing.Day newDay = Timing.Day.MON; // !!This is not supposed to be the
-    // default; change this before
-    // // submitting
-    // do {
-    // System.out.println("Day(MON/TUE/WED/THU/FRI): ");
-    // Scanner d = new Scanner(System.in);
-    // day = d.nextLine();
-    // } while ((!day.equals("MON")) && (!day.equals("TUE")) && (!day.equals("WED"))
-    // && (!day.equals("THU"))
-    // && (!day.equals("FRI")));
-    // // enum part??
-    // switch (day) {
-    // case "MON":
-    // newDay = Timing.Day.MON;
-    // case "TUE":
-    // newDay = Timing.Day.TUE;
-    // case "WED":
-    // newDay = Timing.Day.WED;
-    // case "THU":
-    // newDay = Timing.Day.THU;
-    // case "FRI":
-    // newDay = Timing.Day.FRI;
-    // }
-
-    // // get the start time
-    // System.out.println("Start Time: ");
-    // Scanner startTime = new Scanner(System.in);
-    // LocalTime start = LocalTime.parse(startTime.nextLine(), timeFormatter);
-    // // get the end time
-    // System.out.println("End Time: ");
-    // Scanner endTime = new Scanner(System.in);
-    // LocalTime end = LocalTime.parse(endTime.nextLine(), timeFormatter);
-
-    // // yet to convert to enum so the constructor is throwing an error
-    // Timing newTiming = new Timing(newDay, newType, start, end);
-    // newIndex.addTiming(newTiming);
-    // System.out.println("Any more Timings? Y/N");
-    // Scanner yesOrNo = new Scanner(System.in);
-    // if ((yesOrNo.nextLine()).equals("N")) {
-    // break;
-    // }
-    // }
-    // return newIndex;
-    // }
 
     private void editCourseInformation() {
         System.out.println("Edit Course Information");
@@ -359,72 +289,71 @@ public class AdminUI extends SelectUI {
                 Scanner indexNumber = new Scanner(System.in);
                 int newIndexNumber = indexNumber.nextInt();
                 Index newIndex = adminController.createIndex(selectedCourse, newVacancy, newIndexNumber);
-                // Index newIndex = new Index(selectedCourse, newVacancy, newIndexNumber);
-                // // get the list of timings
-                // System.out.println("Input Timings: ");
-                // while (true) {
-                // // get the type
-                // String type;
-                // Timing.Type newType = Timing.Type.LEC; // !!This is not supposed to be the
-                // default; change this
-                // // before submitting
-                // do {
-                // System.out.println("Type(LEC/TUT/LAB): ");
-                // Scanner t = new Scanner(System.in);
-                // type = t.nextLine();
-                // } while ((!type.equals("LEC")) && (!type.equals("TUT")) &&
-                // (!type.equals("LAB")));
-                // switch (type) {
-                // case "LEC":
-                // newType = Timing.Type.LEC;
-                // case "TUT":
-                // newType = Timing.Type.TUT;
-                // case "LAB":
-                // newType = Timing.Type.LAB;
-                // }
-                // // get the day of the timing
-                // String day;
-                // Timing.Day newDay = Timing.Day.MON; // !!This is not supposed to be the
-                // default; change this before
-                // // submitting
-                // do {
-                // System.out.println("Day(MON/TUE/WED/THU/FRI): ");
-                // Scanner d = new Scanner(System.in);
-                // day = d.nextLine();
-                // } while ((!day.equals("MON")) && (!day.equals("TUE")) && (!day.equals("WED"))
-                // && (!day.equals("THU")) && (!day.equals("FRI")));
-                // // enum part??
-                // switch (day) {
-                // case "MON":
-                // newDay = Timing.Day.MON;
-                // case "TUE":
-                // newDay = Timing.Day.TUE;
-                // case "WED":
-                // newDay = Timing.Day.WED;
-                // case "THU":
-                // newDay = Timing.Day.THU;
-                // case "FRI":
-                // newDay = Timing.Day.FRI;
-                // }
+                System.out.println("Input Timings: ");
+                while (true) {
+                    // get the type
+                    String type;
+                    Timing.Type newType = Timing.Type.LEC; // !!This is not supposed to be the default; change this
+                                                           // before submitting
+                    do {
+                        System.out.println("Type(LEC/TUT/LAB): ");
+                        Scanner t = new Scanner(System.in);
+                        type = t.nextLine();
+                    } while ((!type.equals("LEC")) && (!type.equals("TUT")) && (!type.equals("LAB")));
+                    switch (type) {
+                        case "LEC":
+                            newType = Timing.Type.LEC;
+                        case "TUT":
+                            newType = Timing.Type.TUT;
+                        case "LAB":
+                            newType = Timing.Type.LAB;
+                    }
+                    // get the day of the timing
+                    String day;
+                    Timing.Day newDay = Timing.Day.MON; // !!This is not supposed to be the default; change this before
+                                                        // submitting
+                    do {
+                        System.out.println("Day(MON/TUE/WED/THU/FRI): ");
+                        Scanner d = new Scanner(System.in);
+                        day = d.nextLine();
+                    } while ((!day.equals("MON")) && (!day.equals("TUE")) && (!day.equals("WED"))
+                            && (!day.equals("THU")) && (!day.equals("FRI")));
+                    // enum part??
+                    switch (day) {
+                        case "MON":
+                            newDay = Timing.Day.MON;
+                        case "TUE":
+                            newDay = Timing.Day.TUE;
+                        case "WED":
+                            newDay = Timing.Day.WED;
+                        case "THU":
+                            newDay = Timing.Day.THU;
+                        case "FRI":
+                            newDay = Timing.Day.FRI;
+                    }
 
-                // // get the start time
-                // System.out.println("Start Time: ");
-                // Scanner startTime = new Scanner(System.in);
-                // LocalTime start = LocalTime.parse(startTime.nextLine(), timeFormatter);
-                // // get the end time
-                // System.out.println("End Time: ");
-                // Scanner endTime = new Scanner(System.in);
-                // LocalTime end = LocalTime.parse(endTime.nextLine(), timeFormatter);
+                    // get the start time
+                    System.out.println("Start Time: ");
+                    Scanner startTime = new Scanner(System.in);
+                    LocalTime start = LocalTime.parse(startTime.nextLine(), timeFormatter);
+                    // get the end time
+                    System.out.println("End Time: ");
+                    Scanner endTime = new Scanner(System.in);
+                    LocalTime end = LocalTime.parse(endTime.nextLine(), timeFormatter);
 
-                // // yet to convert to enum so the constructor is throwing an error
-                // Timing newTiming = new Timing(newDay, newType, start, end);
-                // newIndex.addTiming(newTiming);
-                // System.out.println("Any more Timings? Y/N");
-                // Scanner yesOrNo = new Scanner(System.in);
-                // if ((yesOrNo.nextLine()).equals("N")) {
-                // break;
-                // }
-                // }
+                    // yet to convert to enum so the constructor is throwing an error
+                    Timing newTiming = adminController.createTiming(newDay, newType, start, end);
+                    if (adminController.addTiming(newIndex, newTiming)) {
+                        System.out.println("Timing Added!");
+                    } else {
+                        System.out.println("Timing could not be added! There was a clash in timing.");
+                    }
+                    System.out.println("Any more Timings? Y/N");
+                    Scanner yesOrNo = new Scanner(System.in);
+                    if ((yesOrNo.nextLine()).equals("N")) {
+                        break;
+                    }
+                }
                 adminController.addIndex(selectedCourse, newIndex);
                 break;
             case 4:
@@ -445,7 +374,7 @@ public class AdminUI extends SelectUI {
                 break;
             case 5:
                 /**
-                 * Change vacancy attribute of course
+                 * Change vacancy limit attribute of course
                  */
                 ArrayList<Index> indexList2 = selectedCourse.getIndexList();
                 // Get the user to choose the index
