@@ -134,7 +134,7 @@ public class AdminController {
     }
 
     public boolean changeIndexID(Index selectedIndex, int newIndexID) {
-        ArrayList<Course> course = selectedIndex.getCourse();
+        Course course = selectedIndex.getCourse();
         ArrayList<Index> indexList = course.getIndexList();
         for (Index index : indexList) {
             if (index.getIndexNumber() == newIndexID) {
