@@ -33,7 +33,7 @@ public class LoginUI {
         username = sc.next();
         System.out.print("Password: ");
         password = new String(System.console().readPassword());
-            
+        // password = sc.next();
         if (!loginController.verifyLogin(username, password)) {
             System.out.println("Invalid Input");
         }        

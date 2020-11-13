@@ -22,10 +22,12 @@ public class IndexStudentAdder {
         int vacancy = index.getVacancy();
         if (vacancy > 0) {
             index.addStudentToConfirmedList(student);
+            System.out.println("Add to confirmed");
             studentRegisteredCourses.addToConfirmedIndexArray(index);
             return true;
         } else {
             index.addStudentToWaitList(student);
+            System.out.println("addd to waitlist");
             studentRegisteredCourses.addToWaitlistedIndexArray(index);
             return true;
         }

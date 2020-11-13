@@ -496,8 +496,14 @@ public class AdminUI extends SelectUI {
         // Get the user to choose the index
         Index selectedIndex = (Index) select(indexList);
         ArrayList<Student> confirmedList = selectedIndex.getConfirmedList();
+        System.out.println("Confirmed Students: ");
         for (int i = 0; i < confirmedList.size(); i++) {
             System.out.printf("%s\n", (confirmedList.get(i)).print());
+        }
+        System.out.println("Waitlisted Students: ");
+        ArrayList<Student> waitList = selectedIndex.getWaitList();
+        for (int i = 0; i < waitList.size(); i++) {
+            System.out.printf("%s\n", (waitList.get(i)).print());
         }
     }
 
