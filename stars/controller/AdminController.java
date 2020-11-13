@@ -83,6 +83,7 @@ public class AdminController {
                     for (int i = 0; i < newVacancyLimit; i++) {
                         Student student = selectedIndex.dequeueStudent();
                         selectedIndex.addStudentToConfirmedList(student);
+                        student.notify();
                         count++;
                     }
                 }
