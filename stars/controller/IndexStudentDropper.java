@@ -14,6 +14,7 @@ public class IndexStudentDropper {
             studentRegisteredCourses.removeFromConfirmedIndexArray(index);
             if (wait.size() > 0) {
                 Student newStudent = index.dequeueStudent();
+                System.out.println("in drop");
                 newStudent.notify(index);
                 newStudent.moveToConfirmed(index);
             }
