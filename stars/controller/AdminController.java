@@ -10,20 +10,19 @@ import stars.boundary.*;
 
 public class AdminController {
 
-    private CourseDB courseInfo;
-    private StudentDB studentInfo;
+    private DatabaseManager dbManager;
 
     public AdminController() {
-        courseInfo = new CourseDB();
-        studentInfo = new StudentDB();
+        dbManager = new DatabaseManager();
+        dbManager.loadInformation();
     }
 
     public ArrayList<Course> getCourseList() {
-        return this.courseInfo.getList();
+        return this.dbManager.getCoursesArray();
     }
 
     public ArrayList<Student> getStudentList() {
-        return this.studentInfo.getList();
+        return this.dbManager.getStudentArray();
     }
 
     /**
@@ -34,14 +33,13 @@ public class AdminController {
         // instantiate a new student object
         Student newStudent = new Student(studentName, nationality, gender, studentID, degree, email);
         // add this student to the StudentDB
-        studentInfo.addItem(newStudent);
+        dbManager.addStudent(newStudent);
         StudentAuthenticator studentAuthenticator = new FlatFileStudentAuthenticator();
         studentAuthenticator.addStudent(studentID, password, start, end);
     }
 
     public void save() {
-        this.courseInfo.saveInformation();
-        this.studentInfo.saveInformation();
+        this.dbManager.saveInformation();
     }
 
     public Index createIndex(Course selectedCourse, int newVacancy, int newIndexNumber) {
@@ -67,7 +65,7 @@ public class AdminController {
     }
 
     public void addCourse(Course newCourse) {
-        courseInfo.addItem(newCourse);
+        dbManager.addCourse(newCourse);
     }
 
     // public void addIndexToCourse(Course newCourse, Index index) {
@@ -78,26 +76,24 @@ public class AdminController {
         // if the user tries to increase the vacancy limit
         if (newVacancyLimit > selectedIndex.getVacancyLimit()) {
             int count = 0;
+            int oldVacancy = selectedIndex.getVacancy();
             // if the confirmedlist is now full
             if (selectedIndex.getVacancy() == 0) {
                 // while there are still students in the waitlist
                 while (selectedIndex.getWaitList().size() > 0) {
-                    for (int i = 0; i < newVacancyLimit; i++) {
-                        Student student = selectedIndex.dequeueStudent();
-                        selectedIndex.addStudentToConfirmedList(student);
-                        student.notify();
-                        count++;
-                    }
+                    Student student = selectedIndex.dequeueStudent();
+                    selectedIndex.addStudentToConfirmedList(student);
+                    student.sendNotification(selectedIndex);
+                    count++;
                 }
                 // if there are no more students in the waitlist and there are still
                 // some empty vacancies, set the vacancy as the leftover slots
-                selectedIndex.setVacancy(newVacancyLimit - count);
+                selectedIndex.setVacancy(newVacancyLimit - oldVacancy - count);
                 selectedIndex.setVacancyLimit(newVacancyLimit);
                 return true;
             } else {
                 // if the confirmed list is not full, simply increase the vacancy
-                selectedIndex
-                        .setVacancy(newVacancyLimit - (selectedIndex.getVacancyLimit() - selectedIndex.getVacancy()));
+                selectedIndex.setVacancy(newVacancyLimit - (selectedIndex.getVacancyLimit() - selectedIndex.getVacancy()));
                 selectedIndex.setVacancyLimit(newVacancyLimit);
                 return true;
             }
@@ -142,7 +138,7 @@ public class AdminController {
      * @param selectedIndex remove this index from the list of indexes
      */
     public boolean dropIndex(Course selectedCourse, Index selectedIndex) {
-        ArrayList<Course> listOfCourses = courseInfo.getList();
+        ArrayList<Course> listOfCourses = dbManager.getCoursesArray();
         // find the ourse in the list of courses and remove it
         for (Course eachCourse : listOfCourses) {
             if (eachCourse.equals(selectedCourse)) {
@@ -161,7 +157,7 @@ public class AdminController {
     public void addCourse(String courseID, int au, String school, String courseName) {
         Course newCourse = new Course(courseID, au, school, courseName);
 
-        courseInfo.addItem(newCourse);
+        dbManager.addCourse(newCourse);
         return;
     }
     // private void editVacancy(Index){

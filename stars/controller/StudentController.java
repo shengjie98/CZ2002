@@ -7,17 +7,16 @@ import stars.boundary.*;
 public class StudentController {
 
     private Student myStudent;
-    private CourseDB courseInfo;
-    private StudentDB studentInfo;
+    private DatabaseManager dbManager;
 
     public StudentController(String studentID) {
-        courseInfo = new CourseDB();
-        studentInfo = new StudentDB();
-        myStudent = studentInfo.findStudent(studentID);
+        dbManager = new DatabaseManager();
+        dbManager.loadInformation();
+        myStudent = dbManager.findStudent(studentID);
     }
 
     public ArrayList<Course> getCourseList() {
-        return this.courseInfo.getList();
+        return this.dbManager.getCoursesArray();
     }
 
     public boolean addIndex(Index myIndex) {
@@ -49,7 +48,7 @@ public class StudentController {
     
     public boolean swopIndex (String friendID, Index myIndex){
         //using myIndex find myCourse, then find my friend's Index using myCourse
-        Student friend = studentInfo.findStudent(friendID); //find the student object for your friend
+        Student friend = dbManager.findStudent(friendID); //find the student object for your friend
         Course myCourse = myIndex.getCourse(); //from the student object, find
         for (Index friendIndex : friend.getRegisteredIndex()) {
             Course friendCourse = friendIndex.getCourse();
@@ -66,8 +65,7 @@ public class StudentController {
     }
 
     public void save() {
-        this.courseInfo.saveInformation();
-        this.studentInfo.saveInformation();
+        this.dbManager.saveInformation();
     }
 
 }

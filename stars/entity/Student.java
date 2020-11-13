@@ -63,7 +63,7 @@ public class Student implements Selectable, Serializable{
         registeredCourses.swopPlaces(friendIndex, friend);
     }
     
-    public void notify(Index index) {
+    public void sendNotification(Index index) {
         this.notificationService.sendNotification(index);
     }
 
