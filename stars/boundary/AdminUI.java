@@ -132,7 +132,9 @@ public class AdminUI extends SelectUI {
             try {
                 System.out.print("  i. Access Period End (DD/MM/YYYY hh:mm): ");
                 end = LocalDateTime.parse(sc.nextLine(), dateFormatter);
-                break;
+                if (end.isAfter(start)) {
+                    break;
+                }
             } catch (DateTimeParseException e) {
                 System.out.println("Incorrect Format");
             }
@@ -143,100 +145,127 @@ public class AdminUI extends SelectUI {
         adminController.addStudent(studentName, nationality, gender, studentID, degree, email, password, start, end);
     }
 
+    private void addIndex(Course newCourse) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("   a. Index Number: ");
+        int newIndexNumber = sc.nextInt();
+        sc.nextLine();
+        System.out.print("   b. Vacancy: ");
+        int newVacancy = sc.nextInt();
+        Index newIndex = adminController.createIndex(newCourse, newVacancy, newIndexNumber);
+        System.out.println("   c. Timings: ");
+        int choice;
+        while (true) {
+            // get the type
+            Timing.Type newType = Timing.Type.LEC; // !!This is not supposed to be the default; change this
+            System.out.println("    a. Type: ");
+            do {
+                System.out.println("     1. Lecture");
+                System.out.println("     2. Tutorial");
+                System.out.println("     3. Lab");
+                System.out.print("Option: ");
+                choice = sc.nextInt();
+            } while (choice <= 0 || choice > 3);
+            switch (choice) {
+                case 1:
+                    newType = Timing.Type.LEC;
+                case 2:
+                    newType = Timing.Type.TUT;
+                case 3:
+                    newType = Timing.Type.LAB;
+            }
+            
+            // get the day of the timing
+            Timing.Day newDay = Timing.Day.MON; // !!This is not supposed to be the default; change this before
+            System.out.println("    b. Day: ");
+            do {
+                System.out.println("     1. Monday");
+                System.out.println("     2. Tuesday");
+                System.out.println("     3. Wednesday");
+                System.out.println("     4. Thursday");
+                System.out.println("     5. Friday");
+                System.out.print("Option: ");
+                choice = sc.nextInt();
+                sc.nextLine();
+            } while (choice <= 0 || choice > 5);
+            switch (choice) {
+                case 1:
+                    newDay = Timing.Day.MON;
+                case 2:
+                    newDay = Timing.Day.TUE;
+                case 3:
+                    newDay = Timing.Day.WED;
+                case 4:
+                    newDay = Timing.Day.THU;
+                case 5:
+                    newDay = Timing.Day.FRI;
+            }
+            
+
+            LocalTime start, end;
+            // get the start time
+            while (true) {
+                try {
+                    System.out.print("    c. Start Time (hh:mm): ");
+                    start = LocalTime.parse(sc.nextLine(), timeFormatter);
+                    break;
+                } catch (DateTimeParseException e) {
+                    System.out.println("Incorrect Format");
+                }
+            }
+            // get the end time
+            while (true) {
+                try {
+                    System.out.print("    d. End Time (hh:mm): ");
+                    end = LocalTime.parse(sc.nextLine(), timeFormatter);
+                    if (end.isAfter(start)) {
+                        break;
+                    }
+                } catch (DateTimeParseException e) {
+                    System.out.println("Incorrect Format");
+                }
+            }
+
+            // yet to convert to enum so the constructor is throwing an error
+            Timing newTiming = adminController.createTiming(newDay, newType, start, end);
+            if (adminController.addTiming(newIndex, newTiming)) {
+                System.out.println("Timing Added!");
+            } else {
+                System.out.println("Timing could not be added! There was a clash in timing.");
+            }
+            System.out.print("Add another timing (Y/N)? ");
+            if ((sc.nextLine()).equals("N")) {
+                break;
+            }
+        }
+        if (adminController.addIndex(newCourse, newIndex)) {
+            System.out.println("Index Added!");
+        } else {
+            System.out.println("Index Could not be added! Duplicate Index ID.");
+        }
+        
+    }
+
     private void addCourse() {
-        System.out.println("Enter Course Name:");
-        Scanner courseName = new Scanner(System.in);
-        String newCourseName = courseName.nextLine();
-        System.out.println("Enter Course ID:");
-        Scanner courseID = new Scanner(System.in);
-        String newCourseID = courseID.nextLine();
-        System.out.println("Enter number of AUs:");
-        Scanner au = new Scanner(System.in);
-        int newAU = au.nextInt();
-        System.out.println("Enter School that course belongs to:");
-        Scanner school = new Scanner(System.in);
-        String newSchool = school.nextLine();
+        Scanner sc = new Scanner(System.in);
+        System.out.print("  a. Course Name: ");
+        String newCourseName = sc.nextLine();
+        System.out.print("  b. Course ID: ");
+        String newCourseID = sc.nextLine();
+        System.out.print("  c. Number of AUs: ");
+        int newAU = sc.nextInt();
+        sc.nextLine();
+        System.out.print("  d. School: ");
+        String newSchool = sc.nextLine();
 
         Course newCourse = adminController.createCourse(newCourseID, newAU, newSchool, newCourseName);
 
-        System.out.println("How many Indexes do you want to add?");
-        Scanner scannerNumOfIndexes = new Scanner(System.in);
-        int numOfIndexes = scannerNumOfIndexes.nextInt();
+        System.out.print("  e. Number of Index: ");
+        int numOfIndexes = sc.nextInt();
+        sc.nextLine();
         for (int a = 0; a < numOfIndexes; a++) {
-            System.out.println("Input Vacancy of Course: ");
-            Scanner vacancy = new Scanner(System.in);
-            int newVacancy = vacancy.nextInt();
-            System.out.println("Input Index Number: ");
-            Scanner indexNumber = new Scanner(System.in);
-            int newIndexNumber = indexNumber.nextInt();
-            Index newIndex = adminController.createIndex(newCourse, newVacancy, newIndexNumber);
-            System.out.println("Input Timings: ");
-            while (true) {
-                // get the type
-                String type;
-                Timing.Type newType = Timing.Type.LEC; // !!This is not supposed to be the default; change this
-                                                       // before submitting
-                do {
-                    System.out.println("Type(LEC/TUT/LAB): ");
-                    Scanner t = new Scanner(System.in);
-                    type = t.nextLine();
-                } while ((!type.equals("LEC")) && (!type.equals("TUT")) && (!type.equals("LAB")));
-                switch (type) {
-                    case "LEC":
-                        newType = Timing.Type.LEC;
-                    case "TUT":
-                        newType = Timing.Type.TUT;
-                    case "LAB":
-                        newType = Timing.Type.LAB;
-                }
-                // get the day of the timing
-                String day;
-                Timing.Day newDay = Timing.Day.MON; // !!This is not supposed to be the default; change this before
-                                                    // submitting
-                do {
-                    System.out.println("Day(MON/TUE/WED/THU/FRI): ");
-                    Scanner d = new Scanner(System.in);
-                    day = d.nextLine();
-                } while ((!day.equals("MON")) && (!day.equals("TUE")) && (!day.equals("WED")) && (!day.equals("THU"))
-                        && (!day.equals("FRI")));
-                // enum part??
-                switch (day) {
-                    case "MON":
-                        newDay = Timing.Day.MON;
-                    case "TUE":
-                        newDay = Timing.Day.TUE;
-                    case "WED":
-                        newDay = Timing.Day.WED;
-                    case "THU":
-                        newDay = Timing.Day.THU;
-                    case "FRI":
-                        newDay = Timing.Day.FRI;
-                }
-
-                // get the start time
-                System.out.println("Start Time: ");
-                Scanner startTime = new Scanner(System.in);
-                LocalTime start = LocalTime.parse(startTime.nextLine(), timeFormatter);
-                // get the end time
-                System.out.println("End Time: ");
-                Scanner endTime = new Scanner(System.in);
-                LocalTime end = LocalTime.parse(endTime.nextLine(), timeFormatter);
-
-                // yet to convert to enum so the constructor is throwing an error
-                Timing newTiming = adminController.createTiming(newDay, newType, start, end);
-                if (adminController.addTiming(newIndex, newTiming)) {
-                    System.out.println("Timing Added!");
-                } else {
-                    System.out.println("Timing could not be added! There was a clash in timing.");
-                }
-                System.out.println("Any more Timings? Y/N");
-                Scanner yesOrNo = new Scanner(System.in);
-                if ((yesOrNo.nextLine()).equals("N")) {
-                    break;
-                }
-            }
-            adminController.addIndex(newCourse, newIndex);
-            System.out.println("Index added!");
+            System.out.printf("For index %d\n", a+1);
+            addIndex(newCourse);
         }
         adminController.addCourse(newCourse);
     }
@@ -253,13 +282,14 @@ public class AdminUI extends SelectUI {
 
         // get user to choose the course information to edit
         System.out.println("Which part of the course do you want to edit?:");
-        System.out.println("1: Course Code");
-        System.out.println("2: Course Name");
-        System.out.println("3: School");
-        System.out.println("4: Add an Index");
-        System.out.println("5: Drop Index Number");
-        System.out.println("6: Change Index ID");
-        System.out.println("7: Change vacancy of the Index");
+        System.out.println("  1: Course Code");
+        System.out.println("  2: Course Name");
+        System.out.println("  3: School");
+        System.out.println("  4: Add an Index");
+        System.out.println("  5: Drop Index Number");
+        System.out.println("  6: Change Index ID");
+        System.out.println("  7: Change vacancy of the Index");
+        System.out.print("Option: ");
         Scanner sc = new Scanner(System.in);
         int i = sc.nextInt();
         switch (i) {
@@ -267,111 +297,28 @@ public class AdminUI extends SelectUI {
                 /**
                  * Change course ID attribute
                  */
-                System.out.println("Enter new Course ID: ");
-                Scanner newCourseID = new Scanner(System.in);
-                selectedCourse.setCourseID(newCourseID.nextLine());
+                System.out.print("  New Course ID: ");
+                selectedCourse.setCourseID(sc.nextLine());
                 break;
             }
             case 2: {
                 /**
                  * Change school attribute
                  */
-                System.out.println("Enter new Course name: ");
-                Scanner newSchool = new Scanner(System.in);
-                selectedCourse.setCourseName(newSchool.nextLine());
+                System.out.print("  New Course name: ");
+                selectedCourse.setCourseName(sc.nextLine());
                 break;
             }
             case 3: {
                 /**
                  * Change school attribute
                  */
-                System.out.println("Enter new School name: ");
-                Scanner newSchool = new Scanner(System.in);
-                selectedCourse.setSchool(newSchool.nextLine());
+                System.out.println("  New School name: ");
+                selectedCourse.setSchool(sc.nextLine());
                 break;
             }
             case 4: {
-                /**
-                 * Add a new index into an existing course
-                 */
-                // get the attributes
-                System.out.println("Input Vacancy of Course: ");
-                Scanner vacancy = new Scanner(System.in);
-                int newVacancy = vacancy.nextInt();
-                System.out.println("Input Index Number: ");
-                Scanner indexNumber = new Scanner(System.in);
-                int newIndexNumber = indexNumber.nextInt();
-                Index newIndex = adminController.createIndex(selectedCourse, newVacancy, newIndexNumber);
-                System.out.println("Input Timings: ");
-                while (true) {
-                    // get the type
-                    String type;
-                    Timing.Type newType = Timing.Type.LEC; // !!This is not supposed to be the default; change this
-                                                           // before submitting
-                    do {
-                        System.out.println("Type(LEC/TUT/LAB): ");
-                        Scanner t = new Scanner(System.in);
-                        type = t.nextLine();
-                    } while ((!type.equals("LEC")) && (!type.equals("TUT")) && (!type.equals("LAB")));
-                    switch (type) {
-                        case "LEC":
-                            newType = Timing.Type.LEC;
-                        case "TUT":
-                            newType = Timing.Type.TUT;
-                        case "LAB":
-                            newType = Timing.Type.LAB;
-                    }
-                    // get the day of the timing
-                    String day;
-                    Timing.Day newDay = Timing.Day.MON; // !!This is not supposed to be the default; change this before
-                                                        // submitting
-                    do {
-                        System.out.println("Day(MON/TUE/WED/THU/FRI): ");
-                        Scanner d = new Scanner(System.in);
-                        day = d.nextLine();
-                    } while ((!day.equals("MON")) && (!day.equals("TUE")) && (!day.equals("WED"))
-                            && (!day.equals("THU")) && (!day.equals("FRI")));
-                    // enum part??
-                    switch (day) {
-                        case "MON":
-                            newDay = Timing.Day.MON;
-                        case "TUE":
-                            newDay = Timing.Day.TUE;
-                        case "WED":
-                            newDay = Timing.Day.WED;
-                        case "THU":
-                            newDay = Timing.Day.THU;
-                        case "FRI":
-                            newDay = Timing.Day.FRI;
-                    }
-
-                    // get the start time
-                    System.out.println("Start Time: ");
-                    Scanner startTime = new Scanner(System.in);
-                    LocalTime start = LocalTime.parse(startTime.nextLine(), timeFormatter);
-                    // get the end time
-                    System.out.println("End Time: ");
-                    Scanner endTime = new Scanner(System.in);
-                    LocalTime end = LocalTime.parse(endTime.nextLine(), timeFormatter);
-
-                    // yet to convert to enum so the constructor is throwing an error
-                    Timing newTiming = adminController.createTiming(newDay, newType, start, end);
-                    if (adminController.addTiming(newIndex, newTiming)) {
-                        System.out.println("Timing Added!");
-                    } else {
-                        System.out.println("Timing could not be added! There was a clash in timing.");
-                    }
-                    System.out.println("Any more Timings? Y/N");
-                    Scanner yesOrNo = new Scanner(System.in);
-                    if ((yesOrNo.nextLine()).equals("N")) {
-                        break;
-                    }
-                }
-                if (adminController.addIndex(selectedCourse, newIndex)) {
-                    System.out.println("Index Added!");
-                } else {
-                    System.out.println("Index Could not be added! Duplicate Index ID.");
-                }
+                addIndex(selectedCourse);
                 break;
             }
             case 5: {
@@ -401,9 +348,8 @@ public class AdminUI extends SelectUI {
                 // the index that they want to drop; The admin will only
                 // be allowed to drop it if it has no students
                 Index selectedIndex = (Index) select(indexList);
-                System.out.println("Enter new Index ID: ");
-                Scanner newIndexIDin = new Scanner(System.in);
-                int newIndexID = newIndexIDin.nextInt();
+                System.out.print("  New Index ID: ");
+                int newIndexID = sc.nextInt();
                 if (adminController.changeIndexID(selectedIndex, newIndexID)) {
                     System.out.println("Index ID Changed.");
                 } else {
@@ -423,10 +369,9 @@ public class AdminUI extends SelectUI {
                 // students
                 int newVacancy;
                 do {
-                    System.out.print("New Vacancy of Index: ");
-                    Scanner newVanacyIn = new Scanner(System.in);
+                    System.out.print("  New Vacancy of Index: ");
                     // !! add while loop to force user to enter positive value
-                    newVacancy = newVanacyIn.nextInt();
+                    newVacancy = sc.nextInt();
                     if (newVacancy < 0) {
                         System.out.println("Please try again! Your new vacancy cannot be negative!");
                     }
