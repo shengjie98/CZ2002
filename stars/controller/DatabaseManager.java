@@ -21,12 +21,12 @@ public class DatabaseManager {
         return db.getCoursesArray();
     }
 
-    public void addStudent(Student student) {
-        db.addStudent(student);
+    public boolean addStudent(Student student) {
+        return db.addStudent(student);
     }
 
-    public void addCourse(Course course) {
-        db.addCourse(course);
+    public boolean addCourse(Course course) {
+        return db.addCourse(course);
     } 
 
     public Student findStudent(String studentID) {
@@ -39,13 +39,14 @@ public class DatabaseManager {
 			this.db = (Database) inputStream.readObject();
             inputStream.close();
             if (this.db == null) {
+                System.out.println("Empty database");
                 this.db = new Database();
             }
 		} catch (IOException e) {
-			// System.out.println("IOException");
+			System.out.println("IOException");
 			this.db = new Database();
 		} catch (ClassNotFoundException e) {
-			// System.out.println("Class not found");
+			System.out.println("Class not found");
 			this.db = new Database();
 		}
     }

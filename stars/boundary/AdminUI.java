@@ -142,7 +142,11 @@ public class AdminUI extends SelectUI {
 
         // admin controller.add student(studentName, nationality, gender, studentID,
         // degree, email)
-        adminController.addStudent(studentName, nationality, gender, studentID, degree, email, password, start, end);
+        if (adminController.addStudent(studentName, nationality, gender, studentID, degree, email, password, start, end)) {
+            System.out.println("Student Added!");
+        } else {
+            System.out.println("Error adding student, student already exists");
+        }
     }
 
     private void addIndex(Course newCourse) {
@@ -274,7 +278,11 @@ public class AdminUI extends SelectUI {
             System.out.printf("For index %d\n", a+1);
             addIndex(newCourse);
         }
-        adminController.addCourse(newCourse);
+        if (adminController.addCourse(newCourse)) {
+            System.out.println("Course Added!");
+        } else {
+            System.out.println("Error adding course, course already exisits.");
+        }
     }
 
     private void editCourseInformation() {

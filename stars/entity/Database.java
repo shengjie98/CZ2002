@@ -2,6 +2,7 @@ package stars.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+
 import stars.boundary.*;
 import stars.controller.*;
 
@@ -22,12 +23,24 @@ public class Database implements Serializable{
 		return coursesArray;
 	}
 	
-	public void addStudent(Student student) {
+	public boolean addStudent(Student student) {
+		for (Student curStudent: studentArray) {
+			if (curStudent.getStudentID().equals(student.getStudentID())) {
+				return false;
+			}
+		}
 		studentArray.add(student);
+		return true;
 	}
 	
-	public void addCourse(Course course) {
+	public boolean addCourse(Course course) {
+		for (Course curCourse: coursesArray) {
+			if (curCourse.getCourseID().equals(course.getCourseID())) {
+				return false;
+			}
+		}
 		coursesArray.add(course);
+		return true;
 	}
 
 	public Student findStudent(String studentID) {

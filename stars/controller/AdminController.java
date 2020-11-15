@@ -28,14 +28,18 @@ public class AdminController {
     /**
      * @return adds a student to an index of a course
      */
-    public void addStudent(String studentName, String nationality, String gender, String studentID, String degree,
+    public boolean addStudent(String studentName, String nationality, String gender, String studentID, String degree,
             String email, String password, LocalDateTime start, LocalDateTime end) {
         // instantiate a new student object
         Student newStudent = new Student(studentName, nationality, gender, studentID, degree, email);
+        boolean success;
         // add this student to the StudentDB
-        dbManager.addStudent(newStudent);
-        StudentAuthenticator studentAuthenticator = new FlatFileStudentAuthenticator();
-        studentAuthenticator.addStudent(studentID, password, start, end);
+        success = dbManager.addStudent(newStudent);
+        if (success) {
+            StudentAuthenticator studentAuthenticator = new FlatFileStudentAuthenticator();
+            studentAuthenticator.addStudent(studentID, password, start, end);
+        }
+        return success;
     }
 
     public void save() {
@@ -64,13 +68,11 @@ public class AdminController {
         return newCourse;
     }
 
-    public void addCourse(Course newCourse) {
-        dbManager.addCourse(newCourse);
+    public boolean addCourse(Course newCourse) {
+        return dbManager.addCourse(newCourse);
     }
 
-    // public void addIndexToCourse(Course newCourse, Index index) {
-    // newCourse.addIndex(index);
-    // }
+    
 
     public boolean setVacancyLimit(Index selectedIndex, int newVacancyLimit) {
         // if the user tries to increase the vacancy limit
