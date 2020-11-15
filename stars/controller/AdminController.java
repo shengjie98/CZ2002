@@ -119,15 +119,6 @@ public class AdminController {
         return true;
     }
 
-    // public void editCourseInformation(int choice) {
-    // // rmb dont let them reduce vacancy past the current
-    // if (choice == 1) {
-
-    // }
-    // // length of the list of confirmed students
-
-    // }
-
     public boolean addIndex(Course selectedCourse, Index newIndex) {
         if (selectedCourse.addIndex(newIndex)) {
             return true;

@@ -40,7 +40,5 @@ public class LoginUI {
     }
 
 
-            
-        // password = sc.next();
-        // loginController.verifyLogin(username, password);
+
 }
