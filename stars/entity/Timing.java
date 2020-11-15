@@ -59,4 +59,12 @@ public class Timing implements Serializable {
     public void setEnd(LocalTime end) {
         this.end = end;
     }
+
+    public Timing.Day getDay() {
+        return day;
+    }
+
+	public Timing.Type getType() {
+		return type;
+	}
 }

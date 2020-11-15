@@ -8,11 +8,13 @@ public class StudentController {
 
     private Student myStudent;
     private DatabaseManager dbManager;
+    private TimetableDisplayer displayer;
 
     public StudentController(String studentID) {
         dbManager = new DatabaseManager();
         dbManager.loadInformation();
         myStudent = dbManager.findStudent(studentID);
+        displayer = new TimetableDisplayer(myStudent);
     }
 
     public ArrayList<Course> getCourseList() {
@@ -66,6 +68,10 @@ public class StudentController {
 
     public void save() {
         this.dbManager.saveInformation();
+    }
+
+    public void displayTimetable() {
+        this.displayer.displayTimetable();
     }
 
 }

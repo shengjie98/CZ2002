@@ -169,10 +169,13 @@ public class AdminUI extends SelectUI {
             switch (choice) {
                 case 1:
                     newType = Timing.Type.LEC;
+                    break;
                 case 2:
                     newType = Timing.Type.TUT;
+                    break;
                 case 3:
                     newType = Timing.Type.LAB;
+                    break;
             }
             
             // get the day of the timing
@@ -191,16 +194,20 @@ public class AdminUI extends SelectUI {
             switch (choice) {
                 case 1:
                     newDay = Timing.Day.MON;
+                    break;
                 case 2:
                     newDay = Timing.Day.TUE;
+                    break;
                 case 3:
                     newDay = Timing.Day.WED;
+                    break;
                 case 4:
                     newDay = Timing.Day.THU;
+                    break;
                 case 5:
                     newDay = Timing.Day.FRI;
+                    break;
             }
-            
 
             LocalTime start, end;
             // get the start time
@@ -234,7 +241,7 @@ public class AdminUI extends SelectUI {
                 System.out.println("Timing could not be added! There was a clash in timing.");
             }
             System.out.print("Add another timing (Y/N)? ");
-            if ((sc.nextLine()).equals("N")) {
+            if (!(sc.nextLine()).equals("Y")) {
                 break;
             }
         }

@@ -24,6 +24,7 @@ public class StudentUI extends SelectUI{
             System.out.println("4. Check vacancies available");
             System.out.println("5. Change index number of course");
             System.out.println("6. Swop index number with another student");
+            System.out.println("7. Display Timetable");
             System.out.print("Option: ");
             i = sc.nextInt();
             switch (i) {
@@ -45,11 +46,14 @@ public class StudentUI extends SelectUI{
                 case 6:
                     swopIndex();
                     break;
+                case 7:
+                    studentController.displayTimetable();
+                    break;
                 default:
                     break;
             }
 
-        } while (i > 0 && i < 7) ;
+        } while (i > 0 && i < 8) ;
         studentController.save();
         return;
     }

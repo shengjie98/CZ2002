@@ -23,7 +23,7 @@ public class Index implements Selectable, Serializable {
 
 	public boolean addTiming(Timing newTiming) {
 		for (Timing timing : timings) {
-			if (timing.checkOverlap(newTiming)) {
+			if (!timing.checkOverlap(newTiming)) {
 				return false;
 			}
 		}
