@@ -159,10 +159,24 @@ public class Student implements Selectable, Serializable {
         return registeredCourses.swopPlaces(friendIndex, friend);
     }
 
+    /**
+     * Sends Notification to Student's Email to inform them of the fact that they
+     * have been moved from the waitlist of an Index to the confrimed list of the
+     * Index. This occurs when another Student is removed from the confirmed list of
+     * the same Index that the current Student is being waitlisted for
+     * 
+     * @param index The index that in which the Student has been moved from the
+     *              waitllist to the confirmed list
+     */
     public void sendNotification(Index index) {
         this.notificationService.sendNotification(index);
     }
 
+    /**
+     * Prints out the information of the Student
+     * 
+     * @return The Information of the Student
+     */
     public String print() {
 
         String stringToReturn = "Name: " + this.studentName + " Gender: " + this.gender + " Nationality: "
@@ -170,30 +184,65 @@ public class Student implements Selectable, Serializable {
         return stringToReturn;
     }
 
+    /**
+     * Gets the StudentRegisteredCourses of the Student
+     * 
+     * @return The StudentRegisteredCourses of the Student
+     */
     public StudentRegisteredCourses getregisteredCourses() {
         return registeredCourses;
     }
 
+    /**
+     * Gets the Student ID of the Student
+     * 
+     * @return Student ID of the Student
+     */
     public String getStudentID() {
         return studentID;
     }
 
+    /**
+     * Gets the name of the Student
+     * 
+     * @return Name of the Student
+     */
     public String getStudentName() {
         return studentName;
     }
 
+    /**
+     * Gets the Nationality of the Student
+     * 
+     * @return The nationality of the Student
+     */
     public String getNationality() {
         return nationality;
     }
 
+    /**
+     * Gets the gender of the Student
+     * 
+     * @return The gender of the Student
+     */
     public String getGender() {
         return gender;
     }
 
+    /**
+     * Gets the degree of the Student
+     * 
+     * @return Degree of the Student
+     */
     public String getDegree() {
         return degree;
     }
 
+    /**
+     * Gets the email of the Student
+     * 
+     * @return Email of the Student
+     */
     public String getEmail() {
         return email;
     }
