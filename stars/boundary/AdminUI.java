@@ -10,6 +10,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+/**
+ * Displays User Interface and handles User Input for Admin User
+ */
 public class AdminUI extends SelectUI {
     private AdminController adminController;
     private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
@@ -19,6 +22,9 @@ public class AdminUI extends SelectUI {
         adminController = new AdminController();
     }
 
+    /**
+     * Lets Admin select from Admin Menu
+     */
     public void displayMenu() {
         Scanner sc = new Scanner(System.in);
         int i;
