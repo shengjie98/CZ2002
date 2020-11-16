@@ -1,8 +1,8 @@
 package stars.controller;
 
-import stars.entity.*;
-import stars.boundary.*;
-
+/**
+ * Interface for authentication, abstracts authentication method from client
+ */
 public interface Authenticator {
     public boolean authenticate(String username, String password);
 }
