@@ -9,12 +9,19 @@ import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
-import stars.entity.*;
-import stars.boundary.*;
 
+/**
+ * Concrete implementation of Student authenticator
+ */
 public class FlatFileStudentAuthenticator implements StudentAuthenticator {
     private final String STUDENT_ACCOUNTS_FILE = "stars/studentAccounts.txt";
 
+    /**
+     * Authenticates username and password by user with username and hashed password stored in flat file
+     * @param username Username to be authenticated
+     * @param password Password to be authenticated
+     * @return true if authentication is successful, false if incorrect username and password is input
+     */
     public boolean authenticate(String username, String password) {
         int hashedPassword = password.hashCode();
         String studentUsername;
@@ -41,6 +48,12 @@ public class FlatFileStudentAuthenticator implements StudentAuthenticator {
         return false;
     }
 
+    /**
+     * Edit the access period of a student
+     * @param username studentID of student whose access period is being edited
+     * @param accessStart start of new access period
+     * @param accessEnd end of new access period
+     */
     public void editAccess(String username, LocalDateTime accessStart, LocalDateTime accessEnd) {
         String line;
         String[] lineList;
@@ -76,6 +89,13 @@ public class FlatFileStudentAuthenticator implements StudentAuthenticator {
         }
     }
 
+    /**
+     * Add new student login particulars to flat file
+     * @param username Username of new student
+     * @param password Password of new student
+     * @param accessStart start of student access period
+     * @param accessEnd end of student access period
+     */
     public void addStudent(String username, String password, LocalDateTime accessStart, LocalDateTime accessEnd) {
         int hashedPassword = password.hashCode();
         try{
