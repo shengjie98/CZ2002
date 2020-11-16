@@ -37,8 +37,8 @@ public class Timing implements Serializable {
         if (this.day != otherTiming.day) {
             return true;
         }
-        if ((this.start.isBefore(otherTiming.getStart()) && this.start.isBefore(otherTiming.getEnd()))
-                || (this.start.isAfter(otherTiming.getStart()) && this.start.isAfter(otherTiming.getEnd()))) {
+        if ((this.start.isBefore(otherTiming.getStart()) && this.end.isBefore(otherTiming.getStart()))
+                || (this.start.isAfter(otherTiming.getEnd()) && this.end.isAfter(otherTiming.getEnd()))) {
             return true;
         }
         return false;
