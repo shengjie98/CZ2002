@@ -7,7 +7,7 @@ import java.time.LocalTime;
 
 public class TimetableDisplayer {   
     private Student student;
-    private final int WIDTH = 18;
+    private final int WIDTH = 24;
     private final int HEIGHT = 1;
 
     public TimetableDisplayer(Student student){
@@ -24,11 +24,55 @@ public class TimetableDisplayer {
             }
         }
         
-        for (Index index: student.getRegisteredIndex()) {
+        for (Index index: student.getConfirmedIndex()) {
             courseID = index.getCourse().getCourseID();
             indexID = Integer.toString(index.getIndexNumber());
             for (Timing time: index.getTimings()) {
                 display = courseID + " " + indexID + " " + time.getType().toString();
+                switch (time.getDay()) {
+                    case MON:
+                        col = 0;    
+                        break;
+                    case TUE:
+                        col = 1;    
+                        break;
+                    case WED:
+                        col = 2;    
+                        break;
+                    case THU:
+                        col = 3;    
+                        break;
+                    case FRI:
+                        col = 4;    
+                        break;
+                    default:
+                        col = 0;
+                        break;
+                }
+
+                LocalTime start, end;
+                start = time.getStart();
+                end = time.getEnd();
+                int minutes = (end.getHour() - start.getHour())*60 + end.getMinute() - start.getMinute();
+                int periods = (int) Math.round((double) minutes / 30);
+                int rowStart = start.getHour() * 2;
+                minutes = start.getMinute();
+                if ( 15 < minutes && minutes < 45) {
+                    rowStart++;
+                } else if (minutes >= 45) {
+                    rowStart += 2;
+                }
+                for (row = rowStart; row < rowStart + periods; row++) {
+                    arr[row][col] = pad(display.substring(0, Math.min(WIDTH, display.length())));
+                }
+            }
+        }
+
+        for (Index index: student.getWaitlistedIndex()) {
+            courseID = index.getCourse().getCourseID();
+            indexID = Integer.toString(index.getIndexNumber());
+            for (Timing time: index.getTimings()) {
+                display = courseID + " " + indexID + " " + time.getType().toString() + "(Waitlist)";
                 switch (time.getDay()) {
                     case MON:
                         col = 0;    

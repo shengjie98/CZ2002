@@ -43,6 +43,16 @@ public class StudentController {
     public ArrayList<Index> getRegisteredIndex () {
         return myStudent.getRegisteredIndex();
     }
+
+    public ArrayList<Index> getConfirmedIndex () {
+        return myStudent.getConfirmedIndex();
+    }
+
+    public ArrayList<Index> getWaitlistedIndex () {
+        return myStudent.getWaitlistedIndex();
+    }
+
+    
     
     public boolean changeIndex (Index oldIndex, Index newIndex){
         return myStudent.changeIndex(oldIndex, newIndex);

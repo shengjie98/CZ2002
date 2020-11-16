@@ -82,11 +82,17 @@ public class StudentRegisteredCourses implements Serializable{
             return false;
         }
         boolean allowed = clashChecker.checkClash(this, newIndex, oldIndex);
+        // System.out.println("checkclash result: ");
+        // System.out.println(allowed);
         if (allowed) {
             IndexStudentAdder adder = new IndexStudentAdder();
             IndexStudentDropper dropper = new IndexStudentDropper();
-            dropper.dropStudent(oldIndex, this);
-            adder.addStudent(newIndex, this);
+            allowed = dropper.dropStudent(oldIndex, this);
+            // System.out.println("drop result: ");
+            // System.out.println(allowed);
+            allowed = adder.addStudent(newIndex, this);
+            // System.out.println("add result: ");
+            // System.out.println(allowed);
         }
         return allowed;
     }

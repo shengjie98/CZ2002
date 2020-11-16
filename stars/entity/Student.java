@@ -46,9 +46,18 @@ public class Student implements Selectable, Serializable {
         registeredCourses.moveToConfirmed(index);
     }
 
+    public ArrayList<Index> getConfirmedIndex() {
+        return registeredCourses.getConfirmedIndexArray();
+    }
+
+    public ArrayList<Index> getWaitlistedIndex() {
+        return registeredCourses.getWaitlistedIndexArray();
+    }
+
     public ArrayList<Index> getRegisteredIndex() {
         return registeredCourses.getIndexList();
     }
+
 
     public boolean changeIndex(Index oldIndex, Index newIndex) {
         return registeredCourses.changeIndex(oldIndex, newIndex);
