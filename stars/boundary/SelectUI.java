@@ -19,6 +19,10 @@ public abstract class SelectUI {
         int choice;
         System.out.println("Select one from the following");
         Scanner sc = new Scanner(System.in);
+        // if the size of the list is zero, return null
+        if (ls.size() == 0) {
+            return null;
+        }
         for (i = 1; i <= ls.size(); i++) {
             System.out.printf("  %d: %s\n", i, ls.get(i - 1).print());
         }

@@ -33,7 +33,7 @@ public class AdminUI extends SelectUI {
             System.out.println("8. Print all students in database");
             System.out.println("9. Print all courses in database");
             System.out.print("Option: ");
-            i = sc.nextInt();
+            i = IntScanner.nextInt();
             switch (i) {
                 case 1:
                     editStudentAccess();
@@ -74,6 +74,11 @@ public class AdminUI extends SelectUI {
     private void editStudentAccess() {
         ArrayList<Student> studentList = this.adminController.getStudentList();
         Student selectedStudent = (Student) select(studentList);
+        if (selectedStudent == null) {
+            System.out.println("\nNo Students in Database!\n");
+            return;
+        }
+
         Scanner sc = new Scanner(System.in);
         LocalDateTime start, end;
         while (true) {
@@ -142,7 +147,8 @@ public class AdminUI extends SelectUI {
 
         // admin controller.add student(studentName, nationality, gender, studentID,
         // degree, email)
-        if (adminController.addStudent(studentName, nationality, gender, studentID, degree, email, password, start, end)) {
+        if (adminController.addStudent(studentName, nationality, gender, studentID, degree, email, password, start,
+                end)) {
             System.out.println("Student Added!");
         } else {
             System.out.println("Error adding student, student already exists");
@@ -152,10 +158,10 @@ public class AdminUI extends SelectUI {
     private void addIndex(Course newCourse) {
         Scanner sc = new Scanner(System.in);
         System.out.print("   a. Index Number: ");
-        int newIndexNumber = sc.nextInt();
+        int newIndexNumber = IntScanner.nextInt();
         sc.nextLine();
         System.out.print("   b. Vacancy: ");
-        int newVacancy = sc.nextInt();
+        int newVacancy = IntScanner.nextInt();
         Index newIndex = adminController.createIndex(newCourse, newVacancy, newIndexNumber);
         System.out.println("   c. Timings: ");
         int choice;
@@ -168,7 +174,7 @@ public class AdminUI extends SelectUI {
                 System.out.println("     2. Tutorial");
                 System.out.println("     3. Lab");
                 System.out.print("Option: ");
-                choice = sc.nextInt();
+                choice = IntScanner.nextInt();
             } while (choice <= 0 || choice > 3);
             switch (choice) {
                 case 1:
@@ -181,7 +187,7 @@ public class AdminUI extends SelectUI {
                     newType = Timing.Type.LAB;
                     break;
             }
-            
+
             // get the day of the timing
             Timing.Day newDay = Timing.Day.MON; // !!This is not supposed to be the default; change this before
             System.out.println("    b. Day: ");
@@ -192,7 +198,7 @@ public class AdminUI extends SelectUI {
                 System.out.println("     4. Thursday");
                 System.out.println("     5. Friday");
                 System.out.print("Option: ");
-                choice = sc.nextInt();
+                choice = IntScanner.nextInt();
                 sc.nextLine();
             } while (choice <= 0 || choice > 5);
             switch (choice) {
@@ -254,7 +260,7 @@ public class AdminUI extends SelectUI {
         } else {
             System.out.println("Index Could not be added! Duplicate Index ID.");
         }
-        
+
     }
 
     private void addCourse() {
@@ -264,7 +270,7 @@ public class AdminUI extends SelectUI {
         System.out.print("  b. Course ID: ");
         String newCourseID = sc.nextLine();
         System.out.print("  c. Number of AUs: ");
-        int newAU = sc.nextInt();
+        int newAU = IntScanner.nextInt();
         sc.nextLine();
         System.out.print("  d. School: ");
         String newSchool = sc.nextLine();
@@ -272,10 +278,10 @@ public class AdminUI extends SelectUI {
         Course newCourse = adminController.createCourse(newCourseID, newAU, newSchool, newCourseName);
 
         System.out.print("  e. Number of Index: ");
-        int numOfIndexes = sc.nextInt();
+        int numOfIndexes = IntScanner.nextInt();
         sc.nextLine();
         for (int a = 0; a < numOfIndexes; a++) {
-            System.out.printf("For index %d\n", a+1);
+            System.out.printf("For index %d\n", a + 1);
             addIndex(newCourse);
         }
         if (adminController.addCourse(newCourse)) {
@@ -294,7 +300,10 @@ public class AdminUI extends SelectUI {
         // this will print out the list of courses and allow the user to select
         // the course they want to edit
         Course selectedCourse = (Course) select(courseList);
-
+        if (selectedCourse == null) {
+            System.out.println("\nNo Courses Available!\n");
+            return;
+        }
         // get user to choose the course information to edit
         System.out.println("Which part of the course do you want to edit?:");
         System.out.println("  1: Course Code");
@@ -306,7 +315,7 @@ public class AdminUI extends SelectUI {
         System.out.println("  7: Change vacancy of the Index");
         System.out.print("Option: ");
         Scanner sc = new Scanner(System.in);
-        int i = sc.nextInt();
+        int i = IntScanner.nextInt();
         switch (i) {
             case 1: {
                 /**
@@ -346,6 +355,10 @@ public class AdminUI extends SelectUI {
                 // the index that they want to drop; The admin will only
                 // be allowed to drop it if it has no students
                 Index selectedIndex = (Index) select(indexList);
+                if (selectedIndex == null) {
+                    System.out.println("\nNo Indexes Available!\n");
+                    break;
+                }
                 if (adminController.dropIndex(selectedCourse, selectedIndex)) {
                     System.out.println("Index Dropped.");
                 } else {
@@ -363,8 +376,14 @@ public class AdminUI extends SelectUI {
                 // the index that they want to drop; The admin will only
                 // be allowed to drop it if it has no students
                 Index selectedIndex = (Index) select(indexList);
+
+                if (selectedIndex == null) {
+                    System.out.println("\nNo Indexes Available!\n");
+                    break;
+                }
+
                 System.out.print("  New Index ID: ");
-                int newIndexID = sc.nextInt();
+                int newIndexID = IntScanner.nextInt();
                 if (adminController.changeIndexID(selectedIndex, newIndexID)) {
                     System.out.println("Index ID Changed.");
                 } else {
@@ -379,6 +398,12 @@ public class AdminUI extends SelectUI {
                 ArrayList<Index> indexList = selectedCourse.getIndexList();
                 // Get the user to choose the index
                 Index selectedIndex = (Index) select(indexList);
+
+                if (selectedIndex == null) {
+                    System.out.println("\nNo Indexes Available!\n");
+                    break;
+                }
+
                 // Get the user to input the vacancy which must be
                 // greater than the current length of the list of
                 // students
@@ -386,7 +411,7 @@ public class AdminUI extends SelectUI {
                 do {
                     System.out.print("  New Vacancy of Index: ");
                     // !! add while loop to force user to enter positive value
-                    newVacancy = sc.nextInt();
+                    newVacancy = IntScanner.nextInt();
                     if (newVacancy < 0) {
                         System.out.println("Please try again! Your new vacancy cannot be negative!");
                     }
@@ -408,9 +433,19 @@ public class AdminUI extends SelectUI {
         // this will print out the list of courses and allow the user to select
         // the course they want to edit
         Course selectedCourse = (Course) select(courseList);
+        if (selectedCourse == null) {
+            System.out.println("\nNo Courses Available!\n");
+            return;
+        }
+
         ArrayList<Index> indexList = selectedCourse.getIndexList();
         // Get the user to choose the index
         Index selectedIndex = (Index) select(indexList);
+        if (selectedIndex == null) {
+            System.out.println("\nNo Indexes Available!\n");
+            return;
+        }
+
         System.out.printf("Vacancy is: %d\n", selectedIndex.getVacancy());
     }
 
@@ -421,9 +456,20 @@ public class AdminUI extends SelectUI {
         // this will print out the list of courses and allow the user to select
         // the course they want to edit
         Course selectedCourse = (Course) select(courseList);
+
+        if (selectedCourse == null) {
+            System.out.println("\nNo Courses Available!\n");
+            return;
+        }
+
         ArrayList<Index> indexList = selectedCourse.getIndexList();
         // Get the user to choose the index
         Index selectedIndex = (Index) select(indexList);
+        if (selectedIndex == null) {
+            System.out.println("\nNo Indexes Available!\n");
+            return;
+        }
+
         ArrayList<Student> confirmedList = selectedIndex.getConfirmedList();
         System.out.println("Confirmed Students: ");
         for (int i = 0; i < confirmedList.size(); i++) {
@@ -443,6 +489,11 @@ public class AdminUI extends SelectUI {
         // this will print out the list of courses and allow the user to select
         // the course they want to edit
         Course selectedCourse = (Course) select(courseList);
+        if (selectedCourse == null) {
+            System.out.println("\nNo Courses Available!\n");
+            return;
+        }
+
         ArrayList<Index> indexList = selectedCourse.getIndexList();
 
         for (Index eachIndex : indexList) {
@@ -455,6 +506,9 @@ public class AdminUI extends SelectUI {
 
     private void getallstudents() {
         ArrayList<Student> ls = adminController.getStudentList();
+        if (ls.size() == 0) {
+            System.out.println("\nNo Students in Database!\n");
+        }
         for (Student smth : ls) {
             System.out.printf("%s\n", smth.print());
         }
@@ -462,6 +516,9 @@ public class AdminUI extends SelectUI {
 
     private void getallcourses() {
         ArrayList<Course> ls = adminController.getCourseList();
+        if (ls.size() == 0) {
+            System.out.println("\nNo Courses in Database!\n");
+        }
         for (Course another : ls) {
             System.out.printf("%s\n", another.print());
         }
