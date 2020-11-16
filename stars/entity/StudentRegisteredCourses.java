@@ -223,16 +223,21 @@ public class StudentRegisteredCourses implements Serializable {
     }
 
     /**
-     * swaps the Index of a Student with the Index of another Student in the same
-     * Course
+     * Swaps the Index of a Student with the Index of another Student in the same
+     * Course. This wil be reflected in both Students and both Indexes
      * 
-     * @param friendIndex The Index of the other Student in the same course
+     * @param friendIndex The Index of the other Student in the same Course
      * @param friend      The other Student
      * @return boolean that indicates true if the current Student has been swopped
      *         to the Confirmed list of the other person's Index or false if the
      *         Waitlist of the other person's Index
-     * @throws TimetableClashException
-     * @throws AlreadyRegisteredException
+     * @throws TimetableClashException    If the user is unable to add the Index to
+     *                                    the list of Registered Courses because of
+     *                                    a Timetable Clash between te Index and the
+     *                                    Student's existing Indexes
+     * @throws AlreadyRegisteredException If the user is unable to add the Index
+     *                                    because he has already Registered for the
+     *                                    Course
      */
     public boolean swopPlaces(Index friendIndex, Student friend)
             throws TimetableClashException, AlreadyRegisteredException {
