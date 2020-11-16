@@ -7,8 +7,15 @@ import stars.boundary.*;
 
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
-
+/**
+ * Collects data from user to add course to database
+ */
 public class AddCourseUI extends SelectUI {
+    /**
+     * Collects data from user to add course
+     * @param adminController admin controller with database initialised
+     * @param timeFormatter timeformatter for timing inputs
+     */
     public void addCourse(AdminController adminController, DateTimeFormatter timeFormatter) {
         Scanner sc = new Scanner(System.in);
         System.out.print(" a. Course Name: ");

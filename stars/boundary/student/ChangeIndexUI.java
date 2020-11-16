@@ -3,11 +3,16 @@ package stars.boundary.student;
 import stars.boundary.SelectUI;
 import stars.controller.StudentController;
 import stars.entity.*;
-import stars.exceptions.ExceedAUException;
-
 import java.util.ArrayList;
 
+/**
+ * UI for student to add index
+ */
 public class ChangeIndexUI extends SelectUI{
+    /**
+     * UI for student to add index
+     * @param studentController student controller with initialised database and student
+     */
     public void changeIndex(StudentController studentController) {
         boolean conrimed;
         ArrayList<Index> indexList;

@@ -9,11 +9,15 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+/**
+ * UI to edit student access period
+ */
 public class EditStudentAccessUI extends SelectUI {
-    public EditStudentAccessUI() {
-        return;
-    }
-
+    /**
+     * UI to edit student access period
+     * @param adminController admin controller with database initialised
+     * @param dateFormatter date formatter to collect new access period
+     */
     public void editStudentAccess(AdminController adminController, DateTimeFormatter dateFormatter) {
         ArrayList<Student> studentList = adminController.getStudentList();
         Student selectedStudent = (Student) select(studentList);

@@ -9,7 +9,15 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * UI for admin to edit course information
+ */
 public class EditCourseInformationUI extends SelectUI {
+    /**
+     * UI for admin to edit course information
+     * @param adminController admin controller with database initialised
+     * @param timeFormatter timeformatter for new timing inputs
+     */
     public void editCourseInformation(AdminController adminController, DateTimeFormatter timeFormatter) {
         System.out.println("Edit Course Information");
 
