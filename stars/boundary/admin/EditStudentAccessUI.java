@@ -5,13 +5,12 @@ import stars.controller.*;
 import stars.entity.*;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
-public class EditStudentAccess extends SelectUI {
-    public EditStudentAccess() {
+public class EditStudentAccessUI extends SelectUI {
+    public EditStudentAccessUI() {
         return;
     }
 
