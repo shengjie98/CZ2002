@@ -2,6 +2,7 @@ package stars.boundary;
 
 import stars.controller.*;
 import stars.entity.*;
+import stars.boundary.admin.*;
 import java.util.Scanner;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -36,7 +37,8 @@ public class AdminUI extends SelectUI {
             i = IntScanner.nextInt();
             switch (i) {
                 case 1:
-                    editStudentAccess();
+                    EditStudentAccess editStudentAccess = new EditStudentAccess();
+                    editStudentAccess.editStudentAccess(adminController);
                     break;
                 case 2:
                     addStudent();

@@ -14,26 +14,26 @@ import stars.entity.*;
 // import java.io.File;
 
 public class LoginController {
-    private SelectUI ui;
     /**
      * Verifies the username and passsword of the use
+     * 
      * @param username
      * @param password
      */
     public boolean verifyLogin(String username, String password) {
         Authenticator studenAuthenticator = new FlatFileStudentAuthenticator();
         Authenticator adminAuthenticator = new FlatFileAdminAuthenticator();
-        
+
         boolean verification = adminAuthenticator.authenticate(username, password);
         if (verification) {
-            this.ui = new AdminUI();
-            this.ui.displayMenu();
+            AdminUI ui = new AdminUI();
+            ui.displayMenu();
             return true;
         } else {
             verification = studenAuthenticator.authenticate(username, password);
             if (verification) {
-                this.ui = new StudentUI(username);
-                this.ui.displayMenu();
+                StudentUI ui = new StudentUI(username);
+                ui.displayMenu();
                 return true;
             }
         }

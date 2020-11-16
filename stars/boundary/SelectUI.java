@@ -7,7 +7,6 @@ import stars.entity.*;
 // import java.util.List;
 
 public abstract class SelectUI {
-    public abstract void displayMenu();
 
     /**
      * Lets the user choose from a list of Selectables
