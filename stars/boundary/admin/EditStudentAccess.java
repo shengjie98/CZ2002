@@ -11,7 +11,11 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class EditStudentAccess extends SelectUI {
-    public void editStudentAccess(AdminController adminController) {
+    public EditStudentAccess() {
+        return;
+    }
+
+    public void editStudentAccess(AdminController adminController, DateTimeFormatter dateFormatter) {
         ArrayList<Student> studentList = adminController.getStudentList();
         Student selectedStudent = (Student) select(studentList);
         if (selectedStudent == null) {

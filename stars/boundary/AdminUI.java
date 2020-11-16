@@ -38,7 +38,7 @@ public class AdminUI extends SelectUI {
             switch (i) {
                 case 1:
                     EditStudentAccess editStudentAccess = new EditStudentAccess();
-                    editStudentAccess.editStudentAccess(adminController);
+                    editStudentAccess.editStudentAccess(adminController, dateFormatter);
                     break;
                 case 2:
                     addStudent();
@@ -73,38 +73,38 @@ public class AdminUI extends SelectUI {
         return;
     }
 
-    private void editStudentAccess() {
-        ArrayList<Student> studentList = this.adminController.getStudentList();
-        Student selectedStudent = (Student) select(studentList);
-        if (selectedStudent == null) {
-            System.out.println("\nNo Students in Database!\n");
-            return;
-        }
+    // private void editStudentAccess() {
+    // ArrayList<Student> studentList = this.adminController.getStudentList();
+    // Student selectedStudent = (Student) select(studentList);
+    // if (selectedStudent == null) {
+    // System.out.println("\nNo Students in Database!\n");
+    // return;
+    // }
 
-        Scanner sc = new Scanner(System.in);
-        LocalDateTime start, end;
-        while (true) {
-            try {
-                System.out.print("  a. Access Period Start (DD/MM/YYYY hh:mm): ");
-                start = LocalDateTime.parse(sc.nextLine(), dateFormatter);
-                break;
-            } catch (DateTimeParseException e) {
-                System.out.println("Incorrect Format");
-            }
-        }
-        while (true) {
-            try {
-                System.out.print("  b. Access Period End (DD/MM/YYYY hh:mm): ");
-                end = LocalDateTime.parse(sc.nextLine(), dateFormatter);
-                if (end.isAfter(start)) {
-                    break;
-                }
-            } catch (DateTimeParseException e) {
-                System.out.println("Incorrect Format");
-            }
-        }
-        adminController.editAccess(selectedStudent.getStudentID(), start, end);
-    }
+    // Scanner sc = new Scanner(System.in);
+    // LocalDateTime start, end;
+    // while (true) {
+    // try {
+    // System.out.print(" a. Access Period Start (DD/MM/YYYY hh:mm): ");
+    // start = LocalDateTime.parse(sc.nextLine(), dateFormatter);
+    // break;
+    // } catch (DateTimeParseException e) {
+    // System.out.println("Incorrect Format");
+    // }
+    // }
+    // while (true) {
+    // try {
+    // System.out.print(" b. Access Period End (DD/MM/YYYY hh:mm): ");
+    // end = LocalDateTime.parse(sc.nextLine(), dateFormatter);
+    // if (end.isAfter(start)) {
+    // break;
+    // }
+    // } catch (DateTimeParseException e) {
+    // System.out.println("Incorrect Format");
+    // }
+    // }
+    // adminController.editAccess(selectedStudent.getStudentID(), start, end);
+    // }
 
     private void addStudent() {
         Scanner sc = new Scanner(System.in);
