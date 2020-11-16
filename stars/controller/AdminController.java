@@ -75,13 +75,11 @@ public class AdminController {
     public boolean setCourseID(Course selectedCourse, String newCourseID) {
         ArrayList<Course> courseList = dbManager.getCoursesArray();
         for (Course course : courseList) {
-            System.out.println("print1");
             if (newCourseID.equals(course.getCourseID())) {
                 return false;
             }
         }
         selectedCourse.setCourseID(newCourseID);
-        System.out.println("print2");
         return true;
     }
 
@@ -116,6 +114,7 @@ public class AdminController {
             // check if the number of students already in the list exceeds the
             // the newVacancyLimit, if so, this will not be allowed
             if ((selectedIndex.getVacancyLimit() - selectedIndex.getVacancy()) > newVacancyLimit) {
+                System.out.println("here");
                 return false;
             } else {
                 // otherwise, set the new vacancy to be the new limit - the number of students
