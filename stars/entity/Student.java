@@ -8,7 +8,7 @@ import stars.controller.*;
 /**
  * Stores and retrieves student data
  */
-public class Student implements Selectable, Serializable{
+public class Student implements Selectable, Serializable {
 
     private String studentID;
     private String studentName;
@@ -21,7 +21,8 @@ public class Student implements Selectable, Serializable{
 
     // Constructor
 
-    public Student(String studentName, String nationality, String gender, String studentID, String degree, String email) {
+    public Student(String studentName, String nationality, String gender, String studentID, String degree,
+            String email) {
         this.studentName = studentName;
         this.nationality = nationality;
         this.gender = gender;
@@ -30,9 +31,8 @@ public class Student implements Selectable, Serializable{
         this.email = email;
         notificationService = new EmailService(this);
         registeredCourses = new StudentRegisteredCourses(this);
-        
+
     }
-    
 
     public boolean addIndex(Index index) {
         return registeredCourses.addIndex(index);
@@ -50,9 +50,9 @@ public class Student implements Selectable, Serializable{
         return registeredCourses.getIndexList();
     }
 
-    public boolean changeIndex(Index oldIndex, Index newIndex){
+    public boolean changeIndex(Index oldIndex, Index newIndex) {
         return registeredCourses.changeIndex(oldIndex, newIndex);
-    } 
+    }
 
     public boolean checkChangeIndex(Index myIndex, Index friendIndex) {
         TimetableClashChecker clashChecker = new TimetableClashChecker();
@@ -62,15 +62,18 @@ public class Student implements Selectable, Serializable{
     public void swopPlaces(Index friendIndex, Student friend) {
         registeredCourses.swopPlaces(friendIndex, friend);
     }
-    
+
     public void sendNotification(Index index) {
         this.notificationService.sendNotification(index);
     }
 
     public String print() {
-        return this.studentName;
+
+        String stringToReturn = "Name: " + this.studentName + " Gender: " + this.gender + " Nationality: "
+                + this.nationality;
+        return stringToReturn;
     }
-    
+
     public String getStudentID() {
         return studentID;
     }
@@ -82,9 +85,11 @@ public class Student implements Selectable, Serializable{
     public String getNationality() {
         return nationality;
     }
+
     public String getGender() {
         return gender;
     }
+
     public String getDegree() {
         return degree;
     }
