@@ -1,11 +1,12 @@
 package stars.boundary;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 import stars.controller.*;
-import stars.entity.*;
 import stars.boundary.student.*;
 
+/**
+ * Displays User Interface and handles User Input for Student User
+ */
 public class StudentUI extends SelectUI {
     StudentController studentController;
 
@@ -13,8 +14,10 @@ public class StudentUI extends SelectUI {
         this.studentController = new StudentController(studentID);
     }
 
+    /**
+     * Lets student user select from menu
+     */
     public void displayMenu() {
-
         Scanner sc = new Scanner(System.in);
         int i;
         // System.out.println("Welcome, " + studentController.getOwner().getName);

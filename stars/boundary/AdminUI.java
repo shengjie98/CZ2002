@@ -4,10 +4,7 @@ import stars.controller.*;
 import stars.entity.*;
 import stars.boundary.admin.*;
 import java.util.Scanner;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 /**
@@ -85,7 +82,10 @@ public class AdminUI extends SelectUI {
         adminController.save();
         return;
     }
-
+    
+    /**
+     * UI to print all students in the database
+     */
     private void getallstudents() {
         ArrayList<Student> ls = adminController.getStudentList();
         System.out.println("Students: ");
@@ -97,6 +97,9 @@ public class AdminUI extends SelectUI {
         }
     }
 
+    /**
+     * UI to print all courses in the database
+     */
     private void getallcourses() {
         ArrayList<Course> ls = adminController.getCourseList();
         System.out.println("Courses: ");
