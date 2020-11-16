@@ -6,7 +6,14 @@ import stars.entity.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * UI for student to swop index with another student
+ */
 public class SwopIndexUI extends SelectUI{
+    /**
+     * UI for student to swop index with another student
+     * @param studentController student controller with initialised database and student
+     */
     public void swopIndex(StudentController studentController) {
         boolean success, confirmed;
         ArrayList<Index> indexList;

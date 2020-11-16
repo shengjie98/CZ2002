@@ -5,7 +5,14 @@ import stars.controller.StudentController;
 import stars.entity.*;
 import java.util.ArrayList;
 
+/**
+ * UI for student to drop index
+ */
 public class DropIndexUI extends SelectUI {
+    /**
+     * UI for student to drop index
+     * @param studentController student controller with initialised database and student
+     */
     public void dropIndex(StudentController studentController) {
         boolean success;
         ArrayList<Index> indexList;

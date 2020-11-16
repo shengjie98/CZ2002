@@ -5,7 +5,14 @@ import stars.controller.StudentController;
 import stars.entity.*;
 import java.util.ArrayList;
 
+/**
+ * UI for student to check vacancies of an index
+ */
 public class CheckVacanciesAvailableUI extends SelectUI{
+    /**
+     * UI for student to check vacancies of an index
+     * @param studentController student controller with initialised database and student
+     */
     public void checkVacanciesAvailable(StudentController studentController) {
         ArrayList<Course> courseList;
         Course selectedCourse;
