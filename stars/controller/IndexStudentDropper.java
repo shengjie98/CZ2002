@@ -9,8 +9,7 @@ public class IndexStudentDropper {
         Student student = studentRegisteredCourses.getOwner();
         ArrayList<Student> confirmed = index.getConfirmedList();
         ArrayList<Student> wait = index.getWaitList();
-        if (confirmed.contains(student)){
-            System.out.println(index.print());
+        if (confirmed.contains(student)) {
             // System.out.println("in drop1");
             index.dropStudentFromConfirmedList(student);
             studentRegisteredCourses.removeFromConfirmedIndexArray(index);

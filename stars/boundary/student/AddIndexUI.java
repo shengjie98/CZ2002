@@ -12,15 +12,15 @@ public class AddIndexUI extends SelectUI {
         Course selectedCourse;
         ArrayList<Index> indexList;
         Index selectedIndex;
-        
+
         courseList = studentController.getCourseList();
-        selectedCourse = (Course)select(courseList);
+        selectedCourse = (Course) select(courseList);
         if (selectedCourse == null) {
             System.out.println("\nNo Courses Available!\n");
             return;
         }
         indexList = selectedCourse.getIndexList();
-        selectedIndex = (Index)select(indexList);
+        selectedIndex = (Index) select(indexList);
         if (selectedIndex == null) {
             System.out.println("\nNo Indexes Available!\n");
             return;
@@ -29,7 +29,7 @@ public class AddIndexUI extends SelectUI {
         if (success) {
             System.out.println("Successfully added!");
         } else {
-            System.out.println("Error adding, timetable clash or too many AUs or already registered");
+            System.out.println("Error! , timetable clash or too many AUs or already registered");
         }
     }
 }

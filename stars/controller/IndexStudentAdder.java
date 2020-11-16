@@ -7,7 +7,7 @@ public class IndexStudentAdder {
     public boolean addStudent(Index index, StudentRegisteredCourses studentRegisteredCourses) {
         Student student = studentRegisteredCourses.getOwner();
         // check if student already has the course
-        for (Index curIndex: studentRegisteredCourses.getIndexList()) {
+        for (Index curIndex : studentRegisteredCourses.getIndexList()) {
             if (curIndex.getCourse().getCourseID().equals(index.getCourse().getCourseID())) {
                 return false;
             }
@@ -28,12 +28,10 @@ public class IndexStudentAdder {
         int vacancy = index.getVacancy();
         if (vacancy > 0) {
             index.addStudentToConfirmedList(student);
-            System.out.println("Add to confirmed");
             studentRegisteredCourses.addToConfirmedIndexArray(index);
             return true;
         } else {
             index.addStudentToWaitList(student);
-            System.out.println("addd to waitlist");
             studentRegisteredCourses.addToWaitlistedIndexArray(index);
             return true;
         }

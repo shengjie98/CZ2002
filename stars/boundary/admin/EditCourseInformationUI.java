@@ -56,7 +56,7 @@ public class EditCourseInformationUI extends SelectUI {
                 /**
                  * Change school attribute
                  */
-                System.out.println("  New School name: ");
+                System.out.print("  New School name: ");
                 selectedCourse.setSchool(sc.nextLine());
                 break;
             }

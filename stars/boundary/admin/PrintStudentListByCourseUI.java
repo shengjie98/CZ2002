@@ -19,12 +19,19 @@ public class PrintStudentListByCourseUI extends SelectUI {
         }
 
         ArrayList<Index> indexList = selectedCourse.getIndexList();
-
+        if (indexList.size() == 0) {
+            System.out.println("\nNo Indexes Available!\n");
+        }
         for (Index eachIndex : indexList) {
+            System.out.println("Index " + String.valueOf(eachIndex.getIndexNumber() + ": "));
             ArrayList<Student> confirmedList = eachIndex.getConfirmedList();
+            if (confirmedList.size() == 0) {
+                System.out.println("NIL");
+            }
             for (Student eachStudent : confirmedList) {
                 System.out.printf("%s\n", eachStudent.print());
             }
         }
+
     }
 }
