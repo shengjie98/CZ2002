@@ -8,6 +8,9 @@ import stars.exceptions.AlreadyRegisteredException;
 import stars.exceptions.ExceedAUException;
 import stars.exceptions.TimetableClashException;
 
+/**
+ * In charge of the handling the Courses registered by the Student
+ */
 public class StudentRegisteredCourses implements Serializable {
     private ArrayList<Index> waitlistedIndexArray;
     private ArrayList<Index> confirmedIndexArray;
@@ -93,66 +96,146 @@ public class StudentRegisteredCourses implements Serializable {
     }
 
     /**
-     * Adds Index to the list of waitlisted
+     * Adds Index to the list of waitlisted Indexes that the Student is registered
+     * for
      * 
-     * @param index
+     * @param index The waitlisted Index that is to be added into the list of
+     *              Waitlisted Indexes
      */
     public void addToWaitlistedIndexArray(Index index) {
         waitlistedIndexArray.add(index);
     }
 
+    /**
+     * Removes Index from list of confirmed Indexes that the Student is registered
+     * for
+     * 
+     * @param index The confirmed Index that is to be removed from the list of
+     *              Confirmed Indexes
+     */
     public void removeFromConfirmedIndexArray(Index index) {
         confirmedIndexArray.remove(index);
     }
 
+    /**
+     * Remove Index from list of waitlisted Indexes that the Student is registered
+     * for
+     *
+     * @param index The waitlisted Index that is to be removed from teh list of
+     *              WaitListed Indexes
+     */
     public void removeFromWaitlistedIndexArray(Index index) {
         waitlistedIndexArray.remove(index);
     }
 
+    /**
+     * Moves the Index from the confirmed List of Indexes to the waitlist List of
+     * Indexes
+     * 
+     * @param index The Index to be moved from the waitlist List of Indexes to the
+     *              confirmed List of Indexes
+     */
     public void moveToConfirmed(Index index) {
         confirmedIndexArray.add(index);
         waitlistedIndexArray.remove(index);
     }
 
+    /**
+     * Gets the Student that the StudentRegisteredCourses belongs to
+     * 
+     * @return The owner of the StudentRegisteredCourses
+     */
     public Student getOwner() {
         return owner;
     }
 
+    /**
+     * Adds Index to StudentRegisteredCourses and adds Student to the Index
+     * 
+     * @param index The Index to be added
+     * @return boolean that indicates false if the Student has been added to the
+     *         waitlist of the Index or true if the confirmed list of the Index
+     * @throws ExceedAUException          If the user is unable to add the Index to
+     *                                    the list of Registered Courses because it
+     *                                    would exceed the AU limit
+     * @throws TimetableClashException    If the user is unable to add the Index to
+     *                                    the list of Registered Courses because of
+     *                                    a Timetable Clash between te Index and the
+     *                                    Student's exisiting Indexes
+     * @throws AlreadyRegisteredException If the user is unable to add the Index
+     *                                    because he has already Registered for the
+     *                                    Course
+     */
     public boolean addIndex(Index index) throws ExceedAUException, TimetableClashException, AlreadyRegisteredException {
         IndexStudentAdder indexStudentAdder = new IndexStudentAdder();
         boolean success = indexStudentAdder.addStudent(index, this);
         return success;
     }
 
+    /**
+     * Drops the Index from StudentRegisteredCourses and drops Student from the
+     * Index
+     * 
+     * @param index The Index to be dropped
+     * @return boolean that indicates whether Index has been dropped from
+     *         StudentRegisteredCourses and from the Index
+     */
     public boolean dropIndex(Index index) {
         IndexStudentDropper indexStudentDropper = new IndexStudentDropper();
         boolean success = indexStudentDropper.dropStudent(index, this);
         return success;
     }
 
-    public boolean changeIndex(Index oldIndex, Index newIndex) throws ExceedAUException, TimetableClashException, AlreadyRegisteredException {
+    /**
+     * Changes the Index for a Student to another Index of the same Course. This
+     * change is also reflected in both Indexes
+     * 
+     * @param oldIndex The current Index of the Student
+     * @param newIndex The new Index of the Student
+     * @return boolean that indicates whether the Student has been added to the
+     *         Waitlist of the Index or the Confirmed list of the Index
+     * @throws ExceedAUException          If the user is unable to add the Index to
+     *                                    the list of Registered Courses because it
+     *                                    would exceed the AU limit
+     * @throws TimetableClashException    If the user is unable to add the Index to
+     *                                    the list of Registered Courses because of
+     *                                    a Timetable Clash between te Index and the
+     *                                    Student's existing Indexes
+     * @throws AlreadyRegisteredException If the user is unable to add the Index
+     *                                    because he has already Registered for the
+     *                                    Course
+     */
+    public boolean changeIndex(Index oldIndex, Index newIndex)
+            throws ExceedAUException, TimetableClashException, AlreadyRegisteredException {
         TimetableClashChecker clashChecker = new TimetableClashChecker();
         if (oldIndex.getIndexNumber() == newIndex.getIndexNumber()) {
             throw new AlreadyRegisteredException();
         }
         boolean allowed = clashChecker.checkClash(this, newIndex, oldIndex);
-        // System.out.println("checkclash result: ");
-        // System.out.println(allowed);
         if (allowed) {
             IndexStudentAdder adder = new IndexStudentAdder();
             IndexStudentDropper dropper = new IndexStudentDropper();
             dropper.dropStudent(oldIndex, this);
-            // System.out.println("drop result: ");
-            // System.out.println(allowed);
             allowed = adder.addStudent(newIndex, this);
             return allowed;
-            // System.out.println("add result: ");
-            // System.out.println(allowed);
         }
         throw new TimetableClashException();
     }
 
-    public boolean swopPlaces(Index friendIndex, Student friend) throws TimetableClashException, AlreadyRegisteredException {
+    /**
+     * swaps the Index of a Student with the Index of another Student in the same
+     * Course
+     * 
+     * @param friendIndex The Index of the other Student in the same course
+     * @param friend      The other Student
+     * @return boolean that indicates true if the current Student has been swopped
+     *         to the Confirmed list of the other person's Index or false if the
+     *         Waitlist of the other person's Index
+     * @throws TimetableClashException
+     * @throws AlreadyRegisteredException
+     */
+    public boolean swopPlaces(Index friendIndex, Student friend)
+            throws TimetableClashException, AlreadyRegisteredException {
         IndexStudentSwopper swopper = new IndexStudentSwopper();
         return swopper.swopStudent(friendIndex, friend, this.owner);
     }
