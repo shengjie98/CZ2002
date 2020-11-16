@@ -41,7 +41,11 @@ public class EditCourseInformationUI extends SelectUI {
                  * Change course ID attribute
                  */
                 System.out.print("  New Course ID: ");
-                selectedCourse.setCourseID(sc.nextLine());
+                if (adminController.setCourseID(selectedCourse, sc.nextLine())) {
+                    System.out.println("New Course ID has been set!");
+                } else {
+                    System.out.println("\nError! Course ID already exists.\n");
+                }
                 break;
             }
             case 2: {

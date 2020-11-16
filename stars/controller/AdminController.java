@@ -72,7 +72,18 @@ public class AdminController {
         return dbManager.addCourse(newCourse);
     }
 
-    
+    public boolean setCourseID(Course selectedCourse, String newCourseID) {
+        ArrayList<Course> courseList = dbManager.getCoursesArray();
+        for (Course course : courseList) {
+            System.out.println("print1");
+            if (newCourseID.equals(course.getCourseID())) {
+                return false;
+            }
+        }
+        selectedCourse.setCourseID(newCourseID);
+        System.out.println("print2");
+        return true;
+    }
 
     public boolean setVacancyLimit(Index selectedIndex, int newVacancyLimit) {
         // if the user tries to increase the vacancy limit
