@@ -6,6 +6,12 @@ import stars.boundary.*;
 public class IndexStudentAdder {
     public boolean addStudent(Index index, StudentRegisteredCourses studentRegisteredCourses) {
         Student student = studentRegisteredCourses.getOwner();
+        // check if student already has the course
+        for (Index curIndex: studentRegisteredCourses.getIndexList()) {
+            if (curIndex.getCourse().getCourseID() == index.getCourse().getCourseID()) {
+                return false;
+            }
+        }
         // check AU limit
         int studentAU = studentRegisteredCourses.getAU();
         int indexAU = index.getAU();

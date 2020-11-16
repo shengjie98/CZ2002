@@ -68,49 +68,14 @@ public class StudentRegisteredCourses implements Serializable{
         IndexStudentAdder indexStudentAdder = new IndexStudentAdder();
         boolean success = indexStudentAdder.addStudent(index, this);
         return success;
-        // boolean confirmed, success;
-        // success = checkClash(index);
-        // if (!success) {
-        //     return false;
-        // }
-        // confirmed = index.addStudent(this.owner);
-        // if (confirmed) {
-        //     this.confirmedIndexArray.add(index);
-        // } else {
-        //     this.waitlistedIndexArray.add(index);
-        // }
-        // return true;
     }
 
     public boolean dropIndex(Index index) {
         IndexStudentDropper indexStudentDropper = new IndexStudentDropper();
         boolean success = indexStudentDropper.dropStudent(index, this);
         return success;
-        // boolean confirmed;
-        // confirmed = index.dropStudent(this.owner);
-        // if (confirmed) {
-        //     this.confirmedIndexArray.remove(index);
-        // } else {
-        //     this.waitlistedIndexArray.remove(index);
-        // }
-        // return true;
     }
-    
-    // public boolean checkChangeIndex(Index oldIndex, Index newIndex){
-    //     boolean success;
-    //     if (this.waitlistedIndexArray.remove(oldIndex)) {
-    //         success = checkClash(newIndex);
-    //         this.waitlistedIndexArray.add(oldIndex);
-    //         return success;
-    //     } else {
-    //         this.confirmedIndexArray.remove(oldIndex) ;
-    //         success = checkClash(newIndex);
-    //         this.confirmedIndexArray.add(oldIndex);
-    //         return success;
-    //     }
 
-    // }
-    
     public boolean changeIndex(Index oldIndex, Index newIndex) {
         TimetableClashChecker clashChecker = new TimetableClashChecker();
         boolean allowed = clashChecker.checkClash(this, newIndex, oldIndex);
@@ -126,12 +91,5 @@ public class StudentRegisteredCourses implements Serializable{
     public void swopPlaces(Index friendIndex, Student friend) {
         IndexStudentSwopper swopper = new IndexStudentSwopper();
         swopper.swopStudent(friendIndex, friend, this.owner);
-        // boolean confirmed;
-        // confirmed = friendIndex.swopStudent(friend, this.owner);
-        // if (confirmed) {
-        //     this.confirmedIndexArray.add(friendIndex);
-        // } else {
-        //     this.waitlistedIndexArray.add(friendIndex);
-        // }
     }
 }
