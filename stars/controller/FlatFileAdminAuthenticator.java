@@ -3,12 +3,19 @@ package stars.controller;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-import stars.entity.*;
-import stars.boundary.*;
 
+/**
+ * Concrete class for admin authentication
+ */
 public class FlatFileAdminAuthenticator implements Authenticator {
     private final String ADMIN_ACCOUNT_FILE = "stars/adminAccount.txt";
     
+    /**
+     * Authenticates username and password by user with username and hashed password stored in flat file
+     * @param username Username to be authenticated
+     * @param password Password to be authenticated
+     * @return true if authentication is successful, false if incorrect username and password is input
+     */
     public boolean authenticate(String username, String password) {
         int hashedPassword = password.hashCode();
         String adminUsername;
