@@ -13,7 +13,6 @@ public class StudentController {
 
     public StudentController(String studentID) {
         dbManager = new DatabaseManager();
-        dbManager.loadInformation();
         myStudent = dbManager.findStudent(studentID);
         displayer = new TimetableDisplayer(myStudent);
     }

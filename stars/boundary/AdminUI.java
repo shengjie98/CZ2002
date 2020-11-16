@@ -15,6 +15,9 @@ public class AdminUI extends SelectUI {
     private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
     private final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
+    /**
+     * Constructor for AdminUI
+     */
     public AdminUI() {
         adminController = new AdminController();
     }
