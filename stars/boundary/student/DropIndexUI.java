@@ -20,7 +20,7 @@ public class DropIndexUI extends SelectUI {
         if (success) {
             System.out.println("Successfully dropped!");
         } else {
-            System.out.println("Error dropping");
+            System.out.println("Left waiting list!");
         }
     }
 }

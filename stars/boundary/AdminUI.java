@@ -28,8 +28,8 @@ public class AdminUI extends SelectUI {
     public void displayMenu() {
         Scanner sc = new Scanner(System.in);
         int i;
-        System.out.println("===ADMIN MENU===");
         do {
+            System.out.println("===ADMIN MENU===");
             System.out.println("1. Edit student access period");
             System.out.println("2. Add student");
             System.out.println("3. Add course");
@@ -39,6 +39,7 @@ public class AdminUI extends SelectUI {
             System.out.println("7. Print student list by course");
             System.out.println("8. Print all students in database");
             System.out.println("9. Print all courses in database");
+            System.out.println("0. Logout");
             System.out.print("Option: ");
             i = IntScanner.nextInt();
             switch (i) {

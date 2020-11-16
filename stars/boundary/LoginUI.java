@@ -13,7 +13,7 @@ public class LoginUI {
             System.out.println("1. Login");
             System.out.println("2. Exit");
             System.out.print("Option: ");
-            i = sc.nextInt();
+            i = IntScanner.nextInt();
             switch (i) {
                 case 1:
                     login();

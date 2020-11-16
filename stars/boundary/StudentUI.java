@@ -27,6 +27,7 @@ public class StudentUI extends SelectUI {
             System.out.println("5. Change index number of course");
             System.out.println("6. Swop index number with another student");
             System.out.println("7. Display Timetable");
+            System.out.println("0. Logout");
             System.out.print("Option: ");
             i = IntScanner.nextInt();
             switch (i) {
