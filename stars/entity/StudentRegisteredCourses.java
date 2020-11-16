@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import stars.boundary.*;
 import stars.controller.*;
 
-public class StudentRegisteredCourses implements Serializable{
+public class StudentRegisteredCourses implements Serializable {
     private ArrayList<Index> waitlistedIndexArray;
     private ArrayList<Index> confirmedIndexArray;
-    private Student owner; 
+    private Student owner;
     private int AU;
 
     public StudentRegisteredCourses(Student owner) {
@@ -18,15 +18,15 @@ public class StudentRegisteredCourses implements Serializable{
     }
 
     public ArrayList<Index> getIndexList() {
-        ArrayList<Index> temp = (ArrayList<Index>)this.waitlistedIndexArray.clone();
+        ArrayList<Index> temp = (ArrayList<Index>) this.waitlistedIndexArray.clone();
         temp.addAll(this.confirmedIndexArray);
         return temp;
     }
-    
+
     public ArrayList<Index> getWaitlistedIndexArray() {
         return waitlistedIndexArray;
     }
-    
+
     public ArrayList<Index> getConfirmedIndexArray() {
         return confirmedIndexArray;
     }
@@ -55,11 +55,11 @@ public class StudentRegisteredCourses implements Serializable{
         waitlistedIndexArray.remove(index);
     }
 
-    public void moveToConfirmed(Index index){
+    public void moveToConfirmed(Index index) {
         confirmedIndexArray.add(index);
         waitlistedIndexArray.remove(index);
     }
-    
+
     public Student getOwner() {
         return owner;
     }
