@@ -12,6 +12,10 @@ public class DropIndexUI extends SelectUI {
         Index selectedIndex;
         indexList = studentController.getRegisteredIndex();
         selectedIndex = (Index)select(indexList);
+        if (selectedIndex == null) {
+            System.out.println("\nNo Indexes Available!\n");
+            return;
+        }
         success = studentController.dropIndex(selectedIndex);
         if (success) {
             System.out.println("Successfully dropped!");

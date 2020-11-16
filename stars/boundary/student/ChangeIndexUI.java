@@ -13,13 +13,21 @@ public class ChangeIndexUI extends SelectUI{
         
         indexList = studentController.getRegisteredIndex();
         oldIndex = (Index)select(indexList);
+        if (oldIndex == null) {
+            System.out.println("\nNo Indexes Available!\n");
+            return;
+        }
         indexList = oldIndex.getCourse().getIndexList();
         newIndex = (Index)select(indexList);
+        if (newIndex == null) {
+            System.out.println("\nNo Indexes Available!\n");
+            return;
+        }
         success = studentController.changeIndex(oldIndex, newIndex);
         if (success) {
             System.out.println("Successfully changed!");
         } else {
-            System.out.println("Error changing,  timetable clash");
+            System.out.println("Error changing,  timetable clash or already registered");
         }
     }
 }

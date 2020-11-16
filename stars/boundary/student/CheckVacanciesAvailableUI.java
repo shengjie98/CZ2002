@@ -13,8 +13,16 @@ public class CheckVacanciesAvailableUI extends SelectUI{
         Index selectedIndex;
         courseList = studentController.getCourseList();
         selectedCourse = (Course)select(courseList);
+        if (selectedCourse == null) {
+            System.out.println("\nNo Courses Available!\n");
+            return;
+        }
         indexList = selectedCourse.getIndexList();
         selectedIndex = (Index)select(indexList);
+        if (selectedIndex == null) {
+            System.out.println("\nNo Indexes Available!\n");
+            return;
+        }
         System.out.printf("Vacancies: %d\n", selectedIndex.getVacancy());
     } 
 }

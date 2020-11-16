@@ -78,6 +78,9 @@ public class StudentRegisteredCourses implements Serializable{
 
     public boolean changeIndex(Index oldIndex, Index newIndex) {
         TimetableClashChecker clashChecker = new TimetableClashChecker();
+        if (oldIndex.getIndexNumber() == newIndex.getIndexNumber()) {
+            return false;
+        }
         boolean allowed = clashChecker.checkClash(this, newIndex, oldIndex);
         if (allowed) {
             IndexStudentAdder adder = new IndexStudentAdder();

@@ -17,6 +17,10 @@ public class SwopIndexUI extends SelectUI{
 
         indexList = studentController.getRegisteredIndex();
         selectedIndex = (Index)select(indexList);
+        if (selectedIndex == null) {
+            System.out.println("\nNo Indexes Available!\n");
+            return;
+        }
         
         System.out.print("Username: ");
         username = sc.next();

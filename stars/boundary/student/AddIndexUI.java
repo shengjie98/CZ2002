@@ -15,8 +15,16 @@ public class AddIndexUI extends SelectUI {
         
         courseList = studentController.getCourseList();
         selectedCourse = (Course)select(courseList);
+        if (selectedCourse == null) {
+            System.out.println("\nNo Courses Available!\n");
+            return;
+        }
         indexList = selectedCourse.getIndexList();
         selectedIndex = (Index)select(indexList);
+        if (selectedIndex == null) {
+            System.out.println("\nNo Indexes Available!\n");
+            return;
+        }
         success = studentController.addIndex(selectedIndex);
         if (success) {
             System.out.println("Successfully added!");

@@ -8,7 +8,7 @@ public class IndexStudentAdder {
         Student student = studentRegisteredCourses.getOwner();
         // check if student already has the course
         for (Index curIndex: studentRegisteredCourses.getIndexList()) {
-            if (curIndex.getCourse().getCourseID() == index.getCourse().getCourseID()) {
+            if (curIndex.getCourse().getCourseID().equals(index.getCourse().getCourseID())) {
                 return false;
             }
         }
