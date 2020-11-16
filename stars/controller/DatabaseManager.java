@@ -13,6 +13,10 @@ public class DatabaseManager {
     private Database db;
     private final String DATABASE_FILE = "stars/database.ser";
 
+    public DatabaseManager() {
+        loadInformation();
+    }
+
     public ArrayList<Student> getStudentArray() {
         return db.getStudentArray();
     }

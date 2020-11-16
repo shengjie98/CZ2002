@@ -10,6 +10,10 @@ import stars.boundary.student.*;
 public class StudentUI extends SelectUI {
     StudentController studentController;
 
+    /**
+     * Constructor for StudentUI
+     * @param studentID student who logged in
+     */
     public StudentUI(String studentID) {
         this.studentController = new StudentController(studentID);
     }

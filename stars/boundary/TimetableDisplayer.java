@@ -11,6 +11,10 @@ public class TimetableDisplayer {
     private final int WIDTH = 24;
     private final int HEIGHT = 1;
 
+    /**
+     * Constructor for TimetableDisplayer
+     * @param student student whose timetable is to be displayed
+     */
     public TimetableDisplayer(Student student){
         this.student = student;
     }
