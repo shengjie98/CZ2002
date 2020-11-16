@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import stars.boundary.*;
 import stars.controller.*;
+import stars.exceptions.*;
 
 /**
  * Stores and retrieves student data
@@ -34,7 +35,7 @@ public class Student implements Selectable, Serializable {
 
     }
 
-    public boolean addIndex(Index index) {
+    public boolean addIndex(Index index) throws ExceedAUException, TimetableClashException, AlreadyRegisteredException{
         return registeredCourses.addIndex(index);
     }
 
@@ -59,17 +60,17 @@ public class Student implements Selectable, Serializable {
     }
 
 
-    public boolean changeIndex(Index oldIndex, Index newIndex) {
+    public boolean changeIndex(Index oldIndex, Index newIndex) throws ExceedAUException, TimetableClashException, AlreadyRegisteredException {
         return registeredCourses.changeIndex(oldIndex, newIndex);
     }
 
-    public boolean checkChangeIndex(Index myIndex, Index friendIndex) {
+    public boolean checkChangeIndex(Index friendIndex, Index myIndex) {
         TimetableClashChecker clashChecker = new TimetableClashChecker();
         return clashChecker.checkClash(this.registeredCourses, friendIndex, myIndex);
     }
 
-    public void swopPlaces(Index friendIndex, Student friend) {
-        registeredCourses.swopPlaces(friendIndex, friend);
+    public boolean swopPlaces(Index friendIndex, Student friend) throws TimetableClashException, AlreadyRegisteredException {
+        return registeredCourses.swopPlaces(friendIndex, friend);
     }
 
     public void sendNotification(Index index) {
@@ -81,6 +82,10 @@ public class Student implements Selectable, Serializable {
         String stringToReturn = "Name: " + this.studentName + " Gender: " + this.gender + " Nationality: "
                 + this.nationality;
         return stringToReturn;
+    }
+
+    public StudentRegisteredCourses getregisteredCourses() {
+        return registeredCourses;
     }
 
     public String getStudentID() {

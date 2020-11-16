@@ -61,41 +61,6 @@ public class Index implements Selectable, Serializable {
 		return this.course.getAu();
 	}
 
-	// public boolean addStudent(Student newStudent) {
-	// // if the confirmedList is full, add the student to the waitlist
-	// if (confirmedList.size() == vacancyLimit) {
-	// waitList.add(newStudent);
-	// return false;
-	// } else {
-	// // else add the student to the confirmed list
-	// confirmedList.add(newStudent);
-	// vacancy--;
-	// return true;
-	// }
-	// }
-
-	// public boolean dropStudent(Student newStudent) {
-	// if (confirmedList.contains(newStudent)) {
-	// confirmedList.remove(newStudent);
-	// vacancy++;
-	// // TODO missing adding the waitlist student
-	// return true;
-
-	// } else {
-	// waitList.remove(newStudent);
-	// return false;
-	// }
-	// }
-
-	// public boolean swopStudent(Student curStudent, Student newStudent) {
-	// if (confirmedList.contains(curStudent)) {
-	// confirmedList.set(confirmedList.indexOf(curStudent), newStudent);
-	// return true;
-	// } else {
-	// waitList.set(waitList.indexOf(curStudent), newStudent);
-	// return false;
-	// }
-	// }
 
 	public Course getCourse() {
 		return course;

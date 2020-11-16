@@ -3,11 +3,13 @@ package stars.boundary.student;
 import stars.boundary.SelectUI;
 import stars.controller.StudentController;
 import stars.entity.*;
+import stars.exceptions.ExceedAUException;
+
 import java.util.ArrayList;
 
 public class ChangeIndexUI extends SelectUI{
     public void changeIndex(StudentController studentController) {
-        boolean success;
+        boolean conrimed;
         ArrayList<Index> indexList;
         Index oldIndex, newIndex;
         
@@ -23,11 +25,15 @@ public class ChangeIndexUI extends SelectUI{
             System.out.println("\nNo Indexes Available!\n");
             return;
         }
-        success = studentController.changeIndex(oldIndex, newIndex);
-        if (success) {
-            System.out.println("Successfully changed!");
-        } else {
-            System.out.println("Error changing,  timetable clash or already registered");
+        try {
+            conrimed = studentController.changeIndex(oldIndex, newIndex);
+            if (conrimed) {
+                System.out.println("Successfully changed!");
+            } else {
+                System.out.println("New Index full! Added to waitlist!");
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 }
