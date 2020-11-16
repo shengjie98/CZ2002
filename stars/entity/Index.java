@@ -64,7 +64,7 @@ public class Index implements Selectable, Serializable {
 	}
 
 	public void insertStudentToWaitList(Student student, int location) {
-		waitList.set(location, student);
+		waitList.add(location, student);
 	}
 
 	public int getAU() {

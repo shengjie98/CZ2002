@@ -1,10 +1,15 @@
 package stars.boundary;
 
-import java.io.InputStream;
 import java.util.Scanner;
 
+/**
+ * Int Scanner with error handling
+ */
 public class IntScanner {
-
+    /**
+     * Int Scanner with error handing
+     * @return int from sys.in
+     */
     public static int nextInt() {
         int i;
         while (true) {

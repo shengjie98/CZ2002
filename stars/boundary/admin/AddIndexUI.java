@@ -10,7 +10,16 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+/**
+ * Collects data to add index to course
+ */
 public class AddIndexUI {
+    /**
+     * Collects data to add index to course 
+     * @param adminController AdminController with database intitialised
+     * @param newCourse Course for which index will be added to
+     * @param timeFormatter timeformatter for timing inputs
+     */
     public void addIndex(AdminController adminController, Course newCourse, DateTimeFormatter timeFormatter) {
         Scanner sc = new Scanner(System.in);
         System.out.print("   a. Index Number: ");

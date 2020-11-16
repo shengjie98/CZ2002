@@ -2,15 +2,15 @@ package stars.boundary;
 
 import java.util.Scanner;
 import java.util.ArrayList;
-import stars.controller.*;
 import stars.entity.*;
-// import java.util.List;
 
+/**
+ * implementation of select method to be used by UI classes
+ */
 public abstract class SelectUI {
 
     /**
      * Lets the user choose from a list of Selectables
-     * 
      * @return Selectable
      */
     public Selectable select(ArrayList<? extends Selectable> ls) {

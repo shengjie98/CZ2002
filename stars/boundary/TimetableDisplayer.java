@@ -1,10 +1,11 @@
 package stars.boundary;
 
 import stars.entity.*;
-import stars.controller.*;
 import java.time.LocalTime;
 
-
+/**
+ * UI class to display timetable in a visual format
+ */
 public class TimetableDisplayer {   
     private Student student;
     private final int WIDTH = 24;
@@ -14,6 +15,9 @@ public class TimetableDisplayer {
         this.student = student;
     }
 
+    /**
+     * UI to display registered and waitlisted courses
+     */
     public void displayTimetable() {
         String courseID, indexID, display;
         int i, j, k, col, row;

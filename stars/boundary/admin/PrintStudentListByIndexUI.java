@@ -5,7 +5,13 @@ import stars.controller.*;
 import stars.entity.*;
 import stars.boundary.*;
 
+/**
+ * UI to print student list by index
+ */
 public class PrintStudentListByIndexUI extends SelectUI {
+    /**
+     * UI to print student list by index
+     */
     public void printStudentListByIndex(AdminController adminController) {
         // get list of courses from the course database
         ArrayList<Course> courseList;

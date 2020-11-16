@@ -26,7 +26,7 @@ public class IndexStudentDropper {
             // System.out.println("in drop2");
             index.dropStudentFromWaitList(student);
             studentRegisteredCourses.removeFromWaitlistedIndexArray(index);
-            return true;
+            return false;
         }
     }
 }

@@ -1,12 +1,19 @@
 package stars.boundary.admin;
 
 import java.util.ArrayList;
-import stars.controller.*;
 import stars.entity.*;
 import stars.boundary.*;
 import stars.controller.AdminController;
 
+
+/**
+ * UI for admin to check vacancy of a index
+ */
 public class CheckVacancyUI extends SelectUI {
+    /**
+     * UI for admin to check vacancy of an index
+     * @param adminController admin controller with database initialised
+     */
     public void checkVacancy(AdminController adminController) {
         // get list of courses from the course database
         ArrayList<Course> courseList;
