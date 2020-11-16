@@ -3,11 +3,13 @@ package stars.boundary.student;
 import stars.boundary.SelectUI;
 import stars.controller.StudentController;
 import stars.entity.*;
+import stars.exceptions.ExceedAUException;
+
 import java.util.ArrayList;
 
 public class AddIndexUI extends SelectUI {
     public void addIndex(StudentController studentController) {
-        boolean success;
+        boolean confirm;
         ArrayList<Course> courseList;
         Course selectedCourse;
         ArrayList<Index> indexList;
@@ -25,11 +27,15 @@ public class AddIndexUI extends SelectUI {
             System.out.println("\nNo Indexes Available!\n");
             return;
         }
-        success = studentController.addIndex(selectedIndex);
-        if (success) {
-            System.out.println("Successfully added!");
-        } else {
-            System.out.println("Error! , timetable clash or too many AUs or already registered");
+        try {
+            confirm = studentController.addIndex(selectedIndex);
+            if (confirm) {
+                System.out.println("Successfully added!");
+            } else {
+                System.out.println("Index full, added to waitlist!");
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 }

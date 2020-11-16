@@ -6,6 +6,7 @@
         "**/CVS": true,
         "**/.DS_Store": true, 
         "**/stars/boundary/*.class": true,
+        "**/stars/exceptions/*.class": true,
         "**/stars/boundary/student/*.class": true,
         "**/stars/boundary/admin/*.class": true,
         "**/stars/controller/*.class": true,

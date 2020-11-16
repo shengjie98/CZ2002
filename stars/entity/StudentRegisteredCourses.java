@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import stars.boundary.*;
 import stars.controller.*;
+import stars.exceptions.AlreadyRegisteredException;
+import stars.exceptions.ExceedAUException;
+import stars.exceptions.TimetableClashException;
 
 public class StudentRegisteredCourses implements Serializable {
     private ArrayList<Index> waitlistedIndexArray;
@@ -64,7 +67,7 @@ public class StudentRegisteredCourses implements Serializable {
         return owner;
     }
 
-    public boolean addIndex(Index index) {
+    public boolean addIndex(Index index) throws ExceedAUException, TimetableClashException, AlreadyRegisteredException {
         IndexStudentAdder indexStudentAdder = new IndexStudentAdder();
         boolean success = indexStudentAdder.addStudent(index, this);
         return success;
@@ -76,10 +79,10 @@ public class StudentRegisteredCourses implements Serializable {
         return success;
     }
 
-    public boolean changeIndex(Index oldIndex, Index newIndex) {
+    public boolean changeIndex(Index oldIndex, Index newIndex) throws ExceedAUException, TimetableClashException, AlreadyRegisteredException {
         TimetableClashChecker clashChecker = new TimetableClashChecker();
         if (oldIndex.getIndexNumber() == newIndex.getIndexNumber()) {
-            return false;
+            throw new AlreadyRegisteredException();
         }
         boolean allowed = clashChecker.checkClash(this, newIndex, oldIndex);
         // System.out.println("checkclash result: ");
@@ -87,18 +90,19 @@ public class StudentRegisteredCourses implements Serializable {
         if (allowed) {
             IndexStudentAdder adder = new IndexStudentAdder();
             IndexStudentDropper dropper = new IndexStudentDropper();
-            allowed = dropper.dropStudent(oldIndex, this);
+            dropper.dropStudent(oldIndex, this);
             // System.out.println("drop result: ");
             // System.out.println(allowed);
             allowed = adder.addStudent(newIndex, this);
+            return allowed;
             // System.out.println("add result: ");
             // System.out.println(allowed);
         }
-        return allowed;
+        throw new TimetableClashException();
     }
 
-    public void swopPlaces(Index friendIndex, Student friend) {
+    public boolean swopPlaces(Index friendIndex, Student friend) throws TimetableClashException, AlreadyRegisteredException {
         IndexStudentSwopper swopper = new IndexStudentSwopper();
-        swopper.swopStudent(friendIndex, friend, this.owner);
+        return swopper.swopStudent(friendIndex, friend, this.owner);
     }
 }

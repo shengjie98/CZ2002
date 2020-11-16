@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class SwopIndexUI extends SelectUI{
     public void swopIndex(StudentController studentController) {
-        boolean success;
+        boolean success, confirmed;
         ArrayList<Index> indexList;
         Index selectedIndex;
         String username, password;
@@ -22,6 +22,7 @@ public class SwopIndexUI extends SelectUI{
             return;
         }
         
+        System.out.println("\nFriend's Login Details ");
         System.out.print("Username: ");
         username = sc.next();
         System.out.print("Password: ");
@@ -29,7 +30,16 @@ public class SwopIndexUI extends SelectUI{
         // password = sc.next();
         success = loginController.authenticate(username, password);
         if (success) {
-            studentController.swopIndex(username, selectedIndex);
+            try {
+                confirmed = studentController.swopIndex(username, selectedIndex);
+                if (confirmed){
+                    System.out.println("Swopped successfully");
+                } else {
+                    System.out.println("Friend in waitlist, successfully took his place in waitlist");
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         } else {
             System.out.println("Incorrect details");
         }
