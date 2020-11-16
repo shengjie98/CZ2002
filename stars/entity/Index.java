@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import stars.boundary.*;
 import stars.controller.*;
 
+/**
+ * In charge of handling the data that belongs to an Index
+ */
 public class Index implements Selectable, Serializable {
 	private Course course;
 	private ArrayList<Timing> timings = new ArrayList<Timing>();;
@@ -14,6 +17,13 @@ public class Index implements Selectable, Serializable {
 	private int vacancyLimit;
 	private int indexNumber;
 
+	/**
+	 * Constructor for Index
+	 * 
+	 * @param course
+	 * @param vacancy
+	 * @param indexNumber
+	 */
 	public Index(Course course, int vacancy, int indexNumber) {
 		this.course = course;
 		this.vacancy = vacancy;
@@ -60,7 +70,6 @@ public class Index implements Selectable, Serializable {
 	public int getAU() {
 		return this.course.getAu();
 	}
-
 
 	public Course getCourse() {
 		return course;
@@ -112,7 +121,9 @@ public class Index implements Selectable, Serializable {
 
 	public String print() {
 		// print out all the information of the Course
-		String stringToReturn = "Index: "+ String.valueOf(this.indexNumber) + " vacancy: " + String.valueOf(this.vacancy) + " confirmed size: " + this.confirmedList.size() + " waitlist size: " + this.waitList.size() ;
+		String stringToReturn = "Index: " + String.valueOf(this.indexNumber) + " vacancy: "
+				+ String.valueOf(this.vacancy) + " confirmed size: " + this.confirmedList.size() + " waitlist size: "
+				+ this.waitList.size();
 		return stringToReturn;
 	}
 
