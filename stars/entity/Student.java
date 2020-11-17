@@ -45,8 +45,9 @@ public class Student implements Selectable, Serializable {
     /**
      * Adds Index to the StudentRegisteredCourses
      * 
-     * @param index
-     * @return
+     * @param index The Index to be added to the StudentRegisteredCourse
+     * @return Boolean that indicates false if the Student has been added to the
+     *         waitlist of the Index
      * @throws ExceedAUException
      * @throws TimetableClashException
      * @throws AlreadyRegisteredException
