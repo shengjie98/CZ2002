@@ -8,18 +8,27 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import stars.boundary.*;
-import stars.controller.*;
 
+/**
+ * Handles the notification to be sent to the Student once the Student is moved
+ * from the waitlist to the confirmed list of the Index
+ */
 public class EmailService implements NotificationInterface {
 	private Student student;
 	final String username = "cz20022020@gmail.com"; // to be added
 	final String password = "ilovecz2002"; // to be added
 
+	/**
+	 * The construcor of the Email Service
+	 */
 	public EmailService(Student student) {
 		this.student = student;
 	}
 
+	/**
+	 * Sends the Notification to the Student's Email once the Student is moved from
+	 * the waitlist of the Index to the confirmed list of the Index
+	 */
 	public void sendNotification(Index index) {
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");

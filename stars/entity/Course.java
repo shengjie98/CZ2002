@@ -2,8 +2,6 @@ package stars.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import stars.boundary.*;
-import stars.controller.*;
 
 /**
  * Course handles the data that pertains to a Course

@@ -2,8 +2,6 @@ package stars.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import stars.boundary.*;
-import stars.controller.*;
 
 /**
  * In charge of handling the data that belongs to an Index
