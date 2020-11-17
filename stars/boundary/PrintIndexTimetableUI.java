@@ -5,12 +5,15 @@ import java.util.ArrayList;
 
 import stars.entity.*;
 
+/**
+ * In charge of printing out the Timings of the Index
+ */
 public class PrintIndexTimetableUI extends SelectUI {
     /**
-     * UI for student to check vacancies of an index
+     * Prints out the Timings of the Index
      * 
-     * @param studentController student controller with initialised database and
-     *                          student
+     * @param userControllerInterface either a StudentController or an
+     *                                AdminController
      */
     public void printIndexTimetable(UserControllerInterface userControllerInterface) {
         ArrayList<Course> courseList;
