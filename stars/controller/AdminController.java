@@ -258,18 +258,6 @@ public class AdminController {
         return false;
     }
 
-    // /**
-    //  * 
-    //  * @param courseID
-    //  * @param au
-    //  * @param school
-    //  * @param courseName
-    //  */
-    // public void addCourse(String courseID, int au, String school, String courseName) {
-    //     Course newCourse = new Course(courseID, au, school, courseName);
-    //     dbManager.addCourse(newCourse);
-    //     return;
-    // }
 
     /**
      * edit access of a student

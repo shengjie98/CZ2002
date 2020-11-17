@@ -2,9 +2,17 @@ package stars.controller;
 
 import java.util.ArrayList;
 import stars.entity.*;
-import stars.boundary.*;
 
+/**
+ * Class to handle logic for student dropping an Index
+ */
 public class IndexStudentDropper {
+    /**
+     * Handles logic to drop Index by Student
+     * @param index Index which student intends to drop of the student
+     * @param studentRegisteredCourses StudentRegisteredCourses object
+     * @return true if student was in the index, false if student was from the waitlist
+     */
     public boolean dropStudent(Index index, StudentRegisteredCourses studentRegisteredCourses) {
         Student student = studentRegisteredCourses.getOwner();
         ArrayList<Student> confirmed = index.getConfirmedList();

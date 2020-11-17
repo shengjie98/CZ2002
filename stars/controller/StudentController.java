@@ -80,6 +80,21 @@ public class StudentController {
         return myStudent.changeIndex(oldIndex, newIndex);
     }
 
+    /**
+     * Method to swap position with another student another index index
+     * 
+     * @param friendID studentID of friend who going to take the place in the index
+     * @param myIndex  The index the student is currently in
+     * @return true if myStudent is added to the confirmed list of the new index,
+     *         false if added to the waitlist of the new index
+     * @throws TimetableClashException    If the user is unable to add the Index to
+     *                                    the list of Registered Courses because of
+     *                                    a Timetable Clash between te Index and the
+     *                                    Student's exisiting Indexes
+     * @throws AlreadyRegisteredException If the user is unable to add the Index
+     *                                    because he has already Registered for the
+     *                                    Course
+     */
     public boolean swopIndex(String friendID, Index myIndex)
             throws TimetableClashException, AlreadyRegisteredException {
         // using myIndex find myCourse, then find my friend's Index using myCourse
@@ -102,10 +117,16 @@ public class StudentController {
         throw new TimetableClashException();
     }
 
+    /**
+     * method to serilaise the database back to disk
+     */
     public void save() {
         this.dbManager.saveInformation();
     }
 
+    /**
+     * Method to display timetable of registered courses by the student
+     */
     public void displayTimetable() {
         this.displayer.displayTimetable();
     }

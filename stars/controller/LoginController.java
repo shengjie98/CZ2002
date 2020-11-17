@@ -1,24 +1,15 @@
 package stars.controller;
 
 import stars.boundary.*;
-import stars.entity.*;
 
-// import java.io.FileNotFoundException;
-// import java.io.FileWriter;
-// import java.io.IOException;
-// import java.io.PrintWriter;
-// import java.time.LocalDateTime;
-// import java.util.ArrayList;
-// import java.util.Scanner;
-// import java.io.BufferedWriter;
-// import java.io.File;
-
+/**
+ * Manages the diffrent Authenticators
+ */
 public class LoginController {
     /**
-     * Verifies the username and passsword of the use
-     * 
-     * @param username
-     * @param password
+     * Verifies the username and passsword of the user
+     * @param username username of the user trying to log in
+     * @param password password of the user trying to log in
      */
     public boolean verifyLogin(String username, String password) {
         Authenticator studenAuthenticator = new FlatFileStudentAuthenticator();

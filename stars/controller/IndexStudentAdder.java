@@ -10,7 +10,7 @@ public class IndexStudentAdder {
     /**
      * Handles the logic to add students to Index
      * @param index Index where student is added to
-     * @param studentRegisteredCourses StudentRegisteredCourses object of the studnet
+     * @param studentRegisteredCourses StudentRegisteredCourses object of the student
      * @return true if added to confirmed list in the index, false if added to the waitlist of index
      * @throws ExceedAUException          If the user is unable to add the Index to
      *                                    the list of Registered Courses because it
