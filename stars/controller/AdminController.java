@@ -206,7 +206,6 @@ public class AdminController {
             // check if the number of students already in the list exceeds the
             // the newVacancyLimit, if so, this will not be allowed
             if ((selectedIndex.getVacancyLimit() - selectedIndex.getVacancy()) > newVacancyLimit) {
-                System.out.println("here");
                 return false;
             } else {
                 // otherwise, set the new vacancy to be the new limit - the number of students
