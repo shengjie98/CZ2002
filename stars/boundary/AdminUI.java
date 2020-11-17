@@ -39,6 +39,7 @@ public class AdminUI extends SelectUI {
             System.out.println("7. Print student list by course");
             System.out.println("8. Print all students in database");
             System.out.println("9. Print all courses in database");
+            System.out.println("10: Display Index Timings");
             System.out.println("0. Logout");
             System.out.print("Option: ");
             i = IntScanner.nextInt();
@@ -77,6 +78,9 @@ public class AdminUI extends SelectUI {
                 case 9:
                     getallcourses();
                     break;
+                case 10:
+                    PrintIndexTimetableUI printIndexTimetableUI = new PrintIndexTimetableUI();
+                    printIndexTimetableUI.printIndexTimetable(adminController);
                 default:
                     break;
             }

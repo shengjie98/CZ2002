@@ -28,6 +28,7 @@ public class AddIndexUI {
         System.out.print("   b. Vacancy: ");
         int newVacancy = IntScanner.nextInt();
         Index newIndex = adminController.createIndex(newCourse, newVacancy, newIndexNumber);
+        IndexTimingDisplayer indexTimingDisplayer = new IndexTimingDisplayer(newIndex);
         System.out.println("   c. Timings: ");
         int choice;
         while (true) {
@@ -114,6 +115,7 @@ public class AddIndexUI {
             } else {
                 System.out.println("Timing could not be added! There was a clash in timing.");
             }
+            indexTimingDisplayer.displayTimetable();
             System.out.print("Add another timing (Y/N)? ");
             if (!(sc.nextLine()).equals("Y")) {
                 break;

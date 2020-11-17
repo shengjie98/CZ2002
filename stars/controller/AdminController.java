@@ -10,7 +10,7 @@ import stars.entity.Timing.Type;
 /**
  * Controller to manage the admin user
  */
-public class AdminController {
+public class AdminController implements UserControllerInterface {
     private DatabaseManager dbManager;
 
     /**
