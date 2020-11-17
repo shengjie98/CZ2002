@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class IntScanner {
     /**
      * Int Scanner with error handing
+     * 
      * @return int from sys.in
      */
     public static int nextInt() {

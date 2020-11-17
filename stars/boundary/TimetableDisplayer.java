@@ -6,16 +6,17 @@ import java.time.LocalTime;
 /**
  * UI class to display timetable in a visual format
  */
-public class TimetableDisplayer {   
+public class TimetableDisplayer {
     private Student student;
     private final int WIDTH = 24;
     private final int HEIGHT = 1;
 
     /**
      * Constructor for TimetableDisplayer
+     * 
      * @param student student whose timetable is to be displayed
      */
-    public TimetableDisplayer(Student student){
+    public TimetableDisplayer(Student student) {
         this.student = student;
     }
 
@@ -26,32 +27,32 @@ public class TimetableDisplayer {
         String courseID, indexID, display;
         int i, j, k, col, row;
         String[][] arr = new String[48][5];
-        for (i = 0; i<48; i++) {
-            for (j=0; j<5; j++) {
-                arr[i][j] = " ".repeat(WIDTH) ;
+        for (i = 0; i < 48; i++) {
+            for (j = 0; j < 5; j++) {
+                arr[i][j] = " ".repeat(WIDTH);
             }
         }
-        
-        for (Index index: student.getConfirmedIndex()) {
+
+        for (Index index : student.getConfirmedIndex()) {
             courseID = index.getCourse().getCourseID();
             indexID = Integer.toString(index.getIndexNumber());
-            for (Timing time: index.getTimings()) {
+            for (Timing time : index.getTimings()) {
                 display = courseID + " " + indexID + " " + time.getType().toString();
                 switch (time.getDay()) {
                     case MON:
-                        col = 0;    
+                        col = 0;
                         break;
                     case TUE:
-                        col = 1;    
+                        col = 1;
                         break;
                     case WED:
-                        col = 2;    
+                        col = 2;
                         break;
                     case THU:
-                        col = 3;    
+                        col = 3;
                         break;
                     case FRI:
-                        col = 4;    
+                        col = 4;
                         break;
                     default:
                         col = 0;
@@ -61,11 +62,11 @@ public class TimetableDisplayer {
                 LocalTime start, end;
                 start = time.getStart();
                 end = time.getEnd();
-                int minutes = (end.getHour() - start.getHour())*60 + end.getMinute() - start.getMinute();
+                int minutes = (end.getHour() - start.getHour()) * 60 + end.getMinute() - start.getMinute();
                 int periods = (int) Math.round((double) minutes / 30);
                 int rowStart = start.getHour() * 2;
                 minutes = start.getMinute();
-                if ( 15 < minutes && minutes < 45) {
+                if (15 < minutes && minutes < 45) {
                     rowStart++;
                 } else if (minutes >= 45) {
                     rowStart += 2;
@@ -76,26 +77,26 @@ public class TimetableDisplayer {
             }
         }
 
-        for (Index index: student.getWaitlistedIndex()) {
+        for (Index index : student.getWaitlistedIndex()) {
             courseID = index.getCourse().getCourseID();
             indexID = Integer.toString(index.getIndexNumber());
-            for (Timing time: index.getTimings()) {
+            for (Timing time : index.getTimings()) {
                 display = courseID + " " + indexID + " " + time.getType().toString() + "(Waitlist)";
                 switch (time.getDay()) {
                     case MON:
-                        col = 0;    
+                        col = 0;
                         break;
                     case TUE:
-                        col = 1;    
+                        col = 1;
                         break;
                     case WED:
-                        col = 2;    
+                        col = 2;
                         break;
                     case THU:
-                        col = 3;    
+                        col = 3;
                         break;
                     case FRI:
-                        col = 4;    
+                        col = 4;
                         break;
                     default:
                         col = 0;
@@ -105,11 +106,11 @@ public class TimetableDisplayer {
                 LocalTime start, end;
                 start = time.getStart();
                 end = time.getEnd();
-                int minutes = (end.getHour() - start.getHour())*60 + end.getMinute() - start.getMinute();
+                int minutes = (end.getHour() - start.getHour()) * 60 + end.getMinute() - start.getMinute();
                 int periods = (int) Math.round((double) minutes / 30);
                 int rowStart = start.getHour() * 2;
                 minutes = start.getMinute();
-                if ( 15 < minutes && minutes < 45) {
+                if (15 < minutes && minutes < 45) {
                     rowStart++;
                 } else if (minutes >= 45) {
                     rowStart += 2;
@@ -128,19 +129,19 @@ public class TimetableDisplayer {
         System.out.print(pad("THU") + " || ");
         System.out.print(pad("FRI") + " || ");
         System.out.println("");
-        for (i = 0; i< 48; i++) {
-            hourStart = (i/2)%24;
-            minuteStart = (i%2) * 30;
-            hourEnd = ((i+1)/2)%24;
-            minuteEnd = ((i+1)%2) * 30;
-            for (k = 0 ; k< HEIGHT; k++) {
-                if (k == HEIGHT/2) {
-                    System.out.printf("%02d:%02d-%02d:%02d", hourStart,  minuteStart, hourEnd, minuteEnd);
+        for (i = 0; i < 48; i++) {
+            hourStart = (i / 2) % 24;
+            minuteStart = (i % 2) * 30;
+            hourEnd = ((i + 1) / 2) % 24;
+            minuteEnd = ((i + 1) % 2) * 30;
+            for (k = 0; k < HEIGHT; k++) {
+                if (k == HEIGHT / 2) {
+                    System.out.printf("%02d:%02d-%02d:%02d", hourStart, minuteStart, hourEnd, minuteEnd);
                 } else {
                     System.out.print(" ".repeat(11));
                 }
                 System.out.print(" || ");
-                for (j = 0; j< 5; j++) {
+                for (j = 0; j < 5; j++) {
                     System.out.print(arr[i][j]);
                     System.out.print(" || ");
                 }

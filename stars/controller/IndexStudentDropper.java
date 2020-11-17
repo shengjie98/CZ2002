@@ -9,9 +9,12 @@ import stars.entity.*;
 public class IndexStudentDropper {
     /**
      * Handles logic to drop Index by Student
-     * @param index Index which student intends to drop of the student
+     * 
+     * @param index                    Index which student intends to drop of the
+     *                                 student
      * @param studentRegisteredCourses StudentRegisteredCourses object
-     * @return true if student was in the index, false if student was from the waitlist
+     * @return true if student was in the index, false if student was from the
+     *         waitlist
      */
     public boolean dropStudent(Index index, StudentRegisteredCourses studentRegisteredCourses) {
         Student student = studentRegisteredCourses.getOwner();

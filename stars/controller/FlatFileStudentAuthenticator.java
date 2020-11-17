@@ -17,10 +17,13 @@ public class FlatFileStudentAuthenticator implements StudentAuthenticator {
     private final String STUDENT_ACCOUNTS_FILE = "stars/studentAccounts.txt";
 
     /**
-     * Authenticates username and password by user with username and hashed password stored in flat file
+     * Authenticates username and password by user with username and hashed password
+     * stored in flat file
+     * 
      * @param username Username to be authenticated
      * @param password Password to be authenticated
-     * @return true if authentication is successful, false if incorrect username and password is input
+     * @return true if authentication is successful, false if incorrect username and
+     *         password is input
      */
     public boolean authenticate(String username, String password) {
         int hashedPassword = password.hashCode();
@@ -37,9 +40,10 @@ public class FlatFileStudentAuthenticator implements StudentAuthenticator {
                 studentPassword = Integer.parseInt(line[1]);
                 accessStart = LocalDateTime.parse(line[2]);
                 accessEnd = LocalDateTime.parse(line[3]);
-                if (username.equals(studentUsername) && hashedPassword == studentPassword && now.isAfter(accessStart) && now.isBefore(accessEnd)) {
+                if (username.equals(studentUsername) && hashedPassword == studentPassword && now.isAfter(accessStart)
+                        && now.isBefore(accessEnd)) {
                     return true;
-                } 
+                }
             } while (admin.hasNextLine());
         } catch (FileNotFoundException e) {
             System.out.println("file not file error\n");
@@ -50,9 +54,10 @@ public class FlatFileStudentAuthenticator implements StudentAuthenticator {
 
     /**
      * Edit the access period of a student
-     * @param username studentID of student whose access period is being edited
+     * 
+     * @param username    studentID of student whose access period is being edited
      * @param accessStart start of new access period
-     * @param accessEnd end of new access period
+     * @param accessEnd   end of new access period
      */
     public void editAccess(String username, LocalDateTime accessStart, LocalDateTime accessEnd) {
         String line;
@@ -67,20 +72,19 @@ public class FlatFileStudentAuthenticator implements StudentAuthenticator {
                     lineList = line.split(" ");
                     line = String.join(" ", lineList[0], lineList[1], accessStart.toString(), accessEnd.toString());
                     lines.add(line);
-    
+
                 } else {
                     lines.add(line);
-                } 
+                }
             }
             sc.close();
         } catch (FileNotFoundException e) {
             System.out.print("file not found\n");
         }
 
-
-        try{
+        try {
             PrintWriter printStream = new PrintWriter(new BufferedWriter((new FileWriter(STUDENT_ACCOUNTS_FILE))));
-            for (String s: lines) {
+            for (String s : lines) {
                 printStream.println(s);
             }
             printStream.close();
@@ -91,16 +95,19 @@ public class FlatFileStudentAuthenticator implements StudentAuthenticator {
 
     /**
      * Add new student login particulars to flat file
-     * @param username Username of new student
-     * @param password Password of new student
+     * 
+     * @param username    Username of new student
+     * @param password    Password of new student
      * @param accessStart start of student access period
-     * @param accessEnd end of student access period
+     * @param accessEnd   end of student access period
      */
     public void addStudent(String username, String password, LocalDateTime accessStart, LocalDateTime accessEnd) {
         int hashedPassword = password.hashCode();
-        try{
-            PrintWriter printStream = new PrintWriter(new BufferedWriter((new FileWriter(STUDENT_ACCOUNTS_FILE, true))));
-            printStream.println(String.join(" ", username, Integer.toString(hashedPassword), accessStart.toString(), accessEnd.toString()));
+        try {
+            PrintWriter printStream = new PrintWriter(
+                    new BufferedWriter((new FileWriter(STUDENT_ACCOUNTS_FILE, true))));
+            printStream.println(String.join(" ", username, Integer.toString(hashedPassword), accessStart.toString(),
+                    accessEnd.toString()));
             printStream.close();
         } catch (IOException e) {
             System.out.println("file not found error\n");

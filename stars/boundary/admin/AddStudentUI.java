@@ -12,8 +12,9 @@ import java.time.format.DateTimeParseException;
 public class AddStudentUI {
     /**
      * Collects data from user to add course to database
+     * 
      * @param adminController AdminController with initialised database
-     * @param dateFormatter dateformatter for user input for access period
+     * @param dateFormatter   dateformatter for user input for access period
      */
     public void addStudent(AdminController adminController, DateTimeFormatter dateFormatter) {
         Scanner sc = new Scanner(System.in);

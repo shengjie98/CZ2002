@@ -8,6 +8,7 @@ import stars.boundary.*;
 public class LoginController {
     /**
      * Verifies the username and passsword of the user
+     * 
      * @param username username of the user trying to log in
      * @param password password of the user trying to log in
      */

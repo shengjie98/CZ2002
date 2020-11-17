@@ -9,12 +9,15 @@ import java.util.Scanner;
  */
 public class FlatFileAdminAuthenticator implements Authenticator {
     private final String ADMIN_ACCOUNT_FILE = "stars/adminAccount.txt";
-    
+
     /**
-     * Authenticates username and password by user with username and hashed password stored in flat file
+     * Authenticates username and password by user with username and hashed password
+     * stored in flat file
+     * 
      * @param username Username to be authenticated
      * @param password Password to be authenticated
-     * @return true if authentication is successful, false if incorrect username and password is input
+     * @return true if authentication is successful, false if incorrect username and
+     *         password is input
      */
     public boolean authenticate(String username, String password) {
         int hashedPassword = password.hashCode();
@@ -26,7 +29,7 @@ public class FlatFileAdminAuthenticator implements Authenticator {
             adminPassword = admin.nextInt();
             if (username.equals(adminUsername) && hashedPassword == adminPassword) {
                 return true;
-            } 
+            }
         } catch (FileNotFoundException e) {
             System.out.print("file not file error\n");
             return false;

@@ -15,10 +15,11 @@ import java.util.Scanner;
  */
 public class AddIndexUI {
     /**
-     * Collects data to add index to course 
+     * Collects data to add index to course
+     * 
      * @param adminController AdminController with database intitialised
-     * @param newCourse Course for which index will be added to
-     * @param timeFormatter timeformatter for timing inputs
+     * @param newCourse       Course for which index will be added to
+     * @param timeFormatter   timeformatter for timing inputs
      */
     public void addIndex(AdminController adminController, Course newCourse, DateTimeFormatter timeFormatter) {
         Scanner sc = new Scanner(System.in);

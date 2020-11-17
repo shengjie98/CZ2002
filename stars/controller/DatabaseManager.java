@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import stars.entity.*;
 
 /**
- * Database manager class to access database, handles database and hides implementation of database from client
+ * Database manager class to access database, handles database and hides
+ * implementation of database from client
  */
 public class DatabaseManager {
     private Database db;
@@ -25,6 +26,7 @@ public class DatabaseManager {
 
     /**
      * Gets all students from the database
+     * 
      * @return ArrayList of students from database
      */
     public ArrayList<Student> getStudentArray() {
@@ -33,6 +35,7 @@ public class DatabaseManager {
 
     /**
      * Gets all courses from the database
+     * 
      * @return ArrayList of courses from database
      */
     public ArrayList<Course> getCoursesArray() {
@@ -41,8 +44,10 @@ public class DatabaseManager {
 
     /**
      * Adds a student to the database
+     * 
      * @param student Student object to be added to the database
-     * @return true if added successfully, false if studentID already exists in the database
+     * @return true if added successfully, false if studentID already exists in the
+     *         database
      */
     public boolean addStudent(Student student) {
         return db.addStudent(student);
@@ -50,15 +55,18 @@ public class DatabaseManager {
 
     /**
      * Adds a course to the database
+     * 
      * @param course Course object to be added to the database
-     * @return true if added successfullym false if courseID already exists in the database
+     * @return true if added successfullym false if courseID already exists in the
+     *         database
      */
     public boolean addCourse(Course course) {
         return db.addCourse(course);
-    } 
+    }
 
     /**
      * Get student object from database using username
+     * 
      * @param studentID username of student to be found
      * @return Student object with matching studentID
      */
@@ -71,20 +79,20 @@ public class DatabaseManager {
      */
     private void loadInformation() {
         try {
-			ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(DATABASE_FILE));
-			this.db = (Database) inputStream.readObject();
+            ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(DATABASE_FILE));
+            this.db = (Database) inputStream.readObject();
             inputStream.close();
             if (this.db == null) {
                 System.out.println("Empty database");
                 this.db = new Database();
             }
-		} catch (IOException e) {
-			System.out.println("IOException");
-			this.db = new Database();
-		} catch (ClassNotFoundException e) {
-			System.out.println("Class not found");
-			this.db = new Database();
-		}
+        } catch (IOException e) {
+            System.out.println("IOException");
+            this.db = new Database();
+        } catch (ClassNotFoundException e) {
+            System.out.println("Class not found");
+            this.db = new Database();
+        }
     }
 
     /**
@@ -92,11 +100,11 @@ public class DatabaseManager {
      */
     public void saveInformation() {
         try {
-			ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(DATABASE_FILE));
-			outputStream.writeObject(this.db);
-			outputStream.close();
-		} catch (IOException e) {
-			System.out.println("Class not found");
-		}
+            ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(DATABASE_FILE));
+            outputStream.writeObject(this.db);
+            outputStream.close();
+        } catch (IOException e) {
+            System.out.println("Class not found");
+        }
     }
 }

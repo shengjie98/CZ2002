@@ -8,24 +8,26 @@ import java.util.ArrayList;
 /**
  * UI for student to add index
  */
-public class ChangeIndexUI extends SelectUI{
+public class ChangeIndexUI extends SelectUI {
     /**
      * UI for student to add index
-     * @param studentController student controller with initialised database and student
+     * 
+     * @param studentController student controller with initialised database and
+     *                          student
      */
     public void changeIndex(StudentController studentController) {
         boolean conrimed;
         ArrayList<Index> indexList;
         Index oldIndex, newIndex;
-        
+
         indexList = studentController.getRegisteredIndex();
-        oldIndex = (Index)select(indexList);
+        oldIndex = (Index) select(indexList);
         if (oldIndex == null) {
             System.out.println("\nNo Indexes Available!\n");
             return;
         }
         indexList = oldIndex.getCourse().getIndexList();
-        newIndex = (Index)select(indexList);
+        newIndex = (Index) select(indexList);
         if (newIndex == null) {
             System.out.println("\nNo Indexes Available!\n");
             return;

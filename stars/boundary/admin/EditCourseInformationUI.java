@@ -15,8 +15,9 @@ import java.util.ArrayList;
 public class EditCourseInformationUI extends SelectUI {
     /**
      * UI for admin to edit course information
+     * 
      * @param adminController admin controller with database initialised
-     * @param timeFormatter timeformatter for new timing inputs
+     * @param timeFormatter   timeformatter for new timing inputs
      */
     public void editCourseInformation(AdminController adminController, DateTimeFormatter timeFormatter) {
         System.out.println("Edit Course Information");

@@ -12,6 +12,7 @@ public class StudentUI extends SelectUI {
 
     /**
      * Constructor for StudentUI
+     * 
      * @param studentID student who logged in
      */
     public StudentUI(String studentID) {

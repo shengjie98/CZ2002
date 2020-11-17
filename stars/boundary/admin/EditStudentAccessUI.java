@@ -15,8 +15,9 @@ import java.util.Scanner;
 public class EditStudentAccessUI extends SelectUI {
     /**
      * UI to edit student access period
+     * 
      * @param adminController admin controller with database initialised
-     * @param dateFormatter date formatter to collect new access period
+     * @param dateFormatter   date formatter to collect new access period
      */
     public void editStudentAccess(AdminController adminController, DateTimeFormatter dateFormatter) {
         ArrayList<Student> studentList = adminController.getStudentList();

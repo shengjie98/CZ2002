@@ -9,10 +9,12 @@ import java.util.Scanner;
 /**
  * UI for student to swop index with another student
  */
-public class SwopIndexUI extends SelectUI{
+public class SwopIndexUI extends SelectUI {
     /**
      * UI for student to swop index with another student
-     * @param studentController student controller with initialised database and student
+     * 
+     * @param studentController student controller with initialised database and
+     *                          student
      */
     public void swopIndex(StudentController studentController) {
         boolean success, confirmed;
@@ -23,12 +25,12 @@ public class SwopIndexUI extends SelectUI{
         Scanner sc = new Scanner(System.in);
 
         indexList = studentController.getRegisteredIndex();
-        selectedIndex = (Index)select(indexList);
+        selectedIndex = (Index) select(indexList);
         if (selectedIndex == null) {
             System.out.println("\nNo Indexes Available!\n");
             return;
         }
-        
+
         System.out.println("\nFriend's Login Details ");
         System.out.print("Username: ");
         username = sc.next();
@@ -39,7 +41,7 @@ public class SwopIndexUI extends SelectUI{
         if (success) {
             try {
                 confirmed = studentController.swopIndex(username, selectedIndex);
-                if (confirmed){
+                if (confirmed) {
                     System.out.println("Swopped successfully");
                 } else {
                     System.out.println("Friend in waitlist, successfully took his place in waitlist");

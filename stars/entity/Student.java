@@ -48,9 +48,16 @@ public class Student implements Selectable, Serializable {
      * @param index The Index to be added to the StudentRegisteredCourse
      * @return Boolean that indicates false if the Student has been added to the
      *         waitlist of the Index
-     * @throws ExceedAUException
-     * @throws TimetableClashException
-     * @throws AlreadyRegisteredException
+     * @throws ExceedAUException          If the user is unable to add the Index to
+     *                                    the list of Registered Courses because it
+     *                                    would exceed the AU limit
+     * @throws TimetableClashException    If the user is unable to add the Index to
+     *                                    the list of Registered Courses because of
+     *                                    a Timetable Clash between te Index and the
+     *                                    Student's exisiting Indexes
+     * @throws AlreadyRegisteredException If the user is unable to add the Index
+     *                                    because he has already Registered for the
+     *                                    Course
      */
     public boolean addIndex(Index index) throws ExceedAUException, TimetableClashException, AlreadyRegisteredException {
         return registeredCourses.addIndex(index);

@@ -6,9 +6,11 @@ package stars.controller;
 public interface Authenticator {
     /**
      * Authenticates username and password by user
+     * 
      * @param username Username to be authenticated
      * @param password Password to be authenticated
-     * @return true if authentication is successful, false if incorrect username and password is input
+     * @return true if authentication is successful, false if incorrect username and
+     *         password is input
      */
     public boolean authenticate(String username, String password);
 }

@@ -11,7 +11,9 @@ import java.util.ArrayList;
 public class AddIndexUI extends SelectUI {
     /**
      * UI for student to add index
-     * @param studentController student controller with database initialised and student 
+     * 
+     * @param studentController student controller with database initialised and
+     *                          student
      */
     public void addIndex(StudentController studentController) {
         boolean confirm;

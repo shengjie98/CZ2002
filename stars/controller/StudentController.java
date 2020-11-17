@@ -36,7 +36,7 @@ public class StudentController {
 
     /**
      * Adds the Index to the Student's StudentRegisteredCourses and adds the Student
-     * to the Index's List of Students
+     * to either the Index's confirmed list or waitlist of Students
      * 
      * @param myIndex The Index to be added to the Student's
      *                StudentRegisteredCourses

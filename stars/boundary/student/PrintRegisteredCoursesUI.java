@@ -10,7 +10,9 @@ import java.util.ArrayList;
 public class PrintRegisteredCoursesUI {
     /**
      * UI to print courses and indexes registered by the student
-     * @param studentController student controller with initialised database and student
+     * 
+     * @param studentController student controller with initialised database and
+     *                          student
      */
     public void printRegisteredCourses(StudentController studentController) {
         ArrayList<Index> indexList;
@@ -19,16 +21,16 @@ public class PrintRegisteredCoursesUI {
         if (indexList.size() == 0) {
             System.out.println("NIL");
         }
-        for (Index index: indexList) {
-            System.out.println("  "+ index.print());
+        for (Index index : indexList) {
+            System.out.println("  " + index.print());
         }
         indexList = studentController.getWaitlistedIndex();
         System.out.println("Waitlisted Courses");
         if (indexList.size() == 0) {
             System.out.println("NIL");
         }
-        for (Index index: indexList) {
-            System.out.println("  "+ index.print());
+        for (Index index : indexList) {
+            System.out.println("  " + index.print());
         }
     }
 }

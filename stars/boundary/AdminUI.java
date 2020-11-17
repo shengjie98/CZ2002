@@ -85,7 +85,7 @@ public class AdminUI extends SelectUI {
         adminController.save();
         return;
     }
-    
+
     /**
      * UI to print all students in the database
      */

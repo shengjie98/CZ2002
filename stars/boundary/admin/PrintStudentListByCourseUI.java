@@ -5,13 +5,13 @@ import stars.controller.*;
 import stars.entity.*;
 import stars.boundary.*;
 
-
 /**
  * UI to print student list by course
  */
 public class PrintStudentListByCourseUI extends SelectUI {
     /**
      * UI to print student list by course
+     * 
      * @param adminController admin controller with database intiialised
      */
     public void printStudentListByCourse(AdminController adminController) {

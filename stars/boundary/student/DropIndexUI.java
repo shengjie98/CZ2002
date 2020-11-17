@@ -11,14 +11,16 @@ import java.util.ArrayList;
 public class DropIndexUI extends SelectUI {
     /**
      * UI for student to drop index
-     * @param studentController student controller with initialised database and student
+     * 
+     * @param studentController student controller with initialised database and
+     *                          student
      */
     public void dropIndex(StudentController studentController) {
         boolean success;
         ArrayList<Index> indexList;
         Index selectedIndex;
         indexList = studentController.getRegisteredIndex();
-        selectedIndex = (Index)select(indexList);
+        selectedIndex = (Index) select(indexList);
         if (selectedIndex == null) {
             System.out.println("\nNo Indexes Available!\n");
             return;

@@ -9,6 +9,7 @@ import stars.controller.*;
 public class LoginUI {
     /**
      * entry point for app
+     * 
      * @param args nil
      */
     public static void main(String[] args) {
