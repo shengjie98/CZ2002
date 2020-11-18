@@ -35,6 +35,7 @@ public class StudentUI extends SelectUI {
             System.out.println("5. Change index number of course");
             System.out.println("6. Swop index number with another student");
             System.out.println("7. Display Timetable");
+            System.out.println("8: Display Index Timings");
             System.out.println("0. Logout");
             System.out.print("Option: ");
             i = IntScanner.nextInt();
@@ -66,6 +67,9 @@ public class StudentUI extends SelectUI {
                 case 7:
                     studentController.displayTimetable();
                     break;
+                case 8:
+                    PrintIndexTimetableUI printIndexTimetableUI = new PrintIndexTimetableUI();
+                    printIndexTimetableUI.printIndexTimetable(studentController);
                 default:
                     break;
             }

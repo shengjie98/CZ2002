@@ -8,7 +8,7 @@ import stars.boundary.*;
 /**
  * Controller to manage Student User
  */
-public class StudentController {
+public class StudentController implements UserControllerInterface {
 
     private Student myStudent;
     private DatabaseManager dbManager;
