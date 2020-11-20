@@ -365,22 +365,23 @@ title __CZ2002's Class Diagram__\n
         - AU : int
         - confirmedIndexArray : ArrayList<Index>
         - waitlistedIndexArray : ArrayList<Index>
-        + StudentRegisteredCourses()
-        + addAU()
-        + addIndex()
-        + addToConfirmedIndexArray()
-        + addToWaitlistedIndexArray()
-        + changeIndex()
-        + dropIndex()
-        + getAU()
-        + getConfirmedIndexArray()
-        + getIndexList()
-        + getOwner()
-        + getWaitlistedIndexArray()
-        + moveToConfirmed()
-        + removeFromConfirmedIndexArray()
-        + removeFromWaitlistedIndexArray()
-        + swopPlaces()
+        - owner : Student
+        + StudentRegisteredCourses(owner : Student)
+        + addAU(au : int)
+        + addIndex(index : Index) : boolean
+        + addToConfirmedIndexArray(index : Index)
+        + addToWaitlistedIndexArray(index : Index)
+        + changeIndex(oldIndex : Index, newIndex : Index) : boolean
+        + dropIndex(index : Index) : boolean
+        + getAU() : int
+        + getConfirmedIndexArray() : ArrayList<Index>
+        + getIndexList() : ArrayList<Index>
+        + getOwner() : Student
+        + getWaitlistedIndexArray() : ArrayList<Index>
+        + moveToConfirmed(index : Index)
+        + removeFromConfirmedIndexArray(index : Index)
+        + removeFromWaitlistedIndexArray(index : Index)
+        + swopPlaces(friendIndex : Index, friend : Student) : boolean
     }
   }
 
@@ -389,14 +390,16 @@ title __CZ2002's Class Diagram__\n
     class stars.entity.Timing {
         - end : LocalTime
         - start : LocalTime
-        + Timing()
-        + checkOverlap()
-        + getDay()
-        + getEnd()
-        + getStart()
-        + getType()
-        + setEnd()
-        + setStart()
+        - day : Day
+        - type : Type
+        + Timing(day : Day, type : Type, start : LocalTime, end : LocalTime)
+        + checkOverlap(otherTiming : Timing) : boolean
+        + getDay() : Day
+        + getEnd() : LocalTime
+        + getStart() : LocalTime
+        + getType() : Type
+        + setEnd(end : LocalTime)
+        + setStart(start : LocalTime)
     }
   }
 
