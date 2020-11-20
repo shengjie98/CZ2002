@@ -4,16 +4,30 @@ title __BOUNDARY's Class Diagram__\n
 
   namespace stars.boundary {
     class stars.boundary.AdminUI {
-        - formatter : DateTimeFormatter
+        - dateFormatter : DateTimeFormatter
+        - timeFormatter : DateTimeFormatter
         + AdminUI()
         + displayMenu()
-        - addCourse()
-        - addStudent()
-        - checkVacancy()
-        - editCourseInformation()
-        - editStudentAccess()
-        - printStudentListByCourse()
-        - printStudentListByIndex()
+        - getallcourses()
+        - getallstudents()
+    }
+  }
+  
+
+  namespace stars.boundary {
+    class stars.boundary.IndexTimingDisplayer {
+        - HEIGHT : int
+        - WIDTH : int
+        + IndexTimingDisplayer()
+        + displayTimetable()
+        + pad()
+    }
+  }
+  
+
+  namespace stars.boundary {
+    class stars.boundary.IntScanner {
+        {static} + nextInt()
     }
   }
   
@@ -21,13 +35,20 @@ title __BOUNDARY's Class Diagram__\n
   namespace stars.boundary {
     class stars.boundary.LoginUI {
         {static} + main()
+        {static} - login()
+    }
+  }
+  
+
+  namespace stars.boundary {
+    class stars.boundary.PrintIndexTimetableUI {
+        + printIndexTimetable()
     }
   }
   
 
   namespace stars.boundary {
     abstract class stars.boundary.SelectUI {
-        {abstract} + displayMenu()
         + select()
     }
   }
@@ -37,20 +58,28 @@ title __BOUNDARY's Class Diagram__\n
     class stars.boundary.StudentUI {
         + StudentUI()
         + displayMenu()
-        - addIndex()
-        - changeIndex()
-        - checkVacanciesAvailable()
-        - dropIndex()
-        - printRegisteredCourses()
-        - swopIndex()
+    }
+  }
+  
+
+  namespace stars.boundary {
+    class stars.boundary.TimetableDisplayer {
+        - HEIGHT : int
+        - WIDTH : int
+        + TimetableDisplayer()
+        + displayTimetable()
+        + pad()
     }
   }
   
 
   stars.boundary.AdminUI -up-|> stars.boundary.SelectUI
   stars.boundary.AdminUI o-- stars.controller.AdminController : adminController
+  stars.boundary.IndexTimingDisplayer o-- stars.entity.Index : index
+  stars.boundary.PrintIndexTimetableUI -up-|> stars.boundary.SelectUI
   stars.boundary.StudentUI -up-|> stars.boundary.SelectUI
   stars.boundary.StudentUI o-- stars.controller.StudentController : studentController
+  stars.boundary.TimetableDisplayer o-- stars.entity.Student : student
 
 
 right footer

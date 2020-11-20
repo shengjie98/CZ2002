@@ -8,11 +8,18 @@ title __CONTROLLER's Class Diagram__\n
         + addCourse()
         + addIndex()
         + addStudent()
+        + addTiming()
+        + changeIndexID()
+        + createCourse()
+        + createIndex()
+        + createTiming()
         + dropIndex()
         + editAccess()
         + getCourseList()
         + getStudentList()
         + save()
+        + setCourseID()
+        + setVacancyLimit()
     }
   }
   
@@ -20,6 +27,21 @@ title __CONTROLLER's Class Diagram__\n
   namespace stars.controller {
     interface stars.controller.Authenticator {
         {abstract} + authenticate()
+    }
+  }
+  
+
+  namespace stars.controller {
+    class stars.controller.DatabaseManager {
+        - DATABASE_FILE : String
+        + DatabaseManager()
+        + addCourse()
+        + addStudent()
+        + findStudent()
+        + getCoursesArray()
+        + getStudentArray()
+        + saveInformation()
+        - loadInformation()
     }
   }
   
@@ -71,6 +93,13 @@ title __CONTROLLER's Class Diagram__\n
   
 
   namespace stars.controller {
+    class stars.controller.SetVacancyLimitController {
+        + setVacancyLimit()
+    }
+  }
+  
+
+  namespace stars.controller {
     interface stars.controller.StudentAuthenticator {
         {abstract} + addStudent()
         {abstract} + editAccess()
@@ -83,9 +112,12 @@ title __CONTROLLER's Class Diagram__\n
         + StudentController()
         + addIndex()
         + changeIndex()
+        + displayTimetable()
         + dropIndex()
+        + getConfirmedIndex()
         + getCourseList()
         + getRegisteredIndex()
+        + getWaitlistedIndex()
         + save()
         + swopIndex()
     }
@@ -100,14 +132,22 @@ title __CONTROLLER's Class Diagram__\n
   }
   
 
-  stars.controller.AdminController o-- stars.entity.CourseDB : courseInfo
-  stars.controller.AdminController o-- stars.entity.StudentDB : studentInfo
+  namespace stars.controller {
+    interface stars.controller.UserControllerInterface {
+        {abstract} + getCourseList()
+    }
+  }
+  
+
+  stars.controller.AdminController .up.|> stars.controller.UserControllerInterface
+  stars.controller.AdminController o-- stars.controller.DatabaseManager : dbManager
+  stars.controller.DatabaseManager o-- stars.entity.Database : db
   stars.controller.FlatFileAdminAuthenticator .up.|> stars.controller.Authenticator
   stars.controller.FlatFileStudentAuthenticator .up.|> stars.controller.StudentAuthenticator
-  stars.controller.LoginController o-- stars.boundary.SelectUI : ui
-  stars.controller.StudentController o-- stars.entity.CourseDB : courseInfo
+  stars.controller.StudentController .up.|> stars.controller.UserControllerInterface
+  stars.controller.StudentController o-- stars.controller.DatabaseManager : dbManager
+  stars.controller.StudentController o-- stars.boundary.TimetableDisplayer : displayer
   stars.controller.StudentController o-- stars.entity.Student : myStudent
-  stars.controller.StudentController o-- stars.entity.StudentDB : studentInfo
 
 
 right footer
