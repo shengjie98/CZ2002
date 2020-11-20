@@ -4,6 +4,7 @@ title __CZ2002's Class Diagram__\n
 
   namespace stars.boundary {
     class stars.boundary.AdminUI {
+        - adminController : AdminController
         - dateFormatter : DateTimeFormatter
         - timeFormatter : DateTimeFormatter
         + AdminUI()
@@ -16,25 +17,26 @@ title __CZ2002's Class Diagram__\n
 
   namespace stars.boundary {
     class stars.boundary.IndexTimingDisplayer {
+        - index : Index
         - HEIGHT : int
         - WIDTH : int
-        + IndexTimingDisplayer()
+        + IndexTimingDisplayer(index : Index)
         + displayTimetable()
-        + pad()
+        + pad(s : String) : String
     }
   }
 
 
   namespace stars.boundary {
     class stars.boundary.IntScanner {
-        {static} + nextInt()
+        {static} + nextInt() : int
     }
   }
 
 
   namespace stars.boundary {
     class stars.boundary.LoginUI {
-        {static} + main()
+        {static} + main(args : String[])
         {static} - login()
     }
   }
@@ -42,21 +44,22 @@ title __CZ2002's Class Diagram__\n
 
   namespace stars.boundary {
     class stars.boundary.PrintIndexTimetableUI {
-        + printIndexTimetable()
+        + printIndexTimetable(userControllerInterface : UserControllerInterface)
     }
   }
 
 
   namespace stars.boundary {
     abstract class stars.boundary.SelectUI {
-        + select()
+        + select(ls : ArrayList<Selectable>) : Selectable
     }
   }
 
 
   namespace stars.boundary {
     class stars.boundary.StudentUI {
-        + StudentUI()
+        - studentController : StudentController
+        + StudentUI(studentID : String)
         + displayMenu()
     }
   }
@@ -64,11 +67,12 @@ title __CZ2002's Class Diagram__\n
 
   namespace stars.boundary {
     class stars.boundary.TimetableDisplayer {
+        - student : Student
         - HEIGHT : int
         - WIDTH : int
-        + TimetableDisplayer()
+        + TimetableDisplayer(student : Student)
         + displayTimetable()
-        + pad()
+        + pad(s : String) : String
     }
   }
 
@@ -230,19 +234,19 @@ title __CZ2002's Class Diagram__\n
         - courseName : String
         - indexList : ArrayList<Index>
         - school : String
-        + Course()
-        + addIndex()
-        + getAu()
-        + getCourseID()
-        + getCourseName()
-        + getIndexList()
-        + getSchool()
-        + print()
-        + setAu()
-        + setCourseID()
-        + setCourseName()
-        + setIndexList()
-        + setSchool()
+        + Course(courseID : String, au : int, school : String, courseName : String)
+        + addIndex(newIndex : Index) : boolean
+        + getAu() : int
+        + getCourseID() : String
+        + getCourseName() : String
+        + getIndexList() : ArrayList<Index>
+        + getSchool() : String
+        + print() : String
+        + setAu(au : int)
+        + setCourseID(courseID : String)
+        + setCourseName(courseName : String)
+        + setIndexList(indexList ArrayList<Index>) 
+        + setSchool(school : String)
     }
   }
 
@@ -252,21 +256,22 @@ title __CZ2002's Class Diagram__\n
         - coursesArray : ArrayList<Course>
         - studentArray : ArrayList<Student>
         + Database()
-        + addCourse()
-        + addStudent()
-        + findStudent()
-        + getCoursesArray()
-        + getStudentArray()
+        + addCourse(course : Course) : boolean
+        + addStudent(student : Student) : boolean
+        + findStudent(studentID : String) : Student
+        + getCoursesArray() : ArrayList<Course>
+        + getStudentArray() : ArrayList<Student>
     }
   }
 
 
   namespace stars.entity {
     class stars.entity.EmailService {
-        ~ password : String
-        ~ username : String
-        + EmailService()
-        + sendNotification()
+        - student : Student
+        - password : String
+        - username : String
+        + EmailService(student Student)
+        + sendNotification(index : Index)
     }
   }
 
@@ -278,45 +283,46 @@ title __CZ2002's Class Diagram__\n
         - timings : ArrayList<Timing>
         - vacancy : int
         - vacancyLimit : int
+        - course : Course
         - waitList : ArrayList<Student>
-        + Index()
-        + addStudentToConfirmedList()
-        + addStudentToWaitList()
-        + addTiming()
-        + dequeueStudent()
-        + dropStudentFromConfirmedList()
-        + dropStudentFromWaitList()
-        + getAU()
-        + getConfirmedList()
-        + getCourse()
-        + getIndexNumber()
-        + getTimings()
-        + getVacancy()
-        + getVacancyLimit()
-        + getWaitList()
-        + insertStudentToWaitList()
-        + print()
-        + setConfirmedList()
-        + setCourse()
-        + setIndexNumber()
-        + setTimings()
-        + setVacancy()
-        + setVacancyLimit()
-        + setWaitList()
+        + Index(course : Course, vacancy : int, indexNumber : int)
+        + addStudentToConfirmedList(student : Student)
+        + addStudentToWaitList(student : Student)
+        + addTiming(newTiming : Timing) : boolean
+        + dequeueStudent() : Student
+        + dropStudentFromConfirmedList(student : Student)
+        + dropStudentFromWaitList(student : Student)
+        + getAU() : int
+        + getConfirmedList() : ArrayList<Student>
+        + getCourse() : Course
+        + getIndexNumber() : int
+        + getTimings() ArrayList<Timing>
+        + getVacancy() : int
+        + getVacancyLimit() : int
+        + getWaitList() : ArrayList<Student> 
+        + insertStudentToWaitList(student : Student, location : int)
+        + print() : String
+        + setConfirmedList(confirmedList : ArrayList<Student>)
+        + setCourse(course : Course)
+        + setIndexNumber(indexNumber : int)
+        + setTimings(timings : ArrayList<Timing>)
+        + setVacancy(vacancy : UserControllerInterface)
+        + setVacancyLimit(newVacancyLimit : int)
+        + setWaitList(waitList : ArrayList<Student>)
     }
   }
 
 
   namespace stars.entity {
     interface stars.entity.NotificationInterface {
-        {abstract} + sendNotification()
+        {abstract} + sendNotification(index : Index)
     }
   }
 
 
   namespace stars.entity {
     interface stars.entity.Selectable {
-        {abstract} + print()
+        {abstract} + print() : String
     }
   }
 
@@ -329,25 +335,27 @@ title __CZ2002's Class Diagram__\n
         - nationality : String
         - studentID : String
         - studentName : String
-        + Student()
-        + addIndex()
-        + changeIndex()
-        + checkChangeIndex()
-        + dropIndex()
-        + getConfirmedIndex()
-        + getDegree()
-        + getEmail()
-        + getGender()
-        + getNationality()
-        + getRegisteredIndex()
-        + getStudentID()
-        + getStudentName()
-        + getWaitlistedIndex()
-        + getregisteredCourses()
-        + moveToConfirmed()
-        + print()
-        + sendNotification()
-        + swopPlaces()
+        - registeredCourses : StudentRegisteredCourses
+        - notificationService : NotificationInterface
+        + Student(studentName : String, nationality : String, gender : String, studentID : String, degree : String, email : String)
+        + addIndex(index : Index) : boolean
+        + changeIndex(oldIndex : Index, newIndex : Index) : boolean
+        + checkChangeIndex(friendIndex : Index, myIndex : Index) : boolean
+        + dropIndex(index : Index) : boolean
+        + getConfirmedIndex() : ArrayList<Index>
+        + getDegree() : String
+        + getEmail() : String
+        + getGender() : String
+        + getNationality() : String
+        + getRegisteredIndex() : ArrayList<Index>
+        + getStudentID() : String
+        + getStudentName() : String
+        + getWaitlistedIndex() : ArrayList<Index>
+        + getregisteredCourses() : StudentRegisteredCourses
+        + moveToConfirmed(index : Index)
+        + print() : String
+        + sendNotification(index : Index)
+        + swopPlaces(friendIndex : Index, friend : Student) : boolean
     }
   }
 
