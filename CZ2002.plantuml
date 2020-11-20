@@ -86,7 +86,7 @@ title __CZ2002's Class Diagram__\n
   namespace stars.boundary {
       namespace student {
         class stars.boundary.student.AddIndexUI {
-            + addIndex()
+            + addIndex(studentController : StudentController)
         }
       }
     }
@@ -95,7 +95,7 @@ title __CZ2002's Class Diagram__\n
     namespace stars.boundary {
       namespace student {
         class stars.boundary.student.ChangeIndexUI {
-            + changeIndex()
+            + changeIndex(studentController : StudentController)
         }
       }
     }
@@ -104,7 +104,7 @@ title __CZ2002's Class Diagram__\n
     namespace stars.boundary {
       namespace student {
         class stars.boundary.student.CheckVacanciesAvailableUI {
-            + checkVacanciesAvailable()
+            + checkVacanciesAvailable(studentController : StudentController)
         }
       }
     }
@@ -113,7 +113,7 @@ title __CZ2002's Class Diagram__\n
     namespace stars.boundary {
       namespace student {
         class stars.boundary.student.DropIndexUI {
-            + dropIndex()
+            + dropIndex(studentController : StudentController)
         }
       }
     }
@@ -122,7 +122,7 @@ title __CZ2002's Class Diagram__\n
     namespace stars.boundary {
       namespace student {
         class stars.boundary.student.PrintRegisteredCoursesUI {
-            + printRegisteredCourses()
+            + printRegisteredCourses(studentController : StudentController)
         }
       }
     }
@@ -131,7 +131,7 @@ title __CZ2002's Class Diagram__\n
     namespace stars.boundary {
       namespace student {
         class stars.boundary.student.SwopIndexUI {
-            + swopIndex()
+            + swopIndex(studentController : StudentController)
         }
       }
     }
