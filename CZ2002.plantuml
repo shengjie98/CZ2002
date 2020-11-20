@@ -1,8 +1,9 @@
 @startuml
-
+left to right direction
 title __CZ2002's Class Diagram__\n
-
+together {
   namespace stars.boundary {
+
     class stars.boundary.AdminUI {
         - adminController : AdminController
         - dateFormatter : DateTimeFormatter
@@ -12,17 +13,19 @@ title __CZ2002's Class Diagram__\n
         - getallcourses()
         - getallstudents()
     }
+    class stars.boundary.IndexTimingDisplayer {
+            - index : Index
+            - HEIGHT : int
+            - WIDTH : int
+            + IndexTimingDisplayer(index : Index)
+            + displayTimetable()
+            + pad(s : String) : String
+    `}
+    }
   }
 
   namespace stars.boundary {
-    class stars.boundary.IndexTimingDisplayer {
-        - index : Index
-        - HEIGHT : int
-        - WIDTH : int
-        + IndexTimingDisplayer(index : Index)
-        + displayTimetable()
-        + pad(s : String) : String
-    }
+
   }
 
   namespace stars.boundary {
@@ -121,15 +124,15 @@ namespace stars.boundary {
             class stars.boundary.admin.EditCourseInformationUI {
                 + editCourseInformation( adminController: AdminController,  timeFormatter: DateTimeFormatter)
             }
-             class stars.boundary.admin.EditStudentAccessUI {
+            class stars.boundary.admin.EditStudentAccessUI {
                 + editStudentAccess( adminController: AdminController,  dateFormatter: DateTimeFormatter)
             }
             class stars.boundary.admin.PrintStudentListByCourseUI {
-                            + printStudentListByCourse( adminController: AdminController)
-                        }
-                        class stars.boundary.admin.PrintStudentListByIndexUI {
-                                        + printStudentListByIndex(adminController: AdminController)
-                                    }
+                + printStudentListByCourse( adminController: AdminController)
+            }
+            class stars.boundary.admin.PrintStudentListByIndexUI {
+                + printStudentListByIndex(adminController: AdminController)
+            }
           }
         }
 
@@ -276,31 +279,6 @@ namespace stars.controller {
 
 
 
-    namespace stars.exceptions {
-        class stars.exceptions.AlreadyRegisteredException {
-            + AlreadyRegisteredException()
-            + AlreadyRegisteredException( message: String)
-        }
-      }
-
-
-      namespace stars.exceptions {
-        class stars.exceptions.ExceedAUException {
-            + ExceedAUException()
-            + ExceedAUException(message: String)
-        }
-      }
-
-
-      namespace stars.exceptions {
-        class stars.exceptions.TimetableClashException {
-            + TimetableClashException()
-            + TimetableClashException(message: String)
-        }
-      }
-
-
-
 
 
 
@@ -322,7 +300,7 @@ namespace stars.controller {
         + setAu(au : int)
         + setCourseID(courseID : String)
         + setCourseName(courseName : String)
-        + setIndexList(indexList ArrayList<Index>) 
+        + setIndexList(indexList ArrayList<Index>)
         + setSchool(school : String)
     }
   }
@@ -500,55 +478,86 @@ namespace stars.controller {
     }
   }
 
-  stars.boundary.AdminUI -up-|> stars.boundary.SelectUI
-  stars.boundary.AdminUI o-- stars.controller.AdminController : adminController
-  stars.boundary.IndexTimingDisplayer o-- stars.entity.Index : index
-  stars.boundary.PrintIndexTimetableUI -up-|> stars.boundary.SelectUI
-  stars.boundary.StudentUI -up-|> stars.boundary.SelectUI
-  stars.boundary.StudentUI o-- stars.controller.StudentController : studentController
-  stars.boundary.TimetableDisplayer o-- stars.entity.Student : student
-
-  stars.boundary.admin.AddCourseUI -up-|> stars.boundary.SelectUI
-  stars.boundary.admin.CheckVacancyUI -up-|> stars.boundary.SelectUI
-  stars.boundary.admin.EditCourseInformationUI -up-|> stars.boundary.SelectUI
-  stars.boundary.admin.EditStudentAccessUI -up-|> stars.boundary.SelectUI
-  stars.boundary.admin.PrintStudentListByCourseUI -up-|> stars.boundary.SelectUI
-  stars.boundary.admin.PrintStudentListByIndexUI -up-|> stars.boundary.SelectUI
-
-  stars.boundary.student.AddIndexUI -up-|> stars.boundary.SelectUI
-  stars.boundary.student.ChangeIndexUI -up-|> stars.boundary.SelectUI
-  stars.boundary.student.CheckVacanciesAvailableUI -up-|> stars.boundary.SelectUI
-  stars.boundary.student.DropIndexUI -up-|> stars.boundary.SelectUI
-  stars.boundary.student.SwopIndexUI -up-|> stars.boundary.SelectUI
+  namespace stars.exceptions {
+          class stars.exceptions.AlreadyRegisteredException {
+              + AlreadyRegisteredException()
+              + AlreadyRegisteredException( message: String)
+          }
+        }
 
 
-  stars.controller.AdminController .up.|> stars.controller.UserControllerInterface
-  stars.controller.AdminController o-- stars.controller.DatabaseManager : dbManager
-  stars.controller.DatabaseManager o-- stars.entity.Database : db
-  stars.controller.FlatFileAdminAuthenticator .up.|> stars.controller.Authenticator
-  stars.controller.FlatFileStudentAuthenticator .up.|> stars.controller.StudentAuthenticator
-  stars.controller.StudentController .up.|> stars.controller.UserControllerInterface
-  stars.controller.StudentController o-- stars.controller.DatabaseManager : dbManager
-  stars.controller.StudentController o-- stars.boundary.TimetableDisplayer : displayer
-  stars.controller.StudentController o-- stars.entity.Student : myStudent
+        namespace stars.exceptions {
+          class stars.exceptions.ExceedAUException {
+              + ExceedAUException()
+              + ExceedAUException(message: String)
+          }
+        }
 
-  stars.entity.Course .up.|> java.io.Serializable
-  stars.entity.Course .up.|> stars.entity.Selectable
-  stars.entity.Database .up.|> java.io.Serializable
-  stars.entity.EmailService .up.|> stars.entity.NotificationInterface
-  stars.entity.EmailService o-- stars.entity.Student : student
-  stars.entity.Index .up.|> java.io.Serializable
-  stars.entity.Index .up.|> stars.entity.Selectable
-  stars.entity.Index o-- stars.entity.Course : course
-  stars.entity.Student .up.|> java.io.Serializable
-  stars.entity.Student .up.|> stars.entity.Selectable
-  stars.entity.Student o-- stars.entity.NotificationInterface : notificationService
-  stars.entity.Student o-- stars.entity.StudentRegisteredCourses : registeredCourses
-  stars.entity.StudentRegisteredCourses .up.|> java.io.Serializable
-  stars.entity.StudentRegisteredCourses o-- stars.entity.Student : owner
-  stars.entity.Timing .up.|> java.io.Serializable
-  stars.entity.Timing o-- stars.entity.Timing.Day : day
-  stars.entity.Timing o-- stars.entity.Timing.Type : type
+
+        namespace stars.exceptions {
+          class stars.exceptions.TimetableClashException {
+              + TimetableClashException()
+              + TimetableClashException(message: String)
+          }
+        }
+ }
+
+    stars.boundary.AdminUI -up-|> stars.boundary.SelectUI
+    stars.boundary.AdminUI o-- stars.controller.AdminController : adminController
+    stars.boundary.AdminUI "1"-[#green]-"1" stars.boundary.admin.AddCourseUI
+    stars.boundary.AdminUI "1"-[#green]-"1" stars.boundary.admin.AddIndexUI
+    stars.boundary.AdminUI "1"-[#green]-"1" stars.boundary.admin.AddStudentUI
+    stars.boundary.AdminUI "1"-[#green]-"1" stars.boundary.admin.CheckVacancyUI
+    stars.boundary.AdminUI "1"-[#green]-"1" stars.boundary.admin.EditCourseInformationUI
+    stars.boundary.AdminUI "1"-[#green]-"1" stars.boundary.admin.EditStudentAccessUI
+    stars.boundary.AdminUI "1"-[#green]-"1" stars.boundary.admin.PrintStudentListByCourseUI
+    stars.boundary.AdminUI "1"-[#green]-"1" stars.boundary.admin.PrintStudentListByIndexUI
+    stars.boundary.AdminUI "1"-[#green]-"1" stars.boundary.admin.AddCourseUI
+    stars.boundary.AdminUI "1"-[#green]-"1" stars.boundary.PrintIndexTimetableUI
+
+    stars.boundary.IndexTimingDisplayer o-- stars.entity.Index : index
+    stars.boundary.StudentUI -up-|> stars.boundary.SelectUI
+    stars.boundary.StudentUI o-- stars.controller.StudentController : studentController
+    stars.boundary.TimetableDisplayer o-- stars.entity.Student : student
+
+    stars.boundary.StudentUI "1"-[#green]-"1" stars.boundary.student.DropIndexUI
+    stars.boundary.StudentUI "1"-[#green]-"1" stars.boundary.student.AddIndexUI
+    stars.boundary.StudentUI "1"-[#green]-"1" stars.boundary.student.ChangeIndexUI
+    stars.boundary.StudentUI "1"-[#green]-"1" stars.boundary.student.CheckVacanciesAvailableUI
+    stars.boundary.StudentUI "1"-[#green]-"1" stars.boundary.student.PrintRegisteredCoursesUI
+    stars.boundary.StudentUI "1"-[#green]-"1" stars.boundary.student.SwopIndexUI
+    stars.boundary.StudentUI "1"-[#green]-"1" stars.boundary.PrintIndexTimetableUI
+
+
+    stars.boundary.LoginUI "1"-[#blue]->"1" stars.controller.LoginController
+
+
+    stars.controller.LoginController "1"-[#blue]->"2" stars.controller.Authenticator
+    stars.controller.LoginController "1"-[#blue]->"1" stars.boundary.StudentUI
+    stars.controller.LoginController "1"-[#blue]->"1" stars.boundary.AdminUI
+
+    stars.controller.AdminController .up.|> stars.controller.UserControllerInterface
+    stars.controller.AdminController o-- stars.controller.DatabaseManager : dbManager
+    stars.controller.DatabaseManager o-- stars.entity.Database : db
+    stars.controller.FlatFileAdminAuthenticator .up.|> stars.controller.Authenticator
+    stars.controller.FlatFileStudentAuthenticator .up.|> stars.controller.StudentAuthenticator
+    stars.controller.StudentController .up.|> stars.controller.UserControllerInterface
+    stars.controller.StudentController o-- stars.controller.DatabaseManager : dbManager
+    stars.controller.StudentController o-- stars.boundary.TimetableDisplayer : displayer
+    stars.controller.StudentController o-- stars.entity.Student : myStudent
+
+
+    stars.entity.Course .up.|> stars.entity.Selectable
+    stars.entity.EmailService .up.|> stars.entity.NotificationInterface
+    stars.entity.EmailService o-- stars.entity.Student : student
+    stars.entity.Index .up.|> stars.entity.Selectable
+    stars.entity.Index o-- stars.entity.Course : course
+    stars.entity.Student .up.|> stars.entity.Selectable
+    stars.entity.Student o-- stars.entity.NotificationInterface : notificationService
+    stars.entity.Student o-- stars.entity.StudentRegisteredCourses : registeredCourses
+    stars.entity.StudentRegisteredCourses o-- stars.entity.Student : owner
+    stars.entity.Timing o-- stars.entity.Timing.Day : day
+    stars.entity.Timing o-- stars.entity.Timing.Type : type
 
 
 right footer
