@@ -83,14 +83,14 @@ public class DatabaseManager {
             this.db = (Database) inputStream.readObject();
             inputStream.close();
             if (this.db == null) {
-                System.out.println("Empty database");
+                // System.out.println("Empty database");
                 this.db = new Database();
             }
         } catch (IOException e) {
-            System.out.println("IOException");
+            // System.out.println("IOException");
             this.db = new Database();
         } catch (ClassNotFoundException e) {
-            System.out.println("Class not found");
+            // System.out.println("Class not found");
             this.db = new Database();
         }
     }
