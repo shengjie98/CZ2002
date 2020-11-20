@@ -1,7 +1,6 @@
 @startuml
 
 title __CZ2002's Class Diagram__\n
-
   namespace stars.boundary {
     class stars.boundary.AdminUI {
         - adminController : AdminController
@@ -77,9 +76,153 @@ title __CZ2002's Class Diagram__\n
   }
 
 
+  stars.boundary.admin.AddCourseUI -up-|> stars.boundary.SelectUI
+  stars.boundary.admin.CheckVacancyUI -up-|> stars.boundary.SelectUI
+  stars.boundary.admin.EditCourseInformationUI -up-|> stars.boundary.SelectUI
+  stars.boundary.admin.EditStudentAccessUI -up-|> stars.boundary.SelectUI
+  stars.boundary.admin.PrintStudentListByCourseUI -up-|> stars.boundary.SelectUI
+  stars.boundary.admin.PrintStudentListByIndexUI -up-|> stars.boundary.SelectUI
+
+  namespace stars.boundary {
+      namespace student {
+        class stars.boundary.student.AddIndexUI {
+            + addIndex()
+        }
+      }
+    }
 
 
-    namespace stars.controller {
+    namespace stars.boundary {
+      namespace student {
+        class stars.boundary.student.ChangeIndexUI {
+            + changeIndex()
+        }
+      }
+    }
+
+
+    namespace stars.boundary {
+      namespace student {
+        class stars.boundary.student.CheckVacanciesAvailableUI {
+            + checkVacanciesAvailable()
+        }
+      }
+    }
+
+
+    namespace stars.boundary {
+      namespace student {
+        class stars.boundary.student.DropIndexUI {
+            + dropIndex()
+        }
+      }
+    }
+
+
+    namespace stars.boundary {
+      namespace student {
+        class stars.boundary.student.PrintRegisteredCoursesUI {
+            + printRegisteredCourses()
+        }
+      }
+    }
+
+
+    namespace stars.boundary {
+      namespace student {
+        class stars.boundary.student.SwopIndexUI {
+            + swopIndex()
+        }
+      }
+    }
+
+
+    stars.boundary.student.AddIndexUI -up-|> stars.boundary.SelectUI
+    stars.boundary.student.ChangeIndexUI -up-|> stars.boundary.SelectUI
+    stars.boundary.student.CheckVacanciesAvailableUI -up-|> stars.boundary.SelectUI
+    stars.boundary.student.DropIndexUI -up-|> stars.boundary.SelectUI
+    stars.boundary.student.SwopIndexUI -up-|> stars.boundary.SelectUI
+
+  namespace stars.boundary {
+      class stars.boundary.AdminUI {
+          - dateFormatter : DateTimeFormatter
+          - timeFormatter : DateTimeFormatter
+          + AdminUI()
+          + displayMenu()
+          - getallcourses()
+          - getallstudents()
+      }
+    }
+
+
+    namespace stars.boundary {
+      class stars.boundary.IndexTimingDisplayer {
+          - HEIGHT : int
+          - WIDTH : int
+          + IndexTimingDisplayer()
+          + displayTimetable()
+          + pad()
+      }
+    }
+
+
+    namespace stars.boundary {
+      class stars.boundary.IntScanner {
+          {static} + nextInt()
+      }
+    }
+
+
+    namespace stars.boundary {
+      class stars.boundary.LoginUI {
+          {static} + main()
+          {static} - login()
+      }
+    }
+
+
+    namespace stars.boundary {
+      class stars.boundary.PrintIndexTimetableUI {
+          + printIndexTimetable()
+      }
+    }
+
+
+    namespace stars.boundary {
+      abstract class stars.boundary.SelectUI {
+          + select()
+      }
+    }
+
+
+    namespace stars.boundary {
+      class stars.boundary.StudentUI {
+          + StudentUI()
+          + displayMenu()
+      }
+    }
+
+
+    namespace stars.boundary {
+      class stars.boundary.TimetableDisplayer {
+          - HEIGHT : int
+          - WIDTH : int
+          + TimetableDisplayer()
+          + displayTimetable()
+          + pad()
+      }
+    }
+
+
+    stars.boundary.AdminUI -up-|> stars.boundary.SelectUI
+    stars.boundary.AdminUI o-- stars.controller.AdminController : adminController
+    stars.boundary.IndexTimingDisplayer o-- stars.entity.Index : index
+    stars.boundary.PrintIndexTimetableUI -up-|> stars.boundary.SelectUI
+    stars.boundary.StudentUI -up-|> stars.boundary.SelectUI
+    stars.boundary.StudentUI o-- stars.controller.StudentController : studentController
+    stars.boundary.TimetableDisplayer o-- stars.entity.Student : student
+
+namespace stars.controller {
     class stars.controller.AdminController {
         + AdminController()
         + addCourse()
@@ -97,137 +240,136 @@ title __CZ2002's Class Diagram__\n
         + save()
         + setCourseID()
         + setVacancyLimit()
-        }
     }
+  }
 
 
-      namespace stars.controller {
-        interface stars.controller.Authenticator {
-            {abstract} + authenticate()
-        }
-      }
+  namespace stars.controller {
+    interface stars.controller.Authenticator {
+        {abstract} + authenticate()
+    }
+  }
 
 
-      namespace stars.controller {
-        class stars.controller.DatabaseManager {
-            - DATABASE_FILE : String
-            + DatabaseManager()
-            + addCourse()
-            + addStudent()
-            + findStudent()
-            + getCoursesArray()
-            + getStudentArray()
-            + saveInformation()
-            - loadInformation()
-        }
-      }
+  namespace stars.controller {
+    class stars.controller.DatabaseManager {
+        - DATABASE_FILE : String
+        + DatabaseManager()
+        + addCourse()
+        + addStudent()
+        + findStudent()
+        + getCoursesArray()
+        + getStudentArray()
+        + saveInformation()
+        - loadInformation()
+    }
+  }
 
 
-      namespace stars.controller {
-        class stars.controller.FlatFileAdminAuthenticator {
-            - ADMIN_ACCOUNT_FILE : String
-            + authenticate()
-        }
-      }
+  namespace stars.controller {
+    class stars.controller.FlatFileAdminAuthenticator {
+        - ADMIN_ACCOUNT_FILE : String
+        + authenticate()
+    }
+  }
 
 
-      namespace stars.controller {
-        class stars.controller.FlatFileStudentAuthenticator {
-            - STUDENT_ACCOUNTS_FILE : String
-            + addStudent()
-            + authenticate()
-            + editAccess()
-        }
-      }
+  namespace stars.controller {
+    class stars.controller.FlatFileStudentAuthenticator {
+        - STUDENT_ACCOUNTS_FILE : String
+        + addStudent()
+        + authenticate()
+        + editAccess()
+    }
+  }
 
 
-      namespace stars.controller {
-        class stars.controller.IndexStudentAdder {
-            + addStudent()
-        }
-      }
+  namespace stars.controller {
+    class stars.controller.IndexStudentAdder {
+        + addStudent()
+    }
+  }
 
 
-      namespace stars.controller {
-        class stars.controller.IndexStudentDropper {
-            + dropStudent()
-        }
-      }
+  namespace stars.controller {
+    class stars.controller.IndexStudentDropper {
+        + dropStudent()
+    }
+  }
 
 
-      namespace stars.controller {
-        class stars.controller.IndexStudentSwopper {
-            + swopStudent()
-        }
-      }
+  namespace stars.controller {
+    class stars.controller.IndexStudentSwopper {
+        + swopStudent()
+    }
+  }
 
 
-      namespace stars.controller {
-        class stars.controller.LoginController {
-            + verifyLogin()
-        }
-      }
+  namespace stars.controller {
+    class stars.controller.LoginController {
+        + verifyLogin()
+    }
+  }
 
 
-      namespace stars.controller {
-        class stars.controller.SetVacancyLimitController {
-            + setVacancyLimit()
-        }
-      }
+  namespace stars.controller {
+    class stars.controller.SetVacancyLimitController {
+        + setVacancyLimit()
+    }
+  }
 
 
-      namespace stars.controller {
-        interface stars.controller.StudentAuthenticator {
-            {abstract} + addStudent()
-            {abstract} + editAccess()
-        }
-      }
+  namespace stars.controller {
+    interface stars.controller.StudentAuthenticator {
+        {abstract} + addStudent()
+        {abstract} + editAccess()
+    }
+  }
 
 
-      namespace stars.controller {
-        class stars.controller.StudentController {
-            + StudentController()
-            + addIndex()
-            + changeIndex()
-            + displayTimetable()
-            + dropIndex()
-            + getConfirmedIndex()
-            + getCourseList()
-            + getRegisteredIndex()
-            + getWaitlistedIndex()
-            + save()
-            + swopIndex()
-        }
-      }
+  namespace stars.controller {
+    class stars.controller.StudentController {
+        + StudentController()
+        + addIndex()
+        + changeIndex()
+        + displayTimetable()
+        + dropIndex()
+        + getConfirmedIndex()
+        + getCourseList()
+        + getRegisteredIndex()
+        + getWaitlistedIndex()
+        + save()
+        + swopIndex()
+    }
+  }
 
 
-      namespace stars.controller {
-        class stars.controller.TimetableClashChecker {
-            + checkClash()
-            + checkClash()
-        }
-      }
+  namespace stars.controller {
+    class stars.controller.TimetableClashChecker {
+        + checkClash()
+        + checkClash()
+    }
+  }
 
 
-      namespace stars.controller {
-        interface stars.controller.UserControllerInterface {
-            {abstract} + getCourseList()
-        }
-      }
+  namespace stars.controller {
+    interface stars.controller.UserControllerInterface {
+        {abstract} + getCourseList()
+    }
+  }
 
 
-      stars.controller.AdminController .up.|> stars.controller.UserControllerInterface
-      stars.controller.AdminController o-- stars.controller.DatabaseManager : dbManager
-      stars.controller.DatabaseManager o-- stars.entity.Database : db
-      stars.controller.FlatFileAdminAuthenticator .up.|> stars.controller.Authenticator
-      stars.controller.FlatFileStudentAuthenticator .up.|> stars.controller.StudentAuthenticator
-      stars.controller.StudentController .up.|> stars.controller.UserControllerInterface
-      stars.controller.StudentController o-- stars.controller.DatabaseManager : dbManager
-      stars.controller.StudentController o-- stars.boundary.TimetableDisplayer : displayer
-      stars.controller.StudentController o-- stars.entity.Student : myStudent
+  stars.controller.AdminController .up.|> stars.controller.UserControllerInterface
+  stars.controller.AdminController o-- stars.controller.DatabaseManager : dbManager
+  stars.controller.DatabaseManager o-- stars.entity.Database : db
+  stars.controller.FlatFileAdminAuthenticator .up.|> stars.controller.Authenticator
+  stars.controller.FlatFileStudentAuthenticator .up.|> stars.controller.StudentAuthenticator
+  stars.controller.StudentController .up.|> stars.controller.UserControllerInterface
+  stars.controller.StudentController o-- stars.controller.DatabaseManager : dbManager
+  stars.controller.StudentController o-- stars.boundary.TimetableDisplayer : displayer
+  stars.controller.StudentController o-- stars.entity.Student : myStudent
 
-
-  namespace stars.entity {
+    namespace stars.entity {
     class stars.entity.Course {
         - au : int
         - courseID : String
@@ -589,6 +731,10 @@ title __CZ2002's Class Diagram__\n
   stars.entity.Timing +-down- stars.entity.Timing.Day
   stars.entity.Timing +-down- stars.entity.Timing.Type
 
+
+
+  
+
   stars.boundary.AdminUI -up-|> stars.boundary.SelectUI
   stars.boundary.AdminUI o-- stars.controller.AdminController : adminController
   stars.boundary.IndexTimingDisplayer o-- stars.entity.Index : index
@@ -633,14 +779,6 @@ title __CZ2002's Class Diagram__\n
   stars.entity.Timing .up.|> java.io.Serializable
   stars.entity.Timing o-- stars.entity.Timing.Day : day
   stars.entity.Timing o-- stars.entity.Timing.Type : type
-
-  stars.boundary.AdminUI -up-|> stars.boundary.SelectUI
-    stars.boundary.AdminUI o-- stars.controller.AdminController : adminController
-    stars.boundary.IndexTimingDisplayer o-- stars.entity.Index : index
-    stars.boundary.PrintIndexTimetableUI -up-|> stars.boundary.SelectUI
-    stars.boundary.StudentUI -up-|> stars.boundary.SelectUI
-    stars.boundary.StudentUI o-- stars.controller.StudentController : studentController
-    stars.boundary.TimetableDisplayer o-- stars.entity.Student : student
 
 
 right footer
