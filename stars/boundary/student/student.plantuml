@@ -36,24 +36,25 @@ title __STUDENT's Class Diagram__\n
       }
     }
   }
-  
+
 
   namespace stars.boundary {
     namespace student {
       class stars.boundary.student.PrintRegisteredCoursesUI {
           + printRegisteredCourses()
+
       }
+      class stars.boundary.student.SwopIndexUI {
+                  + swopIndex()
+          }
+      class stars.boundary.student.DropIndexUI {
+                 + dropIndex()
+             }
     }
   }
   
 
-  namespace stars.boundary {
-    namespace student {
-      class stars.boundary.student.SwopIndexUI {
-          + swopIndex()
-      }
-    }
-  }
+
   
 
   stars.boundary.student.AddIndexUI -up-|> stars.boundary.SelectUI

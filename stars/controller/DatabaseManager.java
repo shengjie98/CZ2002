@@ -14,10 +14,10 @@ import stars.entity.*;
  * implementation of database from client
  */
 public class DatabaseManager {
-    private Database db;
+    ;
     private final String DATABASE_FILE = "stars/database.ser";
 
-    /**
+    private Database db   /**
      * Constructor for DatabaseManager
      */
     public DatabaseManager() {

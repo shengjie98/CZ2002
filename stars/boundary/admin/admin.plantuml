@@ -63,7 +63,8 @@ title __ADMIN's Class Diagram__\n
       }
     }
   }
-  
+
+
 
   namespace stars.boundary {
     namespace admin {
