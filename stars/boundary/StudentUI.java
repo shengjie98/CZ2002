@@ -70,11 +70,12 @@ public class StudentUI extends SelectUI {
                 case 8:
                     PrintIndexTimetableUI printIndexTimetableUI = new PrintIndexTimetableUI();
                     printIndexTimetableUI.printIndexTimetable(studentController);
+                    break;
                 default:
                     break;
             }
 
-        } while (i > 0 && i < 8);
+        } while (i > 0 && i <= 8);
         studentController.save();
         return;
     }

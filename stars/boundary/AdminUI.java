@@ -81,6 +81,7 @@ public class AdminUI extends SelectUI {
                 case 10:
                     PrintIndexTimetableUI printIndexTimetableUI = new PrintIndexTimetableUI();
                     printIndexTimetableUI.printIndexTimetable(adminController);
+                    break;
                 default:
                     break;
             }

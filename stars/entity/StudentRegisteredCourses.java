@@ -82,7 +82,14 @@ public class StudentRegisteredCourses implements Serializable {
     public void addAU(int au) {
         this.AU += au;
     }
-
+    /**
+     * Subtracts a certain number of AUs from the total AU of the Student
+     * 
+     * @param au The AU to be subtracted from the total AU
+     */
+    public void subtractAU(int au) {
+        this.AU -= au;
+    }
     /**
      * Adds Index to the list of confirmed Indexes that the Student is registered
      * for

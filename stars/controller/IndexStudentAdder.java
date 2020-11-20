@@ -52,10 +52,12 @@ public class IndexStudentAdder {
         if (vacancy > 0) {
             index.addStudentToConfirmedList(student);
             studentRegisteredCourses.addToConfirmedIndexArray(index);
+            studentRegisteredCourses.addAU(index.getAU());
             return true;
         } else {
             index.addStudentToWaitList(student);
             studentRegisteredCourses.addToWaitlistedIndexArray(index);
+            studentRegisteredCourses.addAU(index.getAU());
             return false;
         }
     }

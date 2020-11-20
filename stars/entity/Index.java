@@ -226,7 +226,7 @@ public class Index implements Selectable, Serializable {
 	 */
 	public String print() {
 		// print out all the information of the Course
-		String stringToReturn = "Index: " + String.valueOf(this.indexNumber) + " vacancy: "
+		String stringToReturn = "Course Name: " + course.getCourseID() + " Index: " + String.valueOf(this.indexNumber) + " vacancy: "
 				+ String.valueOf(this.vacancy) + " confirmed size: " + this.confirmedList.size() + " waitlist size: "
 				+ this.waitList.size();
 		return stringToReturn;
