@@ -34,6 +34,6 @@ public class CheckVacancyUI extends SelectUI {
             return;
         }
 
-        System.out.printf("Vacancy is: %d\n", selectedIndex.getVacancy());
+        System.out.printf("Vacancy is: %d/%d\n", selectedIndex.getVacancy(), selectedIndex.getVacancyLimit());
     }
 }
