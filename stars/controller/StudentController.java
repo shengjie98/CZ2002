@@ -11,7 +11,7 @@ import stars.boundary.*;
 public class StudentController implements UserControllerInterface {
 
     private Student myStudent;
-    private DatabaseManager dbManager;
+    private DatabaseManagerInterface dbManager;
     private TimetableDisplayer displayer;
 
     /**

@@ -21,7 +21,7 @@ public class SwopIndexUI extends SelectUI {
         ArrayList<Index> indexList;
         Index selectedIndex;
         String username, password;
-        StudentAuthenticator loginController = new FlatFileStudentAuthenticator();
+        Authenticator loginController = new FlatFileStudentAuthenticator();
         Scanner sc = new Scanner(System.in);
 
         indexList = studentController.getRegisteredIndex();
@@ -37,20 +37,20 @@ public class SwopIndexUI extends SelectUI {
         System.out.print("Password: ");
         password = new String(System.console().readPassword());
         // password = sc.next();
-        success = loginController.authenticate(username, password);
-        if (success) {
-            try {
+        try {
+            success = loginController.authenticate(username, password);
+            if (success) {
                 confirmed = studentController.swopIndex(username, selectedIndex);
                 if (confirmed) {
                     System.out.println("Swopped successfully");
                 } else {
                     System.out.println("Friend in waitlist, successfully took his place in waitlist");
                 }
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
+            } else {
+                System.out.println("Incorrect details");
             }
-        } else {
-            System.out.println("Incorrect details");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 }

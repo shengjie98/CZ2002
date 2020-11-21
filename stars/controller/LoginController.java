@@ -1,6 +1,7 @@
 package stars.controller;
 
 import stars.boundary.*;
+import stars.exceptions.InvalidAccessPeriodException;
 
 /**
  * Manages the diffrent Authenticators
@@ -12,7 +13,7 @@ public class LoginController {
      * @param username username of the user trying to log in
      * @param password password of the user trying to log in
      */
-    public boolean verifyLogin(String username, String password) {
+    public boolean verifyLogin(String username, String password) throws InvalidAccessPeriodException {
         Authenticator studenAuthenticator = new FlatFileStudentAuthenticator();
         Authenticator adminAuthenticator = new FlatFileAdminAuthenticator();
 

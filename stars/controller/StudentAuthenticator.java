@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
  * Interface for student authentication, abstracts authentication method from
  * client
  */
-public interface StudentAuthenticator extends Authenticator {
+public interface StudentAuthenticator  {
     /**
      * Edit the access period of a student
      * 

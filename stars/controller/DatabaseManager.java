@@ -13,11 +13,11 @@ import stars.entity.*;
  * Database manager class to access database, handles database and hides
  * implementation of database from client
  */
-public class DatabaseManager {
+public class DatabaseManager implements DatabaseManagerInterface{
     ;
     private final String DATABASE_FILE = "stars/database.ser";
-
-    private Database db   /**
+    private Database db;   
+    /**
      * Constructor for DatabaseManager
      */
     public DatabaseManager() {

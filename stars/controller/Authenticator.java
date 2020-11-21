@@ -1,5 +1,7 @@
 package stars.controller;
 
+import stars.exceptions.InvalidAccessPeriodException;
+
 /**
  * Interface for authentication, abstracts authentication method from client
  */
@@ -12,5 +14,5 @@ public interface Authenticator {
      * @return true if authentication is successful, false if incorrect username and
      *         password is input
      */
-    public boolean authenticate(String username, String password);
+    public boolean authenticate(String username, String password) throws InvalidAccessPeriodException;
 }

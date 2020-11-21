@@ -11,7 +11,7 @@ import stars.entity.Timing.Type;
  * Controller to manage the admin user
  */
 public class AdminController implements UserControllerInterface {
-    private DatabaseManager dbManager;
+    private DatabaseManagerInterface dbManager;
 
     /**
      * Constructor for AdminConstructor, to initilaise database

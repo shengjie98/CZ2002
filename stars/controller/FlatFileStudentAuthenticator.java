@@ -9,11 +9,12 @@ import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
+import stars.exceptions.*;
 
 /**
  * Concrete implementation of Student authenticator
  */
-public class FlatFileStudentAuthenticator implements StudentAuthenticator {
+public class FlatFileStudentAuthenticator implements StudentAuthenticator, Authenticator {
     private final String STUDENT_ACCOUNTS_FILE = "stars/studentAccounts.txt";
 
     /**
@@ -25,7 +26,7 @@ public class FlatFileStudentAuthenticator implements StudentAuthenticator {
      * @return true if authentication is successful, false if incorrect username and
      *         password is input
      */
-    public boolean authenticate(String username, String password) {
+    public boolean authenticate(String username, String password) throws InvalidAccessPeriodException {
         int hashedPassword = password.hashCode();
         String studentUsername;
         String[] line;
@@ -40,10 +41,15 @@ public class FlatFileStudentAuthenticator implements StudentAuthenticator {
                 studentPassword = Integer.parseInt(line[1]);
                 accessStart = LocalDateTime.parse(line[2]);
                 accessEnd = LocalDateTime.parse(line[3]);
-                if (username.equals(studentUsername) && hashedPassword == studentPassword && now.isAfter(accessStart)
-                        && now.isBefore(accessEnd)) {
-                    return true;
+                if (username.equals(studentUsername) && hashedPassword == studentPassword){
+                    if (now.isAfter(accessStart) && now.isBefore(accessEnd)) {
+                        return true;
+                    } else {
+                        throw new InvalidAccessPeriodException();
+                    }
+
                 }
+                
             } while (admin.hasNextLine());
         } catch (FileNotFoundException e) {
             System.out.println("file not file error\n");
