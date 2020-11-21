@@ -46,8 +46,6 @@ public class SwopIndexUI extends SelectUI {
                 } else {
                     System.out.println("Friend in waitlist, successfully took his place in waitlist");
                 }
-            } else {
-                System.out.println("Incorrect details");
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());

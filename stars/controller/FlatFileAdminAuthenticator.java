@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import stars.exceptions.LoginErrorException;
+
 /**
  * Concrete class for admin authentication
  */
@@ -19,7 +21,7 @@ public class FlatFileAdminAuthenticator implements Authenticator {
      * @return true if authentication is successful, false if incorrect username and
      *         password is input
      */
-    public boolean authenticate(String username, String password) {
+    public boolean authenticate(String username, String password) throws LoginErrorException {
         int hashedPassword = password.hashCode();
         String adminUsername;
         int adminPassword;
@@ -27,8 +29,11 @@ public class FlatFileAdminAuthenticator implements Authenticator {
             Scanner admin = new Scanner(new File(ADMIN_ACCOUNT_FILE));
             adminUsername = admin.nextLine();
             adminPassword = admin.nextInt();
-            if (username.equals(adminUsername) && hashedPassword == adminPassword) {
-                return true;
+            if (username.equals(adminUsername)) {
+                if (hashedPassword == adminPassword) {
+                    return true;
+                }
+                throw new LoginErrorException("Wrong password!");
             }
         } catch (FileNotFoundException e) {
             System.out.print("file not file error\n");

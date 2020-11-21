@@ -29,7 +29,7 @@ public class AdminUI extends SelectUI {
         Scanner sc = new Scanner(System.in);
         int i;
         do {
-            System.out.println("===ADMIN MENU===");
+            System.out.println("\n===ADMIN MENU===");
             System.out.println("1. Edit student access period");
             System.out.println("2. Add student");
             System.out.println("3. Add course");
@@ -86,7 +86,7 @@ public class AdminUI extends SelectUI {
                     break;
             }
 
-        } while (i > 0 && i < 10);
+        } while (i > 0 && i < 11);
         adminController.save();
         return;
     }

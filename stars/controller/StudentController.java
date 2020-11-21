@@ -142,14 +142,16 @@ public class StudentController implements UserControllerInterface {
      *                                    Course
      */
     public boolean swopIndex(String friendID, Index myIndex)
-            throws TimetableClashException, AlreadyRegisteredException {
+            throws TimetableClashException, AlreadyRegisteredException, NotRegisteredForCourseException {
         // using myIndex find myCourse, then find my friend's Index using myCourse
         Student friend = dbManager.findStudent(friendID); // find the student object for your friend
         Course myCourse = myIndex.getCourse(); // from the student object, find
+        boolean hasRegisteredForCourse = false;
         for (Index friendIndex : friend.getRegisteredIndex()) {
             Course friendCourse = friendIndex.getCourse();
             if (friendCourse.getCourseID().equals(myCourse.getCourseID())) {// id
                 // check that index is not the same
+                hasRegisteredForCourse = true;
                 if (friendIndex.getIndexNumber() == myIndex.getIndexNumber()) {
                     throw new AlreadyRegisteredException();
                 }
@@ -160,7 +162,11 @@ public class StudentController implements UserControllerInterface {
                 }
             }
         }
-        throw new TimetableClashException();
+        if (!hasRegisteredForCourse) {
+            throw new NotRegisteredForCourseException();
+        } else {
+            throw new TimetableClashException();
+        }
     }
 
     /**

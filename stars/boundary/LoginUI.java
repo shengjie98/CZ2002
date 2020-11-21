@@ -47,11 +47,11 @@ public class LoginUI {
         password = new String(System.console().readPassword());
         // password = sc.next();
         try {
-            if (!loginController.verifyLogin(username, password)) {
-                System.out.println("Access Denied");
-            }
-
-        } catch(Exception e){
+            loginController.verifyLogin(username, password);
+            // if (!loginController.verifyLogin(username, password)) {
+            // System.out.println("Access Denied");
+            // }
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }

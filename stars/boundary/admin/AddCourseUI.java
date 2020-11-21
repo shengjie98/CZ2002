@@ -7,6 +7,7 @@ import stars.boundary.*;
 
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 /**
  * Collects data from user to add course to database
@@ -39,7 +40,11 @@ public class AddCourseUI extends SelectUI {
             addIndexUI.addIndex(adminController, newCourse, timeFormatter);
         }
         if (adminController.addCourse(newCourse)) {
-            System.out.println("Course Added!");
+            System.out.println("\nCourse Added! Current List of Courses: ");
+            ArrayList<Course> courseList = adminController.getCourseList();
+            for (Course course : courseList) {
+                System.out.println(course.print());
+            }
         } else {
             System.out.println("Error adding course, course already exisits.");
         }

@@ -51,7 +51,7 @@ public class EditCourseInformationUI extends SelectUI {
                  */
                 System.out.print("  New Course ID: ");
                 if (adminController.setCourseID(selectedCourse, sc.nextLine())) {
-                    System.out.println("New Course ID has been set!");
+                    System.out.println("\nNew Course ID has been set!");
                 } else {
                     System.out.println("\nError! Course ID already exists.\n");
                 }
@@ -63,6 +63,7 @@ public class EditCourseInformationUI extends SelectUI {
                  */
                 System.out.print("  New Course name: ");
                 selectedCourse.setCourseName(sc.nextLine());
+                System.out.println("\nNew Course name has been set!");
                 break;
             }
             case 3: {
@@ -71,6 +72,7 @@ public class EditCourseInformationUI extends SelectUI {
                  */
                 System.out.print("  New School name: ");
                 selectedCourse.setSchool(sc.nextLine());
+                System.out.println("\nNew School name has been set!");
                 break;
             }
             case 4: {
@@ -118,7 +120,7 @@ public class EditCourseInformationUI extends SelectUI {
                 System.out.print("  New Index ID: ");
                 int newIndexID = IntScanner.nextInt();
                 if (adminController.changeIndexID(selectedIndex, newIndexID)) {
-                    System.out.println("Index ID Changed.");
+                    System.out.println("Index ID Changed!");
                 } else {
                     System.out.println("Unable to change Index ID. An Index with the same ID already exists!");
                 }
@@ -151,6 +153,8 @@ public class EditCourseInformationUI extends SelectUI {
                 } while (newVacancy < 0);
                 if (adminController.setVacancyLimit(selectedIndex, newVacancy) == false) {
                     System.out.println("Unable to set new vacancy. Students will be kicked out of the list!");
+                } else {
+                    System.out.println("Vacancy changed!");
                 }
                 break;
             }

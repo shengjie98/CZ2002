@@ -27,7 +27,7 @@ public class StudentUI extends SelectUI {
         int i;
         // System.out.println("Welcome, " + studentController.getOwner().getName);
         do {
-            System.out.println("===STUDENT MENU===");
+            System.out.println("\n===STUDENT MENU===");
             System.out.println("1. Add course index");
             System.out.println("2. Drop course index");
             System.out.println("3. Print Registered courses");

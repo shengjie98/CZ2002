@@ -5,6 +5,8 @@ import java.util.Scanner;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import stars.entity.*;
+import java.util.ArrayList;
 
 /**
  * Collects data from user to add student to database
@@ -52,6 +54,7 @@ public class AddStudentUI {
                 if (end.isAfter(start)) {
                     break;
                 }
+                System.out.println("End of Access period cannot be before Start of Access period!");
             } catch (DateTimeParseException e) {
                 System.out.println("Incorrect Format");
             }
@@ -61,7 +64,11 @@ public class AddStudentUI {
         // degree, email)
         if (adminController.addStudent(studentName, nationality, gender, studentID, degree, email, password, start,
                 end)) {
-            System.out.println("Student Added!");
+            System.out.println("\nStudent Added! Current List of Students: ");
+            ArrayList<Student> studentList = adminController.getStudentList();
+            for (Student student : studentList) {
+                System.out.println(student.print());
+            }
         } else {
             System.out.println("Error adding student, student already exists");
         }

@@ -16,7 +16,7 @@ public class ChangeIndexUI extends SelectUI {
      *                          student
      */
     public void changeIndex(StudentController studentController) {
-        boolean conrimed;
+        boolean confirmed;
         ArrayList<Index> indexList;
         Index oldIndex, newIndex;
 
@@ -33,8 +33,8 @@ public class ChangeIndexUI extends SelectUI {
             return;
         }
         try {
-            conrimed = studentController.changeIndex(oldIndex, newIndex);
-            if (conrimed) {
+            confirmed = studentController.changeIndex(oldIndex, newIndex);
+            if (confirmed) {
                 System.out.println("Successfully changed!");
             } else {
                 System.out.println("New Index full! Added to waitlist!");

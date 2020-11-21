@@ -32,6 +32,6 @@ public class CheckVacanciesAvailableUI extends SelectUI {
             System.out.println("\nNo Indexes Available!\n");
             return;
         }
-        System.out.printf("Vacancies: %d\n", selectedIndex.getVacancy());
+        System.out.printf("Vacancies: %d/%d\n", selectedIndex.getVacancy(), selectedIndex.getVacancyLimit());
     }
 }

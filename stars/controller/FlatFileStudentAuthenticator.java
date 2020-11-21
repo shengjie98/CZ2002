@@ -26,12 +26,14 @@ public class FlatFileStudentAuthenticator implements StudentAuthenticator, Authe
      * @return true if authentication is successful, false if incorrect username and
      *         password is input
      */
-    public boolean authenticate(String username, String password) throws InvalidAccessPeriodException {
+    public boolean authenticate(String username, String password)
+            throws InvalidAccessPeriodException, LoginErrorException {
         int hashedPassword = password.hashCode();
         String studentUsername;
         String[] line;
         int studentPassword;
         LocalDateTime accessStart, accessEnd, now;
+        boolean usernameFound = false;
         try {
             Scanner admin = new Scanner(new File(STUDENT_ACCOUNTS_FILE));
             now = LocalDateTime.now();
@@ -41,16 +43,24 @@ public class FlatFileStudentAuthenticator implements StudentAuthenticator, Authe
                 studentPassword = Integer.parseInt(line[1]);
                 accessStart = LocalDateTime.parse(line[2]);
                 accessEnd = LocalDateTime.parse(line[3]);
-                if (username.equals(studentUsername) && hashedPassword == studentPassword){
-                    if (now.isAfter(accessStart) && now.isBefore(accessEnd)) {
-                        return true;
+                if (username.equals(studentUsername)) {
+                    usernameFound = true;
+                    if (hashedPassword == studentPassword) {
+                        if (now.isAfter(accessStart) && now.isBefore(accessEnd)) {
+                            return true;
+                        } else if (now.isBefore(accessStart)) {
+                            throw new InvalidAccessPeriodException("Error! Access period has not started yet!");
+                        } else if (now.isAfter(accessEnd)) {
+                            throw new InvalidAccessPeriodException("Error! Access period is over!");
+                        }
                     } else {
-                        throw new InvalidAccessPeriodException();
+                        throw new LoginErrorException("Wrong password!");
                     }
-
                 }
-                
             } while (admin.hasNextLine());
+            if (!usernameFound) {
+                throw new LoginErrorException("Account does not exist!");
+            }
         } catch (FileNotFoundException e) {
             System.out.println("file not file error\n");
             return false;
