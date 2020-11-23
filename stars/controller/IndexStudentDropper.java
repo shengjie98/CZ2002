@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import stars.entity.*;
 
 /**
- * Class to handle logic for student dropping an Index
+ * Class to handle logic for student dropping an Index 
  */
 public class IndexStudentDropper {
     /**
